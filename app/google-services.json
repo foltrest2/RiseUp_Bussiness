@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "134555776364",
+    "project_id": "riseup-v1",
+    "storage_bucket": "riseup-v1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:134555776364:android:5f56f3c54e35dfe6546f49",
+        "android_client_info": {
+          "package_name": "com.riseup.riseup_bussiness"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "134555776364-mjhcamb6vcj7lourcv1nnqhqnre640q4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD2JOOtQaEiBqhIbMHbie6TqyPXB5Uwork"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "134555776364-mjhcamb6vcj7lourcv1nnqhqnre640q4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
