@@ -1,5 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/kamca/RiseUp/RiseUp_Bussiness/app/src/main/res/drawable-v24/addicon.xml" value="0.2255" />
+        <entry key="..\:/Users/kamca/RiseUp/RiseUp_Bussiness/app/src/main/res/drawable-v24/arrowback.xml" value="0.2255" />
+        <entry key="..\:/Users/kamca/RiseUp/RiseUp_Bussiness/app/src/main/res/drawable-v24/azulnavi_popup.xml" value="0.2255" />
+        <entry key="..\:/Users/kamca/RiseUp/RiseUp_Bussiness/app/src/main/res/drawable-v24/blue_green_gradient.xml" value="0.2255" />
+        <entry key="..\:/Users/kamca/RiseUp/RiseUp_Bussiness/app/src/main/res/drawable-v24/gradient_button.xml" value="0.2255" />
+        <entry key="..\:/Users/kamca/RiseUp/RiseUp_Bussiness/app/src/main/res/drawable-v24/linear_gradient_azulcian.xml" value="0.2255" />
+        <entry key="..\:/Users/kamca/RiseUp/RiseUp_Bussiness/app/src/main/res/drawable-v24/login_circle_icon.xml" value="0.2255" />
+        <entry key="..\:/Users/kamca/RiseUp/RiseUp_Bussiness/app/src/main/res/drawable-v24/purple_button_border.xml" value="0.2255" />
+        <entry key="..\:/Users/kamca/RiseUp/RiseUp_Bussiness/app/src/main/res/drawable-v24/right_arrow.xml" value="0.2255" />
+        <entry key="..\:/Users/kamca/RiseUp/RiseUp_Bussiness/app/src/main/res/drawable-v24/switch_thumb_selector.xml" value="0.2255" />
+        <entry key="..\:/Users/kamca/RiseUp/RiseUp_Bussiness/app/src/main/res/drawable-v24/text_field_shape.xml" value="0.2255" />
+        <entry key="..\:/Users/kamca/RiseUp/RiseUp_Bussiness/app/src/main/res/drawable-v24/textfield_w_whitestroke.xml" value="0.2255" />
+        <entry key="..\:/Users/kamca/RiseUp/RiseUp_Bussiness/app/src/main/res/font/poppins.xml" value="0.3958333333333333" />
+      </map>
+    </option>
+  </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>

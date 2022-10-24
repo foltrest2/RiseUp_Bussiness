@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Divider">
+         //you can give your color here. that will change all divider color in your app.
+    </style>
+
+    <style name="Divider.Horizontal" parent="Divider">
+        <item name="android:background">@color/white</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_marginLeft">16dp</item>
+        <item name="android:layout_marginRight">16dp</item>
+        <item name="android:layout_marginTop">15dp</item>
+        <item name="android:layout_marginBottom">20dp</item>
+        <item name="android:layout_height">0.5dp</item> // You can change thickness here.
+    </style>
+
+    <style name="Divider.HorizontalLight" parent="Divider">
+        <item name="android:background">@color/gray</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_marginLeft">10dp</item>
+        <item name="android:layout_marginRight">10dp</item>
+        <item name="android:layout_marginTop">15dp</item>
+        <item name="android:layout_marginBottom">20dp</item>
+        <item name="android:layout_height">0.5dp</item> // You can change thickness here.
+    </style>
+
+    <style name="Divider.HorizontalLightRosadoAzul" parent="Divider">
+        <item name="android:background">@drawable/gradient_rosado_azul</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_marginLeft">10dp</item>
+        <item name="android:layout_marginRight">10dp</item>
+        <item name="android:layout_marginTop">15dp</item>
+        <item name="android:layout_marginBottom">20dp</item>
+        <item name="android:layout_height">0.5dp</item> // You can change thickness here.
+    </style>
+
+    <style name="Divider.Vertical" parent="Divider">
+        <item name="android:background">@color/white</item>
+        <item name="android:layout_width">0.5dp</item>
+        <item name="android:layout_height">match_parent</item>
+    </style>
+
+    <style name="myDatePicker" parent="android:Widget.Material.Light.DatePicker">
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+
+</resources>
