@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/linear_gradient_background"
+    tools:context=".view.ConfigUsageConditionsActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="0dp"
+        android:layout_height="42dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageButton
+            android:id="@+id/backUsageConditionsBtn"
+            style="@style/BackArrowButton"
+            android:layout_width="52dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/arrowback" />
+
+        <TextView
+            android:id="@+id/usageCondTV"
+            style="@style/PoppinsBold_20"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:text="@string/condUso"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/backUsageConditionsBtn"
+            app:layout_constraintTop_toTopOf="@+id/backUsageConditionsBtn" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/infoDescargaUsoTV"
+                style="@style/PoppinsMed_14"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/infoDescargaCondUso" />
+
+            <TextView
+                android:id="@+id/condUsoTitulo1TV"
+                style="@style/PoppinsBold_18"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="@string/condUsoTitulo1" />
+
+            <TextView
+                android:id="@+id/condUsoParr1"
+                style="@style/PoppinsMed_14"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/condUsoInfo1" />
+
+            <TextView
+                android:id="@+id/condUsoTitulo2TV"
+                style="@style/PoppinsBold_18"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="@string/condUsoTitulo2" />
+
+            <TextView
+                android:id="@+id/condUsoParr2"
+                style="@style/PoppinsMed_14"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/condUsoInfo2" />
+
+            <TextView
+                android:id="@+id/condUsoTitulo3TV"
+                style="@style/PoppinsBold_18"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="@string/condUsoTitulo3" />
+
+            <TextView
+                android:id="@+id/condUsoParr3"
+                style="@style/PoppinsMed_14"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/condUsoInfo3" />
+
+            <TextView
+                android:id="@+id/condUsoTitulo4TV"
+                style="@style/PoppinsBold_18"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="@string/condUsoTitulo4" />
+
+            <TextView
+                android:id="@+id/condUsoParr4"
+                style="@style/PoppinsMed_14"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/condUsoInfo4" />
+
+            <TextView
+                android:id="@+id/condUsoTitulo5TV"
+                style="@style/PoppinsBold_18"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="@string/condUsoTitulo5" />
+
+            <TextView
+                android:id="@+id/condUsoParr5"
+                style="@style/PoppinsMed_14"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/condUsoInfo5" />
+        </LinearLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

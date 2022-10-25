@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/linear_gradient_background"
+    tools:context=".view.ConfigLanguageActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayoutLanguageHeader"
+        android:layout_width="0dp"
+        android:layout_height="42dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/titleIdiomaConfigTV"
+            style="@style/PoppinsBold_20"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:text="@string/idioma"
+            app:layout_constraintBottom_toBottomOf="@+id/backArrowLanguageConfigBtn"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/backArrowLanguageConfigBtn"
+            app:layout_constraintTop_toTopOf="@+id/backArrowLanguageConfigBtn" />
+
+        <ImageButton
+            android:id="@+id/backArrowLanguageConfigBtn"
+            style="@style/BackArrowButton"
+            android:layout_width="48dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/arrowback" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/idiomasIdiomaTV2"
+        style="@style/PoppinsBold_18"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/sugeridos"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayoutLanguageHeader" />
+
+    <RadioGroup
+        android:id="@+id/radioGroupidiomasConfig"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        app:flow_horizontalAlign="start"
+        app:flow_verticalAlign="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/idiomasIdiomaTV2">
+
+        <RadioButton
+            android:id="@+id/radioBtnLang1"
+            style="@style/radioBtnCompleto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="@string/espanolLang"
+            android:textAllCaps="false" />
+
+        <RadioButton
+            android:id="@+id/radioBtnLang2"
+            style="@style/radioBtnCompleto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/ingleslLang"
+            android:textAllCaps="false" />
+
+        <TextView
+            android:id="@+id/idiomasDispTVLang"
+            style="@style/PoppinsBold_18"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:text="@string/idiomasDisponibles" />
+
+        <RadioButton
+            android:id="@+id/radioBtnLang3"
+            style="@style/radioBtnCompleto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/mandarinlLang"
+            android:textAllCaps="false" />
+
+        <RadioButton
+            android:id="@+id/radioBtnLang4"
+            style="@style/radioBtnCompleto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/fancesLang"
+            android:textAllCaps="false" />
+
+        <RadioButton
+            android:id="@+id/radioBtnLang5"
+            style="@style/radioBtnCompleto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/rusolLang"
+            android:textAllCaps="false" />
+
+        <RadioButton
+            android:id="@+id/radioBtnLang6"
+            style="@style/radioBtnCompleto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/alemanLang"
+            android:textAllCaps="false" />
+
+    </RadioGroup>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

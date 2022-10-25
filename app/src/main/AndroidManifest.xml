@@ -14,7 +14,28 @@
         android:theme="@style/Theme.RiseUp_Bussiness"
         tools:targetApi="31">
         <activity
+            android:name=".view.ConfigHelpCenterActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.ConfigHelpActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.ConfigUsageConditionsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.ConfigPoliticInformationActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.ConfigInformationActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.ConfigLanguageActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.ConfigurationActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

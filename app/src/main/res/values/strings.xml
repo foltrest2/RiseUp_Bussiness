@@ -196,6 +196,7 @@
     <string name="showOrderCodeTxtMain">Ver código</string>
     <string name="OrderPopUpDetailTitle">Pedido</string>
     <string name="OrderDetailsTitleTxt">Detalles pedido</string>
+    <string name="actualizar_apariencia">Actualizar apariencia</string>
 
 
 </resources>
