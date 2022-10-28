@@ -197,6 +197,9 @@
     <string name="OrderPopUpDetailTitle">Pedido</string>
     <string name="OrderDetailsTitleTxt">Detalles pedido</string>
     <string name="actualizar_apariencia">Actualizar apariencia</string>
+    <string name="seleccionBannerImg">Banner para la página principal</string>
+    <string name="seleccionEventosImg">Banners en la lista de eventos</string>
+    <string name="seleccionaArchivo">Selecciona la imágen</string>
 
 
 </resources>

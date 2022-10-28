@@ -15,6 +15,9 @@ class ConfigurationActivity : AppCompatActivity() {
         setContentView(binding.root)
 
 
+        binding.contraintAparienciaGo.setOnClickListener{
+            startActivity(Intent(this@ConfigurationActivity, ConfigUpdateAppearanceActivity::class.java))
+        }
         binding.contraintIdiomaGo.setOnClickListener{
             startActivity(Intent(this@ConfigurationActivity, ConfigLanguageActivity::class.java))
         }
