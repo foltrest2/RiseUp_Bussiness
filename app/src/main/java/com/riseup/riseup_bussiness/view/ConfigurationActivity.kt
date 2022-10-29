@@ -1,18 +1,28 @@
 package com.riseup.riseup_bussiness.view
 
+import android.Manifest
 import android.content.Intent
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.annotation.RequiresApi
 import com.riseup.riseup_bussiness.databinding.ActivityConfigurationBinding
 
 class ConfigurationActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityConfigurationBinding
 
+    @RequiresApi(Build.VERSION_CODES.R)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityConfigurationBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        requestPermissions(arrayOf(
+            Manifest.permission.INTERNET,
+            Manifest.permission.READ_EXTERNAL_STORAGE,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+        ),1)
 
 
         binding.contraintAparienciaGo.setOnClickListener{
