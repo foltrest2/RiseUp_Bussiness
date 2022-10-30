@@ -314,6 +314,14 @@
         <item name="android:gravity">center</item>
     </style>
 
+    <style name="PoppinsBold_34_Center" parent="Widget.AppCompat.TextView">
+        <item name="fontFamily">@font/poppins_bold</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">34dp</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:gravity">center</item>
+    </style>
+
     //Order screen styles
 
     <style name="RectangleWGradientOrder" parent="Widget.AppCompat.Button">
@@ -481,6 +489,14 @@
         <item name="fontFamily">@font/poppins_semibold</item>
         <item name="android:textColor">@color/white</item>
         <item name="android:textSize">64dp</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="PoppinsSemiBold_36" parent="Widget.AppCompat.TextView">
+        <item name="fontFamily">@font/poppins_semibold</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">36dp</item>
         <item name="android:textAlignment">center</item>
         <item name="android:gravity">center</item>
     </style>

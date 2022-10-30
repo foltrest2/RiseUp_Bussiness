@@ -200,6 +200,11 @@
     <string name="seleccionBannerImg">Banner para la página principal</string>
     <string name="seleccionEventosImg">Banners en la lista de eventos</string>
     <string name="seleccionaArchivo">Selecciona la imágen</string>
+    <string name="eliminar">Eliminar</string>
+    <string name="retornar">Retornar</string>
+    <string name="ordenes">Ordenes</string>
+    <string name="activeorders">En curso</string>
+    <string name="completedorders">Finalizadas</string>
 
 
 </resources>

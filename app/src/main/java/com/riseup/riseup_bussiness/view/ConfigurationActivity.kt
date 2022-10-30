@@ -40,6 +40,9 @@ class ConfigurationActivity : AppCompatActivity() {
         binding.borrarCacheTVProfile.setOnClickListener {
             CacheCleanedDialog().show(supportFragmentManager, "dialogcache")
         }
+        binding.contraintUserPagosGo.setOnClickListener {
+            startActivity(Intent(this@ConfigurationActivity, OrdersListActivity::class.java))
+        }
     }
 
 }

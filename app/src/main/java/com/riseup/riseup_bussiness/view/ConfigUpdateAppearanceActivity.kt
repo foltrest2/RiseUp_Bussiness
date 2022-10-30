@@ -58,7 +58,6 @@ class ConfigUpdateAppearanceActivity : AppCompatActivity() {
             val filename = UUID.randomUUID().toString()
             Firebase.storage.getReference("/Espacio 10-60/Banner").child(filename).putFile(uriImage!!)
             Firebase.firestore.collection("Discotecas").document(discoID).update("bannerID", filename)
-            Log.e(">>>", "UUID: ${filename}")
 
         }
     }
@@ -67,7 +66,6 @@ class ConfigUpdateAppearanceActivity : AppCompatActivity() {
         Firebase.firestore.collection("Discotecas").document(discoID).get().addOnSuccessListener {
             val updatedDisco = it.toObject(Disco::class.java)
             val bannerID = updatedDisco?.bannerID
-            Log.e(">>>", "Updated Disco: "+updatedDisco+"thisBannerID: "+bannerID)
             downloadBanner(bannerID)
         }
     }
