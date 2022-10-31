@@ -3,10 +3,12 @@ package com.riseup.riseup_bussiness.view
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.setFragmentResultListener
 import com.riseup.riseup_bussiness.ActiveOrdersFragment
 import com.riseup.riseup_bussiness.CompletedOrdersFragment
 import com.riseup.riseup_bussiness.R
 import com.riseup.riseup_bussiness.databinding.ActivityOrdersListBinding
+import com.riseup.riseup_bussiness.model.OrdersBlockModel
 
 class OrdersListActivity : AppCompatActivity() {
 
@@ -22,6 +24,9 @@ class OrdersListActivity : AppCompatActivity() {
 
         activeOrdersFragment = ActiveOrdersFragment.newInstance()
         completedOrdersFragment = CompletedOrdersFragment.newInstance()
+
+        //Suscripcion
+        activeOrdersFragment.listener = completedOrdersFragment
 
         showFragment(activeOrdersFragment)
         binding.finalizadasDivider.setBackgroundResource(R.color.grayFigma)
