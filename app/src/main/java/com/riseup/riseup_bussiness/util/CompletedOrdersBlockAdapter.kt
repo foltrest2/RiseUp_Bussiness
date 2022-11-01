@@ -4,17 +4,15 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.riseup.riseup_bussiness.R
-import com.riseup.riseup_bussiness.model.CarritoItem
-import com.riseup.riseup_bussiness.model.CarritoModel
-import com.riseup.riseup_bussiness.model.OrdersBlockModel
+import com.riseup.riseup_bussiness.model.OrdersModel
 import com.riseup.riseup_bussiness.view.CompletedOrdersInfoBlocksView
-import java.util.*
 import kotlin.collections.ArrayList
 
-class CompletedOrdersBlockAdapter(private val onClickListener:(OrdersBlockModel) -> Unit, private val onClickListenerReturn:(OrdersBlockModel) -> Unit) : RecyclerView.Adapter<CompletedOrdersInfoBlocksView>() {
+class CompletedOrdersBlockAdapter(private val onClickListener:(OrdersModel) -> Unit, private val onClickListenerReturn:(OrdersModel) -> Unit) : RecyclerView.Adapter<CompletedOrdersInfoBlocksView>() {
 
-    private val ordersBlocks = ArrayList<OrdersBlockModel>()
+    private val ordersBlocks = ArrayList<OrdersModel>()
 
+/**
     init {
         val date = Date(2022, 10, 30)
         val carritoItem = CarritoItem(2,"j0WVgXvjZT1h0A7C91Vn")
@@ -28,6 +26,7 @@ class CompletedOrdersBlockAdapter(private val onClickListener:(OrdersBlockModel)
         ordersBlocks.add(OrdersBlockModel(UUID.randomUUID().toString(),"HT3B6",20,0,date,carritoItems,"1otzuoJuS4ZrQQH6REsL","1XROaNApeL2BBVN1mGmK","tarjeta"))
         ordersBlocks.add(OrdersBlockModel(UUID.randomUUID().toString(),"HT3B7",20,0,date,carritoItems,"1otzuoJuS4ZrQQH6REsL","1XROaNApeL2BBVN1mGmK","tarjeta"))
     }
+*/
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CompletedOrdersInfoBlocksView {
         var inflater = LayoutInflater.from(parent.context)
@@ -47,12 +46,12 @@ class CompletedOrdersBlockAdapter(private val onClickListener:(OrdersBlockModel)
         return ordersBlocks.size
     }
 
-    fun addOrder(order: OrdersBlockModel) {
+    fun addOrder(order: OrdersModel) {
         this.ordersBlocks.add(order)
         notifyItemInserted(ordersBlocks.lastIndex)
     }
 
-    fun removeOrder(order: OrdersBlockModel) {
+    fun removeOrder(order: OrdersModel) {
         val index = ordersBlocks.indexOf(order)
         ordersBlocks.remove(order)
         notifyItemRemoved(index)

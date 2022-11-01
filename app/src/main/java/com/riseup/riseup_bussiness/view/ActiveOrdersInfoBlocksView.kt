@@ -1,13 +1,9 @@
 package com.riseup.riseup_bussiness.view
 
 import android.view.View
-import android.widget.ImageView
-import android.widget.TextView
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
-import com.riseup.riseup_bussiness.R
 import com.riseup.riseup_bussiness.databinding.ActiveOrdersBlockRowBinding
-import com.riseup.riseup_bussiness.model.OrdersBlockModel
+import com.riseup.riseup_bussiness.model.OrdersModel
 
 class ActiveOrdersInfoBlocksView(itemView:View) : RecyclerView.ViewHolder(itemView) {
 
@@ -18,7 +14,7 @@ class ActiveOrdersInfoBlocksView(itemView:View) : RecyclerView.ViewHolder(itemVi
     var constraintOrderConfirm : ConstraintLayout = itemView.findViewById(R.id.confirmOrderConstraint)
     var confirmOrderArrow : ImageView = itemView.findViewById(R.id.arrowConfirmOrderImg)
 */
-    fun render(order: OrdersBlockModel, onClickListener: (OrdersBlockModel) -> Unit){
+    fun render(order: OrdersModel, onClickListener: (OrdersModel) -> Unit){
         binding.orderCodeTV.text = order.codigo
         binding.confirmOrderConstraint.setOnClickListener { onClickListener(order) }
 

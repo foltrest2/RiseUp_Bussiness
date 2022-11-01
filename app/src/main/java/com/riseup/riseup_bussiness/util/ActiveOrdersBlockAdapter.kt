@@ -4,18 +4,15 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.riseup.riseup_bussiness.R
-import com.riseup.riseup_bussiness.model.CarritoItem
-import com.riseup.riseup_bussiness.model.CarritoModel
-import com.riseup.riseup_bussiness.model.OrdersBlockModel
+import com.riseup.riseup_bussiness.model.OrdersModel
 import com.riseup.riseup_bussiness.view.ActiveOrdersInfoBlocksView
-import java.util.*
 import kotlin.collections.ArrayList
 
-class ActiveOrdersBlockAdapter(private val onClickListener:(OrdersBlockModel) -> Unit) : RecyclerView.Adapter<ActiveOrdersInfoBlocksView>(){
+class ActiveOrdersBlockAdapter(private val onClickListener:(OrdersModel) -> Unit) : RecyclerView.Adapter<ActiveOrdersInfoBlocksView>(){
 
-     private val ordersBlocks = ArrayList<OrdersBlockModel>()
+     private val ordersBlocks = ArrayList<OrdersModel>()
 
-
+/**
     init {
         val date = Date(2022, 10, 30)
         val carritoItem = CarritoItem(2,"j0WVgXvjZT1h0A7C91Vn")
@@ -29,6 +26,7 @@ class ActiveOrdersBlockAdapter(private val onClickListener:(OrdersBlockModel) ->
         ordersBlocks.add(OrdersBlockModel(UUID.randomUUID().toString(),"C5S1V",20,0,date,carritoItems,"1otzuoJuS4ZrQQH6REsL","1XROaNApeL2BBVN1mGmK","tarjeta"))
         ordersBlocks.add(OrdersBlockModel(UUID.randomUUID().toString(),"C5S2V",20,0,date,carritoItems,"1otzuoJuS4ZrQQH6REsL","1XROaNApeL2BBVN1mGmK","tarjeta"))
     }
+    */
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ActiveOrdersInfoBlocksView {
         var inflater = LayoutInflater.from(parent.context)
@@ -48,10 +46,25 @@ class ActiveOrdersBlockAdapter(private val onClickListener:(OrdersBlockModel) ->
     }
 
 
-    fun removeOrder(order: OrdersBlockModel){
+    fun removeOrder(order: OrdersModel){
         val index = ordersBlocks.indexOf(order)
         ordersBlocks.remove(order)
         notifyItemRemoved(index)
     }
+
+    fun addOrder(order : OrdersModel){
+            ordersBlocks.add(order)
+            notifyItemInserted(ordersBlocks.lastIndex)
+    }
+
+    fun addOrderAll(orders : ArrayList<OrdersModel>){
+        ordersBlocks.addAll(orders)
+        notifyDataSetChanged()
+    }
+
+    fun reset(){
+        ordersBlocks.clear()
+    }
+
 
 }

@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import com.riseup.riseup_bussiness.model.OrdersBlockModel
+import com.riseup.riseup_bussiness.model.OrdersModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
@@ -18,42 +18,68 @@ class OrdersListViewModel:ViewModel() {
     private var discoID = "1otzuoJuS4ZrQQH6REsL"
 
 
-    private val ordersArray = arrayListOf<OrdersBlockModel>()
-    private val _orders: MutableLiveData<ArrayList<OrdersBlockModel>> = MutableLiveData(arrayListOf())
-    val orders: LiveData<ArrayList<OrdersBlockModel>> get() = _orders
+    private val ordersArray = arrayListOf<OrdersModel>()
+    private val _orders: MutableLiveData<ArrayList<OrdersModel>> = MutableLiveData(arrayListOf())
+    val orders: LiveData<ArrayList<OrdersModel>> get() = _orders
+
 
     /**
     fun suscribeToOrders(){
         viewModelScope.launch(Dispatchers.IO){
-            lateinit var order:OrdersBlockModel
+            lateinit var order:OrdersModel
             val result = Firebase.firestore.collection("Ventas")
                 .whereEqualTo("idDiscoteca",discoID).get().await()
             for (doc in result.documents){
-                val order = doc.toObject(OrdersBlockModel::class.java)
-                withContext(Dispatchers.Main){suscribeRealTimeOrders(order!!)}
+                //Log.e(">>>",doc.toString())
+                val order = doc.toObject(OrdersModel::class.java)
+                Log.e(">>>",order.toString())
+                withContext(Dispatchers.Main){
+                    ordersArray.add(order!!)
+                    _orders.value = ordersArray
+                }
+
+                //withContext(Dispatchers.Main){suscribeRealTimeOrders(order!!)}
             }
         }
     }
-*/
+    */
 
-    private fun suscribeRealTimeOrders(order: OrdersBlockModel) {
-        Firebase.firestore
-            .collection("Ventas").document(order.id)
-            .collection("Ventas").addSnapshotListener { data, e ->
-                for (doc in data!!.documentChanges){
-                    if(doc.type.name == "ADDED"){
-                        val thisOrder = doc.document.toObject(OrdersBlockModel::class.java)
-                        Log.e(">>>", "ADEED: "+thisOrder.toString())
-                        ordersArray.add(thisOrder)
-                        _orders.value = ordersArray
-                    } else if (doc.type.name == "MODIFIED"){
-                        val thisOrder = doc.document.toObject(OrdersBlockModel::class.java)
-                        Log.e(">>>", "MODIFIED: "+thisOrder.toString())
-                        //ordersArray.
-                        //_orders.value = ordersArray
+    fun onOrderStateChange(order: OrdersModel, newState : Int){
+        viewModelScope.launch(Dispatchers.IO) {
+            //val index = ordersArray.indexOf(order)
+            Firebase.firestore.collection("Ventas").document(order.id).update("estado",newState).await()
+        }
+
+    }
+
+    fun suscribeRealTimeOrders() {
+        viewModelScope.launch(Dispatchers.IO){
+            Firebase.firestore
+                .collection("Ventas").whereEqualTo("idDiscoteca",discoID).addSnapshotListener { data, e ->
+                    for (doc in data!!.documentChanges){
+                        if(doc.type.name == "ADDED"){
+                            val thisOrder = doc.document.toObject(OrdersModel::class.java)
+                            Log.e(">>>", "ADEED: "+thisOrder.toString())
+                            ordersArray.add(thisOrder)
+                            _orders.value = ordersArray
+                        } else if (doc.type.name == "MODIFIED"){
+                            val thisOrder = doc.document.toObject(OrdersModel::class.java)
+                            Log.e(">>>", "MODIFIED: "+thisOrder.toString())
+                            for (order in ordersArray){
+                                if(order.id.equals(thisOrder.id)){
+                                    val index = ordersArray.indexOf(order)
+                                    ordersArray[index] = thisOrder
+                                    Log.e(">>>", "INDEX_TO_MOD: "+index)
+                                    //_orders.value = ordersArray
+                                    break
+                                }
+                            }
+                        }
                     }
                 }
-            }
+        }
+
     }
+
 
 }

@@ -1,14 +1,9 @@
 package com.riseup.riseup_bussiness.model
 
-class CarritoModel {
-    var carrito : MutableList<CarritoItem> = arrayListOf()
+data class CarritoModel (
 
-    constructor(carrito: MutableList<CarritoItem>) {
-        this.carrito = carrito
-    }
+    var carrito : ArrayList<CarritoItem> = arrayListOf()
 
-    override fun toString(): String {
-        return "CarritoModel(carrito=$carrito)"
-    }
+)
 
-}
+

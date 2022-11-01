@@ -1,13 +1,9 @@
 package com.riseup.riseup_bussiness.view
 
 import android.view.View
-import android.widget.ImageView
-import android.widget.TextView
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
-import com.riseup.riseup_bussiness.R
 import com.riseup.riseup_bussiness.databinding.CompletedOrdersBlockRowBinding
-import com.riseup.riseup_bussiness.model.OrdersBlockModel
+import com.riseup.riseup_bussiness.model.OrdersModel
 
 class CompletedOrdersInfoBlocksView(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
@@ -23,7 +19,7 @@ class CompletedOrdersInfoBlocksView(itemView: View) : RecyclerView.ViewHolder(it
     var returnOrderArrow : ImageView = itemView.findViewById(R.id.arrowReturnOrderImg)
     */
 
-    fun render(order : OrdersBlockModel, onClickListener:(OrdersBlockModel) -> Unit, onClickListenerReturn: (OrdersBlockModel) -> Unit){
+    fun render(order : OrdersModel, onClickListener:(OrdersModel) -> Unit, onClickListenerReturn: (OrdersModel) -> Unit){
         binding.completedOrderCodeTV.text = order.codigo
         binding.deleteOrderConstraint.setOnClickListener { onClickListener(order) }
         binding.returnOrderConstraint.setOnClickListener { onClickListenerReturn(order) }

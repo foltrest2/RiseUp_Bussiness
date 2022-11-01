@@ -1,6 +1,5 @@
 package com.riseup.riseup_bussiness
 
-import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -9,7 +8,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.riseup.riseup_bussiness.databinding.FragmentCompletedOrdersBinding
-import com.riseup.riseup_bussiness.model.OrdersBlockModel
+import com.riseup.riseup_bussiness.model.OrdersModel
 import com.riseup.riseup_bussiness.util.CompletedOrdersBlockAdapter
 
 
@@ -42,12 +41,12 @@ class CompletedOrdersFragment : Fragment(), ActiveOrdersFragment.AddCompleteOrde
         _binding = null
     }
 
-    fun onItemSelectedRemove(order: OrdersBlockModel){
+    fun onItemSelectedRemove(order: OrdersModel){
         Toast.makeText(context, order.codigo, Toast.LENGTH_SHORT).show()
         adapter.removeOrder(order)
     }
 
-    fun onItemSelectedReturn(order: OrdersBlockModel){
+    fun onItemSelectedReturn(order: OrdersModel){
         Toast.makeText(context, "Retorna: ${order}", Toast.LENGTH_LONG).show()
     }
 
@@ -57,7 +56,7 @@ class CompletedOrdersFragment : Fragment(), ActiveOrdersFragment.AddCompleteOrde
     }
 
     //Ejecutado desde ActiveOrdersFragment
-    override fun addOrderFromActive(order: OrdersBlockModel) {
+    override fun addOrderFromActive(order: OrdersModel) {
         //Modificamos el estado
         adapter.addOrder(order)
     }
