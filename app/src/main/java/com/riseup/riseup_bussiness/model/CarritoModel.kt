@@ -2,7 +2,7 @@ package com.riseup.riseup_bussiness.model
 
 data class CarritoModel (
 
-    var carrito : ArrayList<CarritoItem> = arrayListOf()
+    var carrito : ArrayList<ShoppingCar> = arrayListOf()
 
 )
 

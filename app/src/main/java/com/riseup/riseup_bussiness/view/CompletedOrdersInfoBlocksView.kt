@@ -20,7 +20,7 @@ class CompletedOrdersInfoBlocksView(itemView: View) : RecyclerView.ViewHolder(it
     */
 
     fun render(order : OrdersModel, onClickListener:(OrdersModel) -> Unit, onClickListenerReturn: (OrdersModel) -> Unit){
-        binding.completedOrderCodeTV.text = order.codigo
+        binding.completedOrderCodeTV.text = order.code
         binding.deleteOrderConstraint.setOnClickListener { onClickListener(order) }
         binding.returnOrderConstraint.setOnClickListener { onClickListenerReturn(order) }
     }

@@ -69,7 +69,7 @@ class ActiveOrdersFragment : Fragment(){
             if(it.isNotEmpty()){
                 adapter.reset()
                 for(orders in it){
-                    if (orders.estado == 0){
+                    if (orders.state == 0){
                         adapter.addOrder(orders)
                     }
                 }
@@ -97,7 +97,7 @@ class ActiveOrdersFragment : Fragment(){
     }
 
     fun onItemSelected(order: OrdersModel){
-        Toast.makeText(context, order.codigo, Toast.LENGTH_SHORT).show()
+        Toast.makeText(context, order.code, Toast.LENGTH_SHORT).show()
             adapter.removeOrder(order)
             viewModel.onOrderStateChange(order,1)
 

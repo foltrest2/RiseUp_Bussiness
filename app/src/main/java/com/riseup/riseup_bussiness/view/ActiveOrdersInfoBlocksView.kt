@@ -15,7 +15,7 @@ class ActiveOrdersInfoBlocksView(itemView:View) : RecyclerView.ViewHolder(itemVi
     var confirmOrderArrow : ImageView = itemView.findViewById(R.id.arrowConfirmOrderImg)
 */
     fun render(order: OrdersModel, onClickListener: (OrdersModel) -> Unit){
-        binding.orderCodeTV.text = order.codigo
+        binding.orderCodeTV.text = order.code
         binding.confirmOrderConstraint.setOnClickListener { onClickListener(order) }
 
     }

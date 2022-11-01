@@ -47,7 +47,7 @@ class OrdersListViewModel:ViewModel() {
     fun onOrderStateChange(order: OrdersModel, newState : Int){
         viewModelScope.launch(Dispatchers.IO) {
             //val index = ordersArray.indexOf(order)
-            Firebase.firestore.collection("Ventas").document(order.id).update("estado",newState).await()
+            Firebase.firestore.collection("Sales").document(order.id).update("state",newState).await()
         }
 
     }
@@ -55,21 +55,21 @@ class OrdersListViewModel:ViewModel() {
     fun suscribeRealTimeOrders() {
         viewModelScope.launch(Dispatchers.IO){
             Firebase.firestore
-                .collection("Ventas").whereEqualTo("idDiscoteca",discoID).addSnapshotListener { data, e ->
+                .collection("Sales").whereEqualTo("discoID",discoID).addSnapshotListener { data, e ->
                     for (doc in data!!.documentChanges){
                         if(doc.type.name == "ADDED"){
                             val thisOrder = doc.document.toObject(OrdersModel::class.java)
-                            Log.e(">>>", "ADEED: "+thisOrder.toString())
+                            Log.e(">>>", "ADEED: $thisOrder")
                             ordersArray.add(thisOrder)
                             _orders.value = ordersArray
                         } else if (doc.type.name == "MODIFIED"){
                             val thisOrder = doc.document.toObject(OrdersModel::class.java)
-                            Log.e(">>>", "MODIFIED: "+thisOrder.toString())
+                            Log.e(">>>", "MODIFIED: $thisOrder")
                             for (order in ordersArray){
                                 if(order.id.equals(thisOrder.id)){
                                     val index = ordersArray.indexOf(order)
                                     ordersArray[index] = thisOrder
-                                    Log.e(">>>", "INDEX_TO_MOD: "+index)
+                                    Log.e(">>>", "INDEX_TO_MOD: $index")
                                     //_orders.value = ordersArray
                                     break
                                 }

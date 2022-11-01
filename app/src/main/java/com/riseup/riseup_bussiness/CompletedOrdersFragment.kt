@@ -42,7 +42,7 @@ class CompletedOrdersFragment : Fragment(), ActiveOrdersFragment.AddCompleteOrde
     }
 
     fun onItemSelectedRemove(order: OrdersModel){
-        Toast.makeText(context, order.codigo, Toast.LENGTH_SHORT).show()
+        Toast.makeText(context, order.code, Toast.LENGTH_SHORT).show()
         adapter.removeOrder(order)
     }
 

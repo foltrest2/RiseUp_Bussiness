@@ -5,20 +5,20 @@ import java.util.*
 data class OrdersModel (
 
     var id:String = "",
-    var codigo:String = "",
-    var diamantes:Int = 0,
-    var estado:Int = 0,
-    var fecha: Date? = null,
-    var carrito:ArrayList<CarritoItem>? = null,
-    var idDiscoteca:String = "",
-    var idUsuario:String = "",
-    var metodo:String = ""
+    var code:String = "",
+    var diamonds:Int = 0,
+    var state:Int = 0,
+    var date: Date? = null,
+    var shoppingCar:ArrayList<ShoppingCar>? = null,
+    var discoID:String = "",
+    var userID:String = "",
+    var method:String = ""
 
 
 
 ) {
     override fun toString(): String {
-        return "OrdersModel(id='$id', codigo='$codigo', diamantes=$diamantes, estado=$estado, fecha=$fecha, carrito=$carrito, idDiscoteca='$idDiscoteca', idUsuario='$idUsuario', metodo='$metodo')"
+        return "OrdersModel(id='$id', code='$code', diamonds=$diamonds, state=$state, date=$date, shoppingCar=$shoppingCar, discoID='$discoID', userID='$userID', method='$method')"
     }
 }
 
