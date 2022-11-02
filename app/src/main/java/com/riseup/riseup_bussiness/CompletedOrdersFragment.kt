@@ -1,21 +1,27 @@
 package com.riseup.riseup_bussiness
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.riseup.riseup_bussiness.databinding.FragmentCompletedOrdersBinding
 import com.riseup.riseup_bussiness.model.OrdersModel
 import com.riseup.riseup_bussiness.util.CompletedOrdersBlockAdapter
+import com.riseup.riseup_bussiness.viewmodel.OrdersListViewModel
 
 
-class CompletedOrdersFragment : Fragment(), ActiveOrdersFragment.AddCompleteOrder {
+class CompletedOrdersFragment : Fragment() {
 
     private var _binding: FragmentCompletedOrdersBinding? = null
     private val binding get() = _binding!!
+
+    //Opcion 1 del viewModel
+    private val viewModel : OrdersListViewModel by activityViewModels()
 
     private val adapter = CompletedOrdersBlockAdapter({thisorder -> onItemSelectedRemove(thisorder)}, {thisorder -> onItemSelectedReturn(thisorder)})
 
@@ -33,6 +39,17 @@ class CompletedOrdersFragment : Fragment(), ActiveOrdersFragment.AddCompleteOrde
         ordersRecycler.layoutManager = LinearLayoutManager(activity)
         ordersRecycler.adapter = adapter
 
+        viewModel.orders.observe(viewLifecycleOwner){
+            if(it.isNotEmpty()){
+                adapter.reset()
+                for(orders in it){
+                    if (orders.state == 1){
+                        adapter.addOrder(orders)
+                        //Log.e(">>>", "Aqui me la esta agregando complete")
+                    }
+                }
+            }
+        }
         return view
     }
 
@@ -42,24 +59,19 @@ class CompletedOrdersFragment : Fragment(), ActiveOrdersFragment.AddCompleteOrde
     }
 
     fun onItemSelectedRemove(order: OrdersModel){
-        Toast.makeText(context, order.code, Toast.LENGTH_SHORT).show()
+        Toast.makeText(context, "Delete: ${order.code}", Toast.LENGTH_SHORT).show()
         adapter.removeOrder(order)
+        viewModel.onOrderStateChange(order,2)
     }
 
     fun onItemSelectedReturn(order: OrdersModel){
-        Toast.makeText(context, "Retorna: ${order}", Toast.LENGTH_LONG).show()
+        Toast.makeText(context, "Retorna: ${order.code}", Toast.LENGTH_LONG).show()
+        adapter.removeOrder(order)
+        viewModel.onOrderStateChange(order,0)
     }
 
     companion object {
         @JvmStatic
         fun newInstance() = CompletedOrdersFragment()
     }
-
-    //Ejecutado desde ActiveOrdersFragment
-    override fun addOrderFromActive(order: OrdersModel) {
-        //Modificamos el estado
-        adapter.addOrder(order)
-    }
-
-
 }

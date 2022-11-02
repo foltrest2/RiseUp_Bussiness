@@ -57,4 +57,9 @@ class CompletedOrdersBlockAdapter(private val onClickListener:(OrdersModel) -> U
         notifyItemRemoved(index)
     }
 
+    fun reset(){
+        ordersBlocks.clear()
+        notifyDataSetChanged()
+    }
+
 }

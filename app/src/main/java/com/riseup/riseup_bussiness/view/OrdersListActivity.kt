@@ -33,9 +33,6 @@ class OrdersListActivity : AppCompatActivity() {
         viewModel.suscribeRealTimeOrders()
 
 
-        //Suscripcion
-        activeOrdersFragment.listener = completedOrdersFragment
-
         showFragment(activeOrdersFragment)
         binding.finalizadasDivider.setBackgroundResource(R.color.grayFigma)
 

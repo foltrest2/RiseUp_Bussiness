@@ -64,6 +64,7 @@ class ActiveOrdersBlockAdapter(private val onClickListener:(OrdersModel) -> Unit
 
     fun reset(){
         ordersBlocks.clear()
+        notifyDataSetChanged()
     }
 
 

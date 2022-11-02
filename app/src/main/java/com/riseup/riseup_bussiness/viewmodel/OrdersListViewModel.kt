@@ -22,34 +22,13 @@ class OrdersListViewModel:ViewModel() {
     private val _orders: MutableLiveData<ArrayList<OrdersModel>> = MutableLiveData(arrayListOf())
     val orders: LiveData<ArrayList<OrdersModel>> get() = _orders
 
-
-    /**
-    fun suscribeToOrders(){
-        viewModelScope.launch(Dispatchers.IO){
-            lateinit var order:OrdersModel
-            val result = Firebase.firestore.collection("Ventas")
-                .whereEqualTo("idDiscoteca",discoID).get().await()
-            for (doc in result.documents){
-                //Log.e(">>>",doc.toString())
-                val order = doc.toObject(OrdersModel::class.java)
-                Log.e(">>>",order.toString())
-                withContext(Dispatchers.Main){
-                    ordersArray.add(order!!)
-                    _orders.value = ordersArray
-                }
-
-                //withContext(Dispatchers.Main){suscribeRealTimeOrders(order!!)}
-            }
-        }
-    }
-    */
-
     fun onOrderStateChange(order: OrdersModel, newState : Int){
         viewModelScope.launch(Dispatchers.IO) {
             //val index = ordersArray.indexOf(order)
-            Firebase.firestore.collection("Sales").document(order.id).update("state",newState).await()
+            Firebase.firestore.collection("Sales").document(order.id).update("state",newState).addOnSuccessListener {
+                Log.e(">>>", "Documento cambiado firebase success")
+            }
         }
-
     }
 
     fun suscribeRealTimeOrders() {
@@ -69,8 +48,8 @@ class OrdersListViewModel:ViewModel() {
                                 if(order.id.equals(thisOrder.id)){
                                     val index = ordersArray.indexOf(order)
                                     ordersArray[index] = thisOrder
-                                    Log.e(">>>", "INDEX_TO_MOD: $index")
-                                    //_orders.value = ordersArray
+                                    _orders.value = ordersArray
+                                    //Log.e(">>>", "Cambio en array${ordersArray[index].state}")
                                     break
                                 }
                             }
@@ -78,7 +57,6 @@ class OrdersListViewModel:ViewModel() {
                     }
                 }
         }
-
     }
 
 

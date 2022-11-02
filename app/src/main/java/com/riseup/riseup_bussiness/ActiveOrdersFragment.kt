@@ -34,9 +34,6 @@ class ActiveOrdersFragment : Fragment(){
         )
     }
 
-    //Listener
-    var listener: AddCompleteOrder? = null
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -64,29 +61,17 @@ class ActiveOrdersFragment : Fragment(){
         }
 */
         //Opcion 1 del viewModel
-
         viewModel.orders.observe(viewLifecycleOwner){
             if(it.isNotEmpty()){
                 adapter.reset()
                 for(orders in it){
                     if (orders.state == 0){
+                        //Log.e(">>>", "Aqui me la esta agregando active")
                         adapter.addOrder(orders)
                     }
                 }
-                //val order = it.last()
-                Log.e(">>>", "Aqui me la esta agregando")
-                //adapter.addOrderAll(it)
-                //adapter.addOrder(order)
             }
         }
-
-
-
-        /**
-        listener?.let {
-            it.addOrderFromActive()
-        }
-        */
 
         return view
     }
@@ -112,9 +97,6 @@ class ActiveOrdersFragment : Fragment(){
     companion object {
         @JvmStatic
         fun newInstance() = ActiveOrdersFragment()
-    }
-    interface AddCompleteOrder{
-        fun addOrderFromActive(order : OrdersModel)
     }
 
 }
