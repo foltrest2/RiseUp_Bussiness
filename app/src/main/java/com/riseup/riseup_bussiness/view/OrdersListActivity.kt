@@ -8,7 +8,6 @@ import com.riseup.riseup_bussiness.ActiveOrdersFragment
 import com.riseup.riseup_bussiness.CompletedOrdersFragment
 import com.riseup.riseup_bussiness.R
 import com.riseup.riseup_bussiness.databinding.ActivityOrdersListBinding
-import com.riseup.riseup_bussiness.util.ActiveOrdersBlockAdapter
 import com.riseup.riseup_bussiness.viewmodel.OrdersListViewModel
 
 class OrdersListActivity : AppCompatActivity() {
@@ -30,7 +29,7 @@ class OrdersListActivity : AppCompatActivity() {
         activeOrdersFragment = ActiveOrdersFragment.newInstance()
         completedOrdersFragment = CompletedOrdersFragment.newInstance()
 
-        viewModel.suscribeRealTimeOrders()
+        viewModel.subscribeRealTimeOrders()
 
 
         showFragment(activeOrdersFragment)

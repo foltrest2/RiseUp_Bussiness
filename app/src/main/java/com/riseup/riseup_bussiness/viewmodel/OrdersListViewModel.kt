@@ -31,7 +31,7 @@ class OrdersListViewModel:ViewModel() {
         }
     }
 
-    fun suscribeRealTimeOrders() {
+    fun subscribeRealTimeOrders() {
         viewModelScope.launch(Dispatchers.IO){
             Firebase.firestore
                 .collection("Sales").whereEqualTo("discoID",discoID).addSnapshotListener { data, e ->
