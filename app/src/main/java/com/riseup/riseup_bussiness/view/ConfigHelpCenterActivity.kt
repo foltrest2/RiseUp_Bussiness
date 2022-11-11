@@ -3,9 +3,11 @@ package com.riseup.riseup_bussiness.view
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
 import com.riseup.riseup_bussiness.R
 import com.riseup.riseup_bussiness.databinding.ActivityConfigHelpCenterBinding
+import com.riseup.riseup_bussiness.viewmodel.FaqHelpCenterViewModel
 import com.riseup.riseup_users.ContactusHelpCenterFragment
 import com.riseup.riseup_users.FaqHelpCenterFragment
 
@@ -13,6 +15,8 @@ class ConfigHelpCenterActivity : AppCompatActivity() {
     private lateinit var binding: ActivityConfigHelpCenterBinding
     private lateinit var faqFragment: FaqHelpCenterFragment
     private lateinit var contatUsFragment: ContactusHelpCenterFragment
+
+    val viewModel: FaqHelpCenterViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,6 +26,7 @@ class ConfigHelpCenterActivity : AppCompatActivity() {
 
         faqFragment = FaqHelpCenterFragment.newInstance()
         contatUsFragment = ContactusHelpCenterFragment.newInstance()
+        viewModel.loadFaq()
 
         showFragment(faqFragment)
         binding.contactUsDivider.setBackgroundResource(R.color.grayFigma)
@@ -41,6 +46,7 @@ class ConfigHelpCenterActivity : AppCompatActivity() {
         }
 
         binding.backConfigHelpCenterBtn.setOnClickListener {
+            finish()
             startActivity(Intent(this@ConfigHelpCenterActivity, ConfigHelpActivity::class.java))
         }
 

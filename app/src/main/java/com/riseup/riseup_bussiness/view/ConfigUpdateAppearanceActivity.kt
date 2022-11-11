@@ -36,6 +36,7 @@ class ConfigUpdateAppearanceActivity : AppCompatActivity() {
         updateImage()
 
         binding.backArrowAppeareanceConfigBtn.setOnClickListener {
+            finish()
             startActivity(Intent(this@ConfigUpdateAppearanceActivity, ConfigurationActivity::class.java))
         }
 

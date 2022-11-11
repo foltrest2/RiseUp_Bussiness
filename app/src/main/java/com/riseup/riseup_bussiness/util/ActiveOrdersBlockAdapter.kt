@@ -8,7 +8,7 @@ import com.riseup.riseup_bussiness.model.OrdersModel
 import com.riseup.riseup_bussiness.view.ActiveOrdersInfoBlocksView
 import kotlin.collections.ArrayList
 
-class ActiveOrdersBlockAdapter(private val onClickListener:(OrdersModel) -> Unit, private val onClickListenerProducts : (OrdersModel) -> Unit) : RecyclerView.Adapter<ActiveOrdersInfoBlocksView>(){
+class ActiveOrdersBlockAdapter(private val onClickListener:(OrdersModel) -> Unit) : RecyclerView.Adapter<ActiveOrdersInfoBlocksView>(){
 
      private val ordersBlocks = ArrayList<OrdersModel>()
 
@@ -22,8 +22,7 @@ class ActiveOrdersBlockAdapter(private val onClickListener:(OrdersModel) -> Unit
 
     override fun onBindViewHolder(skeleton: ActiveOrdersInfoBlocksView, position: Int) {
         val ordersList = ordersBlocks[position]
-        skeleton.render(ordersList, onClickListener, onClickListenerProducts)
-        //skeleton.orderCode.text = ordersList.codigo
+        skeleton.render(ordersList, onClickListener)
     }
 
     override fun getItemCount(): Int {
@@ -40,11 +39,6 @@ class ActiveOrdersBlockAdapter(private val onClickListener:(OrdersModel) -> Unit
     fun addOrder(order : OrdersModel){
             ordersBlocks.add(order)
             notifyItemInserted(ordersBlocks.lastIndex)
-    }
-
-    fun addOrderAll(orders : ArrayList<OrdersModel>){
-        ordersBlocks.addAll(orders)
-        notifyDataSetChanged()
     }
 
     fun reset(){

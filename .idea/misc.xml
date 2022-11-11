@@ -50,13 +50,16 @@
         <entry key="..\:/Users/kamca/RiseUp/RiseUp_Bussiness/app/src/main/res/layout/activity_orders_list.xml" value="0.25" />
         <entry key="..\:/Users/kamca/RiseUp/RiseUp_Bussiness/app/src/main/res/layout/activity_update_appearance.xml" value="0.33" />
         <entry key="..\:/Users/kamca/RiseUp/RiseUp_Bussiness/app/src/main/res/layout/cache_cleaned.xml" value="0.18697916666666667" />
-        <entry key="..\:/Users/kamca/RiseUp/RiseUp_Bussiness/app/src/main/res/layout/completed_orders_block_row.xml" value="0.33" />
+        <entry key="..\:/Users/kamca/RiseUp/RiseUp_Bussiness/app/src/main/res/layout/completed_orders_block_row.xml" value="0.5" />
         <entry key="..\:/Users/kamca/RiseUp/RiseUp_Bussiness/app/src/main/res/layout/faq_info_block_row.xml" value="0.18697916666666667" />
         <entry key="..\:/Users/kamca/RiseUp/RiseUp_Bussiness/app/src/main/res/layout/fragment_active_orders.xml" value="0.2265625" />
         <entry key="..\:/Users/kamca/RiseUp/RiseUp_Bussiness/app/src/main/res/layout/fragment_active_orders2.xml" value="0.2265625" />
         <entry key="..\:/Users/kamca/RiseUp/RiseUp_Bussiness/app/src/main/res/layout/fragment_completed_orders.xml" value="0.2265625" />
         <entry key="..\:/Users/kamca/RiseUp/RiseUp_Bussiness/app/src/main/res/layout/fragment_contactus_help_center.xml" value="0.18697916666666667" />
+        <entry key="..\:/Users/kamca/RiseUp/RiseUp_Bussiness/app/src/main/res/layout/fragment_faq_help_center.xml" value="0.34193840579710144" />
+        <entry key="..\:/Users/kamca/RiseUp/RiseUp_Bussiness/app/src/main/res/layout/order_products_info.xml" value="0.29270833333333335" />
         <entry key="..\:/Users/kamca/RiseUp/RiseUp_Bussiness/app/src/main/res/layout/orders_block_row.xml" value="0.5" />
+        <entry key="..\:/Users/kamca/RiseUp/RiseUp_Bussiness/app/src/main/res/layout/orders_products_list_detail.xml" value="0.29270833333333335" />
         <entry key="..\:/Users/kamca/RiseUp/RiseUp_Bussiness/app/src/main/res/layout/report_bug.xml" value="0.18697916666666667" />
         <entry key="..\:/Users/kamca/RiseUp/RiseUp_Bussiness/app/src/main/res/menu/menu_config_help_center.xml" value="0.18697916666666667" />
         <entry key="..\:/Users/kamca/RiseUp/RiseUp_Bussiness/app/src/main/res/menu/menu_orders.xml" value="0.2265625" />

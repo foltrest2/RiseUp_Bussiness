@@ -15,6 +15,7 @@ class ConfigUsageConditionsActivity : AppCompatActivity() {
 
 
         binding.backUsageConditionsBtn.setOnClickListener {
+            finish()
             startActivity(Intent(this@ConfigUsageConditionsActivity, ConfigInformationActivity::class.java))
         }
 

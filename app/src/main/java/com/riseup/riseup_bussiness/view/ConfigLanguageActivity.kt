@@ -15,6 +15,7 @@ class ConfigLanguageActivity : AppCompatActivity() {
 
 
         binding.backArrowLanguageConfigBtn.setOnClickListener {
+            finish()
             startActivity(Intent(this@ConfigLanguageActivity, ConfigurationActivity::class.java))
         }
     }

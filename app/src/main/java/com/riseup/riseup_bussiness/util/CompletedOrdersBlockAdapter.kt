@@ -8,7 +8,7 @@ import com.riseup.riseup_bussiness.model.OrdersModel
 import com.riseup.riseup_bussiness.view.CompletedOrdersInfoBlocksView
 import kotlin.collections.ArrayList
 
-class CompletedOrdersBlockAdapter(private val onClickListener:(OrdersModel) -> Unit, private val onClickListenerReturn:(OrdersModel) -> Unit, private val onClickListenerProducts : (OrdersModel) -> Unit) : RecyclerView.Adapter<CompletedOrdersInfoBlocksView>() {
+class CompletedOrdersBlockAdapter(private val onClickListener:(OrdersModel) -> Unit, private val onClickListenerReturn:(OrdersModel) -> Unit) : RecyclerView.Adapter<CompletedOrdersInfoBlocksView>() {
 
     private val ordersBlocks = ArrayList<OrdersModel>()
 
@@ -21,8 +21,7 @@ class CompletedOrdersBlockAdapter(private val onClickListener:(OrdersModel) -> U
 
     override fun onBindViewHolder(skeleton: CompletedOrdersInfoBlocksView, position: Int) {
         val ordersList = ordersBlocks[position]
-        skeleton.render(ordersList, onClickListener, onClickListenerReturn, onClickListenerProducts)
-        //skeleton.orderCompletedCode.text = ordersList.codigo
+        skeleton.render(ordersList, onClickListener, onClickListenerReturn)
 
     }
 

@@ -1,8 +1,6 @@
 package com.riseup.riseup_bussiness
 
-import android.app.Activity
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -13,7 +11,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.riseup.riseup_bussiness.databinding.FragmentCompletedOrdersBinding
 import com.riseup.riseup_bussiness.model.OrdersModel
 import com.riseup.riseup_bussiness.util.CompletedOrdersBlockAdapter
-import com.riseup.riseup_bussiness.view.OrdersListActivity
 import com.riseup.riseup_bussiness.viewmodel.OrdersListViewModel
 import com.riseup.riseup_users.repo.SharedPreferences
 
@@ -26,7 +23,7 @@ class CompletedOrdersFragment : Fragment() {
     //Opcion 1 del viewModel
     private val viewModel : OrdersListViewModel by activityViewModels()
 
-    private val adapter = CompletedOrdersBlockAdapter({thisorder -> onItemSelectedRemove(thisorder)}, {thisorder -> onItemSelectedReturn(thisorder)}, {thisorder -> onItemSelectProducts(thisorder)})
+    private val adapter = CompletedOrdersBlockAdapter({thisorder -> onItemSelectedRemove(thisorder)}, {thisorder -> onItemSelectedReturn(thisorder)})
 
 
 
@@ -53,7 +50,6 @@ class CompletedOrdersFragment : Fragment() {
                 for(orders in it){
                     if (orders.state == 1){
                         adapter.addOrder(orders)
-                        //Log.e(">>>", "Aqui me la esta agregando complete")
                     }
                 }
             }

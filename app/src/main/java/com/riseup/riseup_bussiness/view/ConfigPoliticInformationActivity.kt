@@ -15,6 +15,7 @@ class ConfigPoliticInformationActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.backArrowPoliticInfoBtn.setOnClickListener {
+            finish()
             startActivity(Intent(this@ConfigPoliticInformationActivity, ConfigInformationActivity::class.java))
         }
     }

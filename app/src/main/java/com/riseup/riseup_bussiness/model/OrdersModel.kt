@@ -1,6 +1,8 @@
 package com.riseup.riseup_bussiness.model
 
 import java.util.*
+import kotlin.collections.ArrayList
+
 
 data class OrdersModel (
 
@@ -12,13 +14,14 @@ data class OrdersModel (
     var shoppingCar:ArrayList<ShoppingCar>? = null,
     val discoID:String = "",
     val userID:String = "",
-    var method:String = ""
+    var method:String = "",
+    var visibility:Boolean = false
 
 
 
 ) {
     override fun toString(): String {
-        return "OrdersModel(id='$id', code='$code', diamonds=$diamonds, state=$state, date=$date, shoppingCar=$shoppingCar, discoID='$discoID', userID='$userID', method='$method')"
+        return "OrdersModel(id='$id', code='$code', diamonds=$diamonds, state=$state, date=$date, shoppingCar=$shoppingCar, discoID='$discoID', userID='$userID', method='$method', visibility=$visibility)"
     }
 }
 

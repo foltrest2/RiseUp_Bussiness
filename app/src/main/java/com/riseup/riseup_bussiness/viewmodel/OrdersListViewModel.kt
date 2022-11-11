@@ -24,9 +24,7 @@ class OrdersListViewModel:ViewModel() {
 
     fun onOrderStateChange(order: OrdersModel, newState : Int){
         viewModelScope.launch(Dispatchers.IO) {
-            //val index = ordersArray.indexOf(order)
             Firebase.firestore.collection("Sales").document(order.id).update("state",newState).addOnSuccessListener {
-                Log.e(">>>", "Documento cambiado firebase success")
             }
         }
     }
@@ -38,18 +36,15 @@ class OrdersListViewModel:ViewModel() {
                     for (doc in data!!.documentChanges){
                         if(doc.type.name == "ADDED"){
                             val thisOrder = doc.document.toObject(OrdersModel::class.java)
-                            Log.e(">>>", "ADEED: $thisOrder")
                             ordersArray.add(thisOrder)
                             _orders.value = ordersArray
                         } else if (doc.type.name == "MODIFIED"){
                             val thisOrder = doc.document.toObject(OrdersModel::class.java)
-                            Log.e(">>>", "MODIFIED: $thisOrder")
                             for (order in ordersArray){
                                 if(order.id.equals(thisOrder.id)){
                                     val index = ordersArray.indexOf(order)
                                     ordersArray[index] = thisOrder
                                     _orders.value = ordersArray
-                                    //Log.e(">>>", "Cambio en array${ordersArray[index].state}")
                                     break
                                 }
                             }
