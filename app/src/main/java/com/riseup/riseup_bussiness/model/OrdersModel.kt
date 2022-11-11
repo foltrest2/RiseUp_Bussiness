@@ -4,14 +4,14 @@ import java.util.*
 
 data class OrdersModel (
 
-    var id:String = "",
+    val id:String = "",
     var code:String = "",
     var diamonds:Int = 0,
     var state:Int = 0,
     var date: Date? = null,
     var shoppingCar:ArrayList<ShoppingCar>? = null,
-    var discoID:String = "",
-    var userID:String = "",
+    val discoID:String = "",
+    val userID:String = "",
     var method:String = ""
 
 

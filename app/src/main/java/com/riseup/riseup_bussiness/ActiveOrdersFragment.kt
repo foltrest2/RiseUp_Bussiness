@@ -26,13 +26,9 @@ class ActiveOrdersFragment : Fragment(){
     private val viewModel : OrdersListViewModel by activityViewModels()
 
 
+    private val adapter = ActiveOrdersBlockAdapter({thisorder -> onItemSelected(thisorder)}, {thisorder -> onItemSelectProducts(thisorder)})
 
 
-    private val adapter = ActiveOrdersBlockAdapter(){thisorder ->
-        onItemSelected(
-            thisorder
-        )
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -86,12 +82,10 @@ class ActiveOrdersFragment : Fragment(){
             adapter.removeOrder(order)
             viewModel.onOrderStateChange(order,1)
 
-        //Publicacion
-        /**
-        listener?.let {
-            it.addOrderFromActive(order)
-        }
-        */
+    }
+
+    fun onItemSelectProducts(order: OrdersModel) {
+        Toast.makeText(context, "Retorna: ${order.code}\nProductos: ${order.shoppingCar}", Toast.LENGTH_LONG).show()
     }
 
     companion object {

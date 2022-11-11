@@ -26,7 +26,9 @@ class CompletedOrdersFragment : Fragment() {
     //Opcion 1 del viewModel
     private val viewModel : OrdersListViewModel by activityViewModels()
 
-    private val adapter = CompletedOrdersBlockAdapter({thisorder -> onItemSelectedRemove(thisorder)}, {thisorder -> onItemSelectedReturn(thisorder)})
+    private val adapter = CompletedOrdersBlockAdapter({thisorder -> onItemSelectedRemove(thisorder)}, {thisorder -> onItemSelectedReturn(thisorder)}, {thisorder -> onItemSelectProducts(thisorder)})
+
+
 
     private lateinit var sp : SharedPreferences
 
@@ -74,6 +76,9 @@ class CompletedOrdersFragment : Fragment() {
         Toast.makeText(context, "Retorna: ${order.code}", Toast.LENGTH_LONG).show()
         adapter.removeOrder(order)
         viewModel.onOrderStateChange(order,0)
+    }
+    fun onItemSelectProducts(order: OrdersModel) {
+        Toast.makeText(context, "Retorna: ${order.code}\nProductos: ${order.shoppingCar}", Toast.LENGTH_LONG).show()
     }
 
     companion object {
