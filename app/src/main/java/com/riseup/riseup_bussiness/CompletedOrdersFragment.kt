@@ -63,18 +63,13 @@ class CompletedOrdersFragment : Fragment() {
     }
 
     fun onItemSelectedRemove(order: OrdersModel){
-        Toast.makeText(context, "Delete: ${order.code}", Toast.LENGTH_SHORT).show()
         adapter.removeOrder(order)
         viewModel.onOrderStateChange(order,2)
     }
 
     fun onItemSelectedReturn(order: OrdersModel){
-        Toast.makeText(context, "Retorna: ${order.code}", Toast.LENGTH_LONG).show()
         adapter.removeOrder(order)
         viewModel.onOrderStateChange(order,0)
-    }
-    fun onItemSelectProducts(order: OrdersModel) {
-        Toast.makeText(context, "Retorna: ${order.code}\nProductos: ${order.shoppingCar}", Toast.LENGTH_LONG).show()
     }
 
     companion object {

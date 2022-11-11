@@ -22,6 +22,7 @@
         <entry key="..\:/Users/kamca/RiseUp/RiseUp_Bussiness/app/src/main/res/drawable-v24/layout_bg_morado.xml" value="0.2255" />
         <entry key="..\:/Users/kamca/RiseUp/RiseUp_Bussiness/app/src/main/res/drawable-v24/linear_gradient_azulcian.xml" value="0.2255" />
         <entry key="..\:/Users/kamca/RiseUp/RiseUp_Bussiness/app/src/main/res/drawable-v24/linear_gradient_azulverdeoscuro.xml" value="0.2255" />
+        <entry key="..\:/Users/kamca/RiseUp/RiseUp_Bussiness/app/src/main/res/drawable-v24/listalt24px.xml" value="0.307" />
         <entry key="..\:/Users/kamca/RiseUp/RiseUp_Bussiness/app/src/main/res/drawable-v24/lock24p.xml" value="0.2255" />
         <entry key="..\:/Users/kamca/RiseUp/RiseUp_Bussiness/app/src/main/res/drawable-v24/login_circle_icon.xml" value="0.2255" />
         <entry key="..\:/Users/kamca/RiseUp/RiseUp_Bussiness/app/src/main/res/drawable-v24/logout_btn.xml" value="0.2255" />
@@ -46,7 +47,7 @@
         <entry key="..\:/Users/kamca/RiseUp/RiseUp_Bussiness/app/src/main/res/layout/activity_config_language.xml" value="0.27291666666666664" />
         <entry key="..\:/Users/kamca/RiseUp/RiseUp_Bussiness/app/src/main/res/layout/activity_config_politic_information.xml" value="0.27291666666666664" />
         <entry key="..\:/Users/kamca/RiseUp/RiseUp_Bussiness/app/src/main/res/layout/activity_config_usage_conditions.xml" value="0.27291666666666664" />
-        <entry key="..\:/Users/kamca/RiseUp/RiseUp_Bussiness/app/src/main/res/layout/activity_configuration.xml" value="0.33" />
+        <entry key="..\:/Users/kamca/RiseUp/RiseUp_Bussiness/app/src/main/res/layout/activity_configuration.xml" value="0.5" />
         <entry key="..\:/Users/kamca/RiseUp/RiseUp_Bussiness/app/src/main/res/layout/activity_orders_list.xml" value="0.25" />
         <entry key="..\:/Users/kamca/RiseUp/RiseUp_Bussiness/app/src/main/res/layout/activity_update_appearance.xml" value="0.33" />
         <entry key="..\:/Users/kamca/RiseUp/RiseUp_Bussiness/app/src/main/res/layout/cache_cleaned.xml" value="0.18697916666666667" />

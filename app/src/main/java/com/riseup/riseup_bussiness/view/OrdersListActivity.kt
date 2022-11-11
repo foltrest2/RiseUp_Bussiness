@@ -1,5 +1,6 @@
 package com.riseup.riseup_bussiness.view
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
@@ -48,20 +49,11 @@ class OrdersListActivity : AppCompatActivity() {
             }
             true
         }
-        /**
-         * ESTO SE DEBE HACER EN CADA FRAGMENTO LLAMANDO A ESTA MONDA
-        viewModel.orders.observe(this){
-            if (it.isNotEmpty()){
-                val order = it.last()
 
-            }
+        binding.atrasArrowOrdersBtn.setOnClickListener {
+            finish()
+            startActivity(Intent(this@OrdersListActivity, ConfigurationActivity::class.java))
         }
-        */
-
-        /**binding.atrasArrowOrdersBtn.setOnClickListener {
-
-        }
-        */
     }
 
     private fun showFragment(fragment: Fragment) {
