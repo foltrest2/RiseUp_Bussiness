@@ -1,5 +1,6 @@
 package com.riseup.riseup_bussiness
 
+import android.app.Activity
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -12,7 +13,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.riseup.riseup_bussiness.databinding.FragmentCompletedOrdersBinding
 import com.riseup.riseup_bussiness.model.OrdersModel
 import com.riseup.riseup_bussiness.util.CompletedOrdersBlockAdapter
+import com.riseup.riseup_bussiness.view.OrdersListActivity
 import com.riseup.riseup_bussiness.viewmodel.OrdersListViewModel
+import com.riseup.riseup_users.repo.SharedPreferences
 
 
 class CompletedOrdersFragment : Fragment() {
@@ -25,6 +28,7 @@ class CompletedOrdersFragment : Fragment() {
 
     private val adapter = CompletedOrdersBlockAdapter({thisorder -> onItemSelectedRemove(thisorder)}, {thisorder -> onItemSelectedReturn(thisorder)})
 
+    private lateinit var sp : SharedPreferences
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,6 +36,8 @@ class CompletedOrdersFragment : Fragment() {
     ): View? {
         _binding = FragmentCompletedOrdersBinding.inflate(inflater,container,false)
         val view = binding.root
+
+       sp = SharedPreferences(requireContext())
 
         //Recrear el estado
         var ordersRecycler = binding.recyclerViewCompletedOrders
