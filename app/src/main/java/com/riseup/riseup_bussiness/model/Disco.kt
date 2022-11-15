@@ -9,7 +9,8 @@ data class Disco(
     var bannerID:String = "",
     var bannerRef:String = "",
     var eventosID: ArrayList<String>? = null,
-    var eventosRef:String = ""
+    var eventosRef:String = "",
+    var productosRef:String = ""
 
 
 ) : Serializable{
