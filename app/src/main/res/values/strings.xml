@@ -8,7 +8,18 @@
     <string name="RegisterHere"><u>Regístrate aquí</u></string>
 
     <!-- Titulos de pantalla de Registro-->
+    ¿Cómo quieres aparecer en la app?
     <string name="registerSCMessage">Los planes y precios se mostrarán cuando se confirme tu aplicabilidad</string>
+    <string name="registerinitialConfigTitle">Configuración inicial</string>
+    <string name="DiscoInitialConfigName">¿Cómo quieres aparecer en la app?</string>
+    <string name="ChooseFileDiscoConfig">Seleccionar archivo</string>
+    <string name="DiscoListImageIC">Imagen en la lista de discotecas</string>
+    <string name="DiscoMainHomePageImageIC">Imagen para la página principal</string>
+    <string name="ContinueText">Continuar</string>
+    <string name="WriteHereText">Escribe aquí</string>
+
+
+
 
 
     <!-- Titulos de pantallas de configuracion -->

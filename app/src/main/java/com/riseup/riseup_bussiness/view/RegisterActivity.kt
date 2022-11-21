@@ -12,6 +12,7 @@ import com.riseup.riseup_bussiness.util.ErrorDialog
 import com.riseup.riseup_bussiness.util.SuccessfulRegisterDialog
 import com.riseup.riseup_bussiness.viewmodel.AuthResult
 import com.riseup.riseup_bussiness.viewmodel.RegisterViewModel
+import kotlinx.coroutines.Dispatchers
 import java.util.*
 
 class RegisterActivity : AppCompatActivity() {
@@ -45,9 +46,17 @@ class RegisterActivity : AppCompatActivity() {
 
                             val dialogFragmentE = ErrorDialog()
                             val bundle = Bundle()
-                            bundle.putString("TEXT","WeakPass")
+                            bundle.putString("TEXT","WeakPassword")
                             dialogFragmentE.arguments = bundle
                             dialogFragmentE.show(supportFragmentManager,"WeakPassDialog")
+                        }
+                        "invalidEmail"-> {
+
+                            val dialogFragmentE = ErrorDialog()
+                            val bundle = Bundle()
+                            bundle.putString("TEXT","invalidEmail")
+                            dialogFragmentE.arguments = bundle
+                            dialogFragmentE.show(supportFragmentManager,"invalidEmailDialog")
                         }
                     }
 

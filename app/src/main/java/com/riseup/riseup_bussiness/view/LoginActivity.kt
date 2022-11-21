@@ -45,11 +45,21 @@ class LoginActivity : AppCompatActivity(){
                             dialogFragmentP.show(supportFragmentManager,"notVerifiedDialog")
 
                         }
-                        "SuccessAndVerified"->{
+                        "Verified"->{
+
                             val thisDiscoToSave = viewmodel.saveUserFromViewModel()
                             saveDisco(thisDiscoToSave)
                             Log.e(">>>", "SAVED: $thisDiscoToSave")
                             startActivity(Intent(this@LoginActivity, OrdersListActivity::class.java))
+                            finish()
+                        }
+
+                        "VerifiedFirstTime"->{
+
+                            val thisDiscoToSave = viewmodel.saveUserFromViewModel()
+                            saveDisco(thisDiscoToSave)
+                            Log.e(">>>", "SAVED: $thisDiscoToSave")
+                            startActivity(Intent(this@LoginActivity, DiscoInitialConfigActivity::class.java))
                             finish()
                         }
                     }
@@ -64,6 +74,7 @@ class LoginActivity : AppCompatActivity(){
                             dialogFragmentP.arguments = bundle
                             dialogFragmentP.show(supportFragmentManager,"wrongPasswordDialog")
                         }
+
                         "invalidEmail"->{
                             val dialogFragmentE = ErrorDialog()
                             val bundle = Bundle()
@@ -119,8 +130,8 @@ class LoginActivity : AppCompatActivity(){
     }
 
     private fun saveDisco(disco: Disco){
-        val sp = getSharedPreferences("RiseUpUser", MODE_PRIVATE)
+        val sp = getSharedPreferences("RiseUpBusiness", MODE_PRIVATE)
         val json = Gson().toJson(disco)
-        sp.edit().putString("Discoteca",json).apply()
+        sp.edit().putString("Usuario",json).apply()
     }
 }

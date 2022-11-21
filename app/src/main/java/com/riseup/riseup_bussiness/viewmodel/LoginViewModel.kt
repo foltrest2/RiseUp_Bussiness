@@ -1,19 +1,20 @@
 package com.riseup.riseup_bussiness.viewmodel
 
-import com.riseup.riseup_bussiness.model.Disco
-
-
 
 import android.util.Log
-import androidx.lifecycle.*
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.google.firebase.auth.FirebaseAuthException
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import com.riseup.riseup_bussiness.model.Disco
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
-
 import kotlinx.coroutines.withContext
 
 
@@ -38,41 +39,56 @@ class LoginViewModel: ViewModel(){
 
                             when(authException.errorCode){
 
-                                "ERROR_WRONG_PASSWORD" -> _authState.value = AuthState(AuthResult.FAIL, "wrongPassword")
-                                "ERROR_INVALID_EMAIL" -> _authState.value = AuthState(AuthResult.FAIL, "invalidEmail")
-                                "ERROR_USER_NOT_FOUND" -> _authState.value = AuthState(AuthResult.FAIL, "userNotFound")
+                                "ERROR_WRONG_PASSWORD" ->
+                                    _authState.value = AuthState(AuthResult.FAIL, "wrongPassword")
+                                "ERROR_INVALID_EMAIL" ->
+                                    _authState.value = AuthState(AuthResult.FAIL, "invalidEmail")
+                                "ERROR_USER_NOT_FOUND" ->
+                                    _authState.value = AuthState(AuthResult.FAIL, "userNotFound")
 
                             }
                         }
                     }else{
+
                         val fbuser = Firebase.auth.currentUser
+
                         if(fbuser!!.isEmailVerified){
+                            Log.e(">>>","el usuario esta verificado")
                             //Pedimos el user en la db
-                            viewModelScope.launch (Dispatchers.IO) {
-                                Firebase.firestore.collection("Discos").document(fbuser.uid).get()
-                                    .addOnSuccessListener {
-                                        userReturn = it.toObject(Disco::class.java)!!
-                                    }.addOnFailureListener {
-                                        _authState.value = AuthState(AuthResult.FAIL, "networkError")
-                                        return@addOnFailureListener
-                                    }.await()
-                                withContext(Dispatchers.Main){
-                                    _authState.value = AuthState(AuthResult.SUCCESS, "SuccessAndVerified")
+                                viewModelScope.launch ( Dispatchers.IO) {
+                                    Firebase.firestore.collection("Discos").document(fbuser.uid)
+                                        .get()
+                                        .addOnSuccessListener {
+                                            Log.e(">>>", "Se esta guardando el usuario")
+                                            userReturn = it.toObject(Disco::class.java)!!
+                                        }.addOnFailureListener {
+                                            Log.e(">>>", "No Se esta guardando el usuario")
+
+                                            _authState.value =
+                                                AuthState(AuthResult.FAIL, "networkError")
+                                            return@addOnFailureListener
+                                        }.await()
+                                    withContext(Dispatchers.Main){
+                                        if (
+                                            fbuser.metadata!!.creationTimestamp == fbuser.metadata!!.lastSignInTimestamp
+                                        ) {
+                                            Log.e(">>>","primera vez que se logea esl usuario")
+                                            _authState.value = AuthState(AuthResult.SUCCESS, "VerifiedFirstTime")
+                                        } else {
+                                            Log.e(">>>","no es la primera vez que se logea el usuario")
+                                            _authState.value = AuthState(AuthResult.SUCCESS, "Verified") }
+                                        }
                                 }
-                            }
                         }else{
                             _authState.value = AuthState(AuthResult.SUCCESS, "NotVerified")
                         }
                     }
                 }.await()
 
-                withContext(Dispatchers.Main){ _authState.value = AuthState(AuthResult.SUCCESS, "Success") }
-
             }catch (ex: FirebaseAuthException){
                 Log.e(">>>", ex.errorCode)
-                withContext(Dispatchers.Main){ _authState.value = AuthState(AuthResult.FAIL, ex.localizedMessage)}
+                 _authState.value = AuthState(AuthResult.FAIL, ex.localizedMessage)
             }
-
         }
     }
 
