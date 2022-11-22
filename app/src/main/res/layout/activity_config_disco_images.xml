@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/linear_gradient_background"
-    tools:context=".view.DiscoInitialConfigActivity">
+    tools:context=".view.ConfigDiscoImagesActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
 
@@ -54,31 +54,43 @@
         app:layout_constraintTop_toBottomOf="@+id/returnToLoginICLY">
 
         <TextView
-            android:id="@+id/DiscoNameICTV"
+            android:id="@+id/DiscoListImageICTV"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
-            android:text="@string/DiscoInitialConfigName"
+            android:text="@string/DiscoListImageIC"
             android:textAlignment="center"
             android:textAppearance="@style/PoppinsRegular_14" />
 
-        <EditText
-            android:id="@+id/DiscoNameICET"
+        <Button
+            android:id="@+id/chooseDiscoListImageBtn"
             android:layout_width="match_parent"
-            android:layout_height="57dp"
+            android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
-            android:background="@drawable/purple_button_border"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:text=""
-            android:textColorHint="@color/grey"
-            android:hint="@string/WriteHereText"
-            android:textAlignment="center"
+            android:background="@drawable/gradient_buttonwithoutborder"
+            android:text="@string/ChooseFileDiscoConfig"
             android:textAppearance="@style/PoppinsRegular_15"
             android:textColor="@color/white" />
 
+        <TextView
+            android:id="@+id/DiscoHomeImageICTV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:text="@string/DiscoMainHomePageImageIC"
+            android:textAlignment="center"
+            android:textAppearance="@style/PoppinsRegular_14" />
+
         <Button
-            android:id="@+id/continueICBtn"
+            android:id="@+id/chooseDiscoHomeImageBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/gradient_buttonwithoutborder"
+            android:text="@string/ChooseFileDiscoConfig"
+            android:textAppearance="@style/PoppinsRegular_15" />
+
+        <Button
+            android:id="@+id/continueICDIBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="right"

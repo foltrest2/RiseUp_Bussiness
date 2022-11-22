@@ -63,13 +63,14 @@ class RegisterViewModel: ViewModel() {
                             Firebase.auth.currentUser!!.uid,
                             "",
                             correo,
-                            UUID.randomUUID().toString(),
+                            "",
+                            "",
                             "",
                             arrayListOf(),
                             "",
                             ""
                         )
-                        Firebase.firestore.collection("Discos")
+                        Firebase.firestore.collection("Discos2")
                             .document(disco.id).set(disco)
                         _authState.value = AuthState(AuthResult.SUCCESS, "Success")
 

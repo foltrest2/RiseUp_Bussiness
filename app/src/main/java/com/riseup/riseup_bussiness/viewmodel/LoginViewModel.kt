@@ -56,7 +56,7 @@ class LoginViewModel: ViewModel(){
                             Log.e(">>>","el usuario esta verificado")
                             //Pedimos el user en la db
                                 viewModelScope.launch ( Dispatchers.IO) {
-                                    Firebase.firestore.collection("Discos").document(fbuser.uid)
+                                    Firebase.firestore.collection("Discos2").document(fbuser.uid)
                                         .get()
                                         .addOnSuccessListener {
                                             Log.e(">>>", "Se esta guardando el usuario")
@@ -69,6 +69,7 @@ class LoginViewModel: ViewModel(){
                                             return@addOnFailureListener
                                         }.await()
                                     withContext(Dispatchers.Main){
+                                        Log.e(">>>",""+task.result.additionalUserInfo?.isNewUser)
                                         if (
                                             fbuser.metadata!!.creationTimestamp == fbuser.metadata!!.lastSignInTimestamp
                                         ) {

@@ -18,6 +18,9 @@
         android:theme="@style/Theme.RiseUp_Bussiness"
         tools:targetApi="31">
         <activity
+            android:name=".view.ConfigDiscoImagesActivity"
+            android:exported="false" />
+        <activity
             android:name=".view.DiscoInitialConfigActivity"
             android:exported="false" />
         <activity
@@ -61,7 +64,17 @@
             android:exported="false" />
         <activity
             android:name=".view.ConfigurationActivity"
-            android:exported="false"></activity>
+            android:exported="false" />
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.riseup.riseup_bussiness"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/paths" />
+        </provider>
     </application>
 
 </manifest>

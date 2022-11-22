@@ -24,15 +24,17 @@
         <entry key="..\:/Users/alejo/OneDrive - Universidad Icesi (@icesi.edu.co)/Universidad/SeptimoSemestre/AppMoviles/ProyectoFinalBussiness/RiseUp_Bussiness/app/src/main/res/drawable/check24p.xml" value="0.276" />
         <entry key="..\:/Users/alejo/OneDrive - Universidad Icesi (@icesi.edu.co)/Universidad/SeptimoSemestre/AppMoviles/ProyectoFinalBussiness/RiseUp_Bussiness/app/src/main/res/drawable/error_gradient.xml" value="0.276" />
         <entry key="..\:/Users/alejo/OneDrive - Universidad Icesi (@icesi.edu.co)/Universidad/SeptimoSemestre/AppMoviles/ProyectoFinalBussiness/RiseUp_Bussiness/app/src/main/res/drawable/password_icon.xml" value="0.3635" />
+        <entry key="..\:/Users/alejo/OneDrive - Universidad Icesi (@icesi.edu.co)/Universidad/SeptimoSemestre/AppMoviles/ProyectoFinalBussiness/RiseUp_Bussiness/app/src/main/res/layout/activity_config_disco_images.xml" value="0.33" />
         <entry key="..\:/Users/alejo/OneDrive - Universidad Icesi (@icesi.edu.co)/Universidad/SeptimoSemestre/AppMoviles/ProyectoFinalBussiness/RiseUp_Bussiness/app/src/main/res/layout/activity_config_information.xml" value="0.30027173913043476" />
         <entry key="..\:/Users/alejo/OneDrive - Universidad Icesi (@icesi.edu.co)/Universidad/SeptimoSemestre/AppMoviles/ProyectoFinalBussiness/RiseUp_Bussiness/app/src/main/res/layout/activity_config_language.xml" value="0.30027173913043476" />
-        <entry key="..\:/Users/alejo/OneDrive - Universidad Icesi (@icesi.edu.co)/Universidad/SeptimoSemestre/AppMoviles/ProyectoFinalBussiness/RiseUp_Bussiness/app/src/main/res/layout/activity_disco_initial_config.xml" value="0.30027173913043476" />
+        <entry key="..\:/Users/alejo/OneDrive - Universidad Icesi (@icesi.edu.co)/Universidad/SeptimoSemestre/AppMoviles/ProyectoFinalBussiness/RiseUp_Bussiness/app/src/main/res/layout/activity_disco_initial_config.xml" value="0.33" />
         <entry key="..\:/Users/alejo/OneDrive - Universidad Icesi (@icesi.edu.co)/Universidad/SeptimoSemestre/AppMoviles/ProyectoFinalBussiness/RiseUp_Bussiness/app/src/main/res/layout/activity_login.xml" value="0.33" />
         <entry key="..\:/Users/alejo/OneDrive - Universidad Icesi (@icesi.edu.co)/Universidad/SeptimoSemestre/AppMoviles/ProyectoFinalBussiness/RiseUp_Bussiness/app/src/main/res/layout/activity_register.xml" value="0.33" />
         <entry key="..\:/Users/alejo/OneDrive - Universidad Icesi (@icesi.edu.co)/Universidad/SeptimoSemestre/AppMoviles/ProyectoFinalBussiness/RiseUp_Bussiness/app/src/main/res/layout/email_already_exist_dialog.xml" value="0.30480072463768115" />
         <entry key="..\:/Users/alejo/OneDrive - Universidad Icesi (@icesi.edu.co)/Universidad/SeptimoSemestre/AppMoviles/ProyectoFinalBussiness/RiseUp_Bussiness/app/src/main/res/layout/error_dialog.xml" value="0.30480072463768115" />
         <entry key="..\:/Users/alejo/OneDrive - Universidad Icesi (@icesi.edu.co)/Universidad/SeptimoSemestre/AppMoviles/ProyectoFinalBussiness/RiseUp_Bussiness/app/src/main/res/layout/succesfull_register_dialog.xml" value="0.30480072463768115" />
         <entry key="..\:/Users/alejo/OneDrive - Universidad Icesi (@icesi.edu.co)/Universidad/SeptimoSemestre/AppMoviles/ProyectoFinalBussiness/RiseUp_Bussiness/app/src/main/res/menu/menu_config_help_center.xml" value="0.3625" />
+        <entry key="..\:/Users/alejo/OneDrive - Universidad Icesi (@icesi.edu.co)/Universidad/SeptimoSemestre/AppMoviles/ProyectoFinalBussiness/RiseUp_Bussiness/app/src/main/res/xml/paths.xml" value="0.18854166666666666" />
       </map>
     </option>
   </component>

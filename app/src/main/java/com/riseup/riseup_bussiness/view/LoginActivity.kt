@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.viewModels
+import com.google.firestore.v1.StructuredQuery
 import com.google.gson.Gson
 import com.riseup.riseup_bussiness.databinding.ActivityLoginBinding
 import com.riseup.riseup_bussiness.model.Disco
@@ -50,7 +51,7 @@ class LoginActivity : AppCompatActivity(){
                             val thisDiscoToSave = viewmodel.saveUserFromViewModel()
                             saveDisco(thisDiscoToSave)
                             Log.e(">>>", "SAVED: $thisDiscoToSave")
-                            startActivity(Intent(this@LoginActivity, OrdersListActivity::class.java))
+                            startActivity(Intent(this@LoginActivity,OrdersListActivity::class.java))
                             finish()
                         }
 
@@ -59,7 +60,7 @@ class LoginActivity : AppCompatActivity(){
                             val thisDiscoToSave = viewmodel.saveUserFromViewModel()
                             saveDisco(thisDiscoToSave)
                             Log.e(">>>", "SAVED: $thisDiscoToSave")
-                            startActivity(Intent(this@LoginActivity, DiscoInitialConfigActivity::class.java))
+                            startActivity(Intent(this@LoginActivity,DiscoInitialConfigActivity::class.java))
                             finish()
                         }
                     }
