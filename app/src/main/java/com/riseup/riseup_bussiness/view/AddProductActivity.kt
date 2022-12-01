@@ -33,10 +33,10 @@ class AddProductActivity : AppCompatActivity() {
         //this.listener = ProductListActivity()
         //Log.e(">>>", "listener seteado en addproductactivity: $listener}")
        //Borrar cache
-       /*
-       val sp = getSharedPreferences("RiseUpBussiness", MODE_PRIVATE)
-       sp.edit().clear().apply()
-        */
+
+       //val sp = getSharedPreferences("RiseUpBussiness", MODE_PRIVATE)
+       //sp.edit().clear().apply()
+
         //Inicializacion de la galeria
         val galleryLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult(),::onGalleryResult)
         //Cargar productos

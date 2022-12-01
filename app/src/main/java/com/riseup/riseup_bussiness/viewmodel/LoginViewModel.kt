@@ -61,6 +61,10 @@ class LoginViewModel: ViewModel(){
                                         .addOnSuccessListener {
                                             Log.e(">>>", "Se esta guardando el usuario")
                                             userReturn = it.toObject(Disco::class.java)!!
+                                            if(userReturn.name == "" || userReturn.bannerCardID == "" || userReturn.bannerCardID ==""
+                                                || userReturn.bannerRef == "" || userReturn.bannerID == "" || userReturn.productsRef == ""){
+                                                _authState.value = AuthState(AuthResult.SUCCESS, "VerifiedFirstTime")
+                                            }
                                         }.addOnFailureListener {
                                             Log.e(">>>", "No Se esta guardando el usuario")
 
@@ -75,10 +79,13 @@ class LoginViewModel: ViewModel(){
                                         ) {
                                             Log.e(">>>","primera vez que se logea esl usuario")
                                             _authState.value = AuthState(AuthResult.SUCCESS, "VerifiedFirstTime")
-                                        } else {
+                                        } /*
+                                        else {
                                             Log.e(">>>","no es la primera vez que se logea el usuario")
                                             _authState.value = AuthState(AuthResult.SUCCESS, "Verified") }
+                                        */
                                         }
+
                                 }
                         }else{
                             _authState.value = AuthState(AuthResult.SUCCESS, "NotVerified")
@@ -94,8 +101,13 @@ class LoginViewModel: ViewModel(){
     }
 
     fun saveUserFromViewModel() : Disco {
+        if(userReturn.name == "" || userReturn.bannerCardID == "" || userReturn.bannerCardID)
+
         return userReturn
+
+
     }
+
 
 }
 

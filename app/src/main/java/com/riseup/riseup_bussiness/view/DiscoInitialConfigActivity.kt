@@ -47,6 +47,7 @@ class DiscoInitialConfigActivity : AppCompatActivity() {
             Log.e(">>>", "Actualizado en observer DiscoInitialConfig: ${it}")
             saveUserSp(it)
         }
+
         binding.continueICBtn.setOnClickListener {
             if (binding.DiscoNameICET.text.isNotEmpty()) {
 
