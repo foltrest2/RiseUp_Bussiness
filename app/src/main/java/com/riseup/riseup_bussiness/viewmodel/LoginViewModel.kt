@@ -86,9 +86,9 @@ class LoginViewModel: ViewModel(){
                     }
                 }.await()
 
-            }catch (ex: FirebaseAuthException){
-                Log.e(">>>", ex.errorCode)
-                 _authState.value = AuthState(AuthResult.FAIL, ex.localizedMessage)
+            }catch (ex:Exception){
+                //Log.e(">>>", ex.errorCode)
+                // _authState.value = AuthState(AuthResult.FAIL, ex.localizedMessage)
             }
         }
     }
