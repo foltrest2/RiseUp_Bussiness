@@ -50,8 +50,8 @@ class DiscoInitialConfigActivity : AppCompatActivity() {
         binding.continueICBtn.setOnClickListener {
             if (binding.DiscoNameICET.text.isNotEmpty()) {
 
-                    viewmodel.updateDiscoName(binding.DiscoNameICET.text.toString(), user)
-                     viewmodel.updateDiscoRef(user)
+                 viewmodel.updateDiscoName(binding.DiscoNameICET.text.toString(), user)
+                     //viewmodel.updateDiscoRef(user)
             }
             finish()
             startActivity(Intent(this, ConfigDiscoImagesActivity::class.java))

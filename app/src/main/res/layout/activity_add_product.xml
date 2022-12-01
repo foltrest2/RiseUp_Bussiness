@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/linear_gradient_background"
+    tools:context=".view.AddProductActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+
+        android:id="@+id/returnToLoginICPLY"
+        android:layout_width="match_parent"
+        android:layout_height="42dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageButton
+            android:id="@+id/returnToLoginICPButton"
+            style="@style/BackArrowButton"
+            android:layout_width="48dp"
+            android:layout_marginStart="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/returnToLoginICPTV"
+            style="@style/PoppinsBold_20"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="24dp"
+            android:text="@string/registerinitialConfigTitle"
+            app:layout_constraintBottom_toBottomOf="@+id/returnToLoginICPButton"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/returnToLoginICPButton"
+
+            app:layout_constraintTop_toTopOf="@+id/returnToLoginICPButton"
+            app:layout_constraintVertical_bias="0.0" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <LinearLayout
+
+        android:gravity="center_horizontal"
+        android:id="@+id/DiscoICPLLY"
+        android:layout_width="match_parent"
+        android:layout_height="679dp"
+        android:orientation="vertical"
+        android:padding="40dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/returnToLoginICPLY">
+
+        <TextView
+            android:id="@+id/DiscoMenuICTV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:text="@string/CreateProductsMenuTitle"
+            android:textAlignment="center"
+            android:textAppearance="@style/PoppinsRegular_14" />
+        <TextView
+            android:id="@+id/ProductTypeICTV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:text="@string/ProductTypeText"
+            android:textAlignment="textStart"
+            android:textAppearance="@style/PoppinsRegular_14" />
+
+        <EditText
+            android:id="@+id/ProductTypeICET"
+            android:layout_width="match_parent"
+            android:layout_height="57dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/purple_button_border"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text=""
+            android:textColorHint="@color/grey"
+            android:hint="@string/WriteHereProductTypeText"
+            android:textAlignment="center"
+            android:textAppearance="@style/PoppinsRegular_15"
+            android:textColor="@color/white" />
+        <TextView
+            android:id="@+id/ProductImageICTV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:text="@string/AddProductImageText"
+            android:textAlignment="textStart"
+            android:textAppearance="@style/PoppinsRegular_14" />
+
+        <Button
+            android:id="@+id/ChooseProductImageBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/gradient_buttonwithoutborder"
+            android:text="@string/ChooseFileDiscoConfig"
+            android:textAppearance="@style/PoppinsRegular_15"
+            android:textColor="@color/white" />
+
+        <TextView
+            android:id="@+id/ProductNameICTV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:text="@string/AddProductNameText"
+            android:textAlignment="textStart"
+            android:textAppearance="@style/PoppinsRegular_14" />
+
+        <EditText
+            android:id="@+id/ProductNameICET"
+            android:layout_width="match_parent"
+            android:layout_height="57dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/purple_button_border"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text=""
+            android:textColorHint="@color/grey"
+            android:hint="@string/WriteHereText"
+            android:textAlignment="center"
+            android:textAppearance="@style/PoppinsRegular_15"
+            android:textColor="@color/white" />
+        <TextView
+            android:id="@+id/ProductPriceICTV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:text="@string/AddProductPriceText"
+            android:textAlignment="textStart"
+            android:textAppearance="@style/PoppinsRegular_14" />
+
+        <EditText
+            android:id="@+id/ProductPriceICET"
+            android:layout_width="match_parent"
+            android:layout_height="57dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/purple_button_border"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text=""
+            android:textColorHint="@color/grey"
+            android:hint="@string/WriteHereText"
+            android:textAlignment="center"
+            android:textAppearance="@style/PoppinsRegular_15"
+            android:textColor="@color/white" />
+        <Button
+            android:id="@+id/AddProductConfigBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:layout_marginRight="80dp"
+            android:layout_marginLeft="80dp"
+            android:background="@drawable/gradient_buttonwithoutborder"
+            android:text="@string/addProductBtn"
+            android:textAppearance="@style/PoppinsRegular_15"
+            android:textColor="@color/white" />
+        <TextView
+            android:id="@+id/ShowProductPrevViewTV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:text="@string/ProductMenuPrevText"
+            android:textAlignment="center"
+            android:textAppearance="@style/PoppinsMed_14" />
+        <Button
+            android:id="@+id/FinishInitialConfigBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="40dp"
+            android:background="@drawable/gradient_buttonwithoutborder"
+            android:text="@string/FinishBtnText"
+            android:textAppearance="@style/PoppinsRegular_15"
+            android:textColor="@color/white" />
+
+
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

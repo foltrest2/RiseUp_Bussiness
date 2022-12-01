@@ -17,6 +17,17 @@
     <string name="DiscoMainHomePageImageIC">Imagen para la página principal</string>
     <string name="ContinueText">Continuar</string>
     <string name="WriteHereText">Escribe aquí</string>
+    <string name="CreateProductsMenuTitle">Crea tu menú de licores</string>
+    <string name="ProductTypeText">¿De qué tipo es el licor?</string>
+    <string name="AddProductImageText">Agrega la imagen del licor</string>
+    <string name="AddProductNameText">Escribe el nombre de tu bebida</string>
+    <string name="AddProductPriceText">Ponle precio</string>
+    <string name="WriteHereProductTypeText">Whisky, cóctel, etc</string>
+    <string name="ProductMenuPrevText">Previsualiza tu menú</string>
+    <string name="FinishInitialConfigText">Terminar</string>
+    <string name="addProductBtn">Agregar</string>
+    <string name="DeleteProductBtn">Eliminar</string>
+    <string name="FinishBtnText">Terminar</string>
 
 
     <!-- Titulos de pantallas de configuracion -->

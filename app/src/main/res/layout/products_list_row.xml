@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/productTypeICPLTV"
+        style="@style/PoppinsSemiBold_20"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="16dp"
+        android:gravity="center_vertical"
+        android:text="TextView"
+        app:layout_constraintBottom_toTopOf="@id/productlistnameICTV"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/productListICImg"
+        android:layout_width="65dp"
+        android:layout_height="65dp"
+        android:layout_marginLeft="24dp"
+        android:layout_weight="1"
+        app:layout_constraintBottom_toBottomOf="@+id/productListPriceICTV"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/productlistnameICTV" />
+
+    <TextView
+        android:id="@+id/productlistnameICTV"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="32dp"
+        android:layout_marginRight="32dp"
+        android:layout_weight="1"
+        android:gravity="center_vertical"
+        android:text="TextView"
+        android:textAppearance="@style/PoppinsMed_20"
+        app:layout_constraintBottom_toTopOf="@id/productListPriceICTV"
+        app:layout_constraintLeft_toRightOf="@id/productListICImg"
+        app:layout_constraintRight_toLeftOf="@id/addProductPLICBtn"
+        app:layout_constraintTop_toBottomOf="@id/productTypeICPLTV" />
+
+    <TextView
+        android:id="@+id/productListPriceICTV"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="32dp"
+        android:layout_marginRight="32dp"
+        android:layout_marginBottom="16dp"
+        android:layout_weight="1"
+        android:gravity="center_vertical"
+        android:text="TextView"
+        android:textAppearance="@style/PoppinsMed_18"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/productListICImg"
+        app:layout_constraintRight_toLeftOf="@id/addProductPLICBtn"
+        app:layout_constraintTop_toBottomOf="@id/productlistnameICTV" />
+
+    <Button
+        android:id="@+id/addProductPLICBtn"
+        style="@style/RectangleWRedGradientPL"
+        android:layout_width="100dp"
+        android:layout_gravity="center_vertical"
+        android:layout_marginRight="24dp"
+        android:backgroundTint="@null"
+        android:text="@string/DeleteProductBtn"
+        android:textAppearance="@style/PoppinsMed_20"
+        android:textSize="14sp"
+        android:theme="@style/RectangleWRedGradientPL"
+        app:layout_constraintBottom_toBottomOf="@+id/productListPriceICTV"
+        app:layout_constraintLeft_toRightOf="@id/productlistnameICTV"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/productlistnameICTV" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

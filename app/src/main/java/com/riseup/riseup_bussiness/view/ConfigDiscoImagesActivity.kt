@@ -61,7 +61,7 @@ class ConfigDiscoImagesActivity : AppCompatActivity() {
                }
 
             finish()
-            startActivity(Intent(this, OrdersListActivity::class.java))
+            startActivity(Intent(this, AddProductActivity::class.java))
         }
 
     }
