@@ -4,16 +4,18 @@ import java.io.Serializable
 
 data class Disco(
     var id:String = "",
-    var nombre:String = "",
+    var name:String = "",
     var email:String  = "",
     var bannerID:String = "",
+    var bannerCardID:String = "",
     var bannerRef:String = "",
-    var eventosID: ArrayList<String>? = null,
-    var eventosRef:String = ""
+    var eventsID: ArrayList<String>? = null,
+    var eventsRef:String = "",
+    var productsRef:String = ""
 
 
 ) : Serializable{
     override fun toString(): String {
-        return "Disco(nombre='$nombre', bannerID='$bannerID')"
+        return "Disco(name='$name', bannerID='$bannerID',bannerCardID='$bannerCardID',bannerRef='$bannerRef',productsRef='$productsRef',eventsRef='$eventsRef')"
     }
 }

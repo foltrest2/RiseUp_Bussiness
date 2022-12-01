@@ -4,6 +4,30 @@
 
     <!-- Titulos de pantalla de Login-->
     <string name="riseup">Rise Up</string>
+    <string name="NotRegisteredDisco">¿Tu discoteca no está registrada aún?</string>
+    <string name="RegisterHere"><u>Regístrate aquí</u></string>
+
+    <!-- Titulos de pantalla de Registro-->
+    ¿Cómo quieres aparecer en la app?
+    <string name="registerSCMessage">Los planes y precios se mostrarán cuando se confirme tu aplicabilidad</string>
+    <string name="registerinitialConfigTitle">Configuración inicial</string>
+    <string name="DiscoInitialConfigName">¿Cómo quieres aparecer en la app?</string>
+    <string name="ChooseFileDiscoConfig">Seleccionar archivo</string>
+    <string name="DiscoListImageIC">Imagen en la lista de discotecas</string>
+    <string name="DiscoMainHomePageImageIC">Imagen para la página principal</string>
+    <string name="ContinueText">Continuar</string>
+    <string name="WriteHereText">Escribe aquí</string>
+    <string name="CreateProductsMenuTitle">Crea tu menú de licores</string>
+    <string name="ProductTypeText">¿De qué tipo es el licor?</string>
+    <string name="AddProductImageText">Agrega la imagen del licor</string>
+    <string name="AddProductNameText">Escribe el nombre de tu bebida</string>
+    <string name="AddProductPriceText">Ponle precio</string>
+    <string name="WriteHereProductTypeText">Whisky, cóctel, etc</string>
+    <string name="ProductMenuPrevText">Previsualiza tu menú</string>
+    <string name="FinishInitialConfigText">Terminar</string>
+    <string name="addProductBtn">Agregar</string>
+    <string name="DeleteProductBtn">Eliminar</string>
+    <string name="FinishBtnText">Terminar</string>
 
 
     <!-- Titulos de pantallas de configuracion -->
@@ -206,5 +230,19 @@
     <string name="activeorders">En curso</string>
     <string name="completedorders">Finalizadas</string>
 
+
+    //error strings
+
+    <string name="passNotMatchRegisterTitle">Error</string>
+    <string name="EmailIsAlreadyRegistered">¡El correo electrónico ingresado ya se encuentra registrado!</string>
+    <string name="SuccessfullRegisterDescTV">¡El usuario ha sido registrado con éxito! Por favor verifica tu correo electrónico para activar tu cuenta </string>
+    <string name="SuccessfullRegisterTitleTV">Éxito</string>
+    <string name="ErrorDialogPassNotMatchTV">¡las contraseñas no coinciden!</string>
+    <string name="ErrorDialogWrongPasswordLoginTV">¡La contraseña ingresada es incorrecta!</string>
+    <string name="ErrorDialogInvalidEmailLoginTV">¡El correo electrónico ingresado es inválido!</string>
+    <string name="ErrorDialogUserNotFoundTV">¡El usuario ingresado no existe!</string>
+    <string name="ErrorDialogWeakPassTV">¡La contraseña ingresada es muy débil(menos de 6 caracteres)!</string>
+    <string name="ErrorDialogEmptyFieldsTV">Por favor completa todos los campos</string>
+    <string name="ErrorDialogNotVerifiedEmailTV">Por favor verifica tu correo electrónico para activar la cuenta</string>
 
 </resources>
