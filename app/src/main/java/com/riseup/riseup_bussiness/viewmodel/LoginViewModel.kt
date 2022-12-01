@@ -101,7 +101,6 @@ class LoginViewModel: ViewModel(){
     }
 
     fun saveUserFromViewModel() : Disco {
-        if(userReturn.name == "" || userReturn.bannerCardID == "" || userReturn.bannerCardID)
 
         return userReturn
 
