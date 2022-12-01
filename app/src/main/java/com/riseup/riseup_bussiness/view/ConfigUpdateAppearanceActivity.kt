@@ -8,13 +8,8 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts.*
 import androidx.activity.viewModels
 import com.bumptech.glide.Glide
-import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.ktx.Firebase
-import com.google.firebase.storage.ktx.storage
 import com.riseup.riseup_bussiness.databinding.ActivityUpdateAppearanceBinding
-import com.riseup.riseup_bussiness.model.DiscoModel
 import com.riseup.riseup_bussiness.viewmodel.ConfigUpdateAppearanceViewModel
-import java.util.*
 
 class ConfigUpdateAppearanceActivity : AppCompatActivity() {
 
