@@ -31,7 +31,7 @@ class RegisterActivity : AppCompatActivity() {
 
                 }
                 AuthResult.SUCCESS->{
-                    val sp = getSharedPreferences("RiseUpBussiness", MODE_PRIVATE)
+                    val sp = getSharedPreferences("RiseUpBusiness", MODE_PRIVATE)
                     sp.edit().clear().apply()
                       startActivity(Intent(this@RegisterActivity, LoginActivity::class.java).putExtra("Dialog","showDialog"))
                     Log.e(">>>","Hice la petición al dialogo")
