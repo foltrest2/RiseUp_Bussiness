@@ -52,7 +52,7 @@ class ProductListActivity : AppCompatActivity() {
 
 
     private fun loadProducts(): ArrayList<ProductModel>? {
-        val sp = this.getSharedPreferences("RiseUpBussiness", AppCompatActivity.MODE_PRIVATE)
+        val sp = this.getSharedPreferences("RiseUpBusiness", AppCompatActivity.MODE_PRIVATE)
         val json = sp?.getString("Products", "NO_USER")
         return if (json == "NO_USER") {
             null
@@ -76,7 +76,7 @@ class ProductListActivity : AppCompatActivity() {
 
     }
     private fun saveProducts(car: ArrayList<ProductModel>) {
-        val sp = this.getSharedPreferences("RiseUpBussiness", AppCompatActivity.MODE_PRIVATE)
+        val sp = this.getSharedPreferences("RiseUpBusiness", AppCompatActivity.MODE_PRIVATE)
         val json = Gson().toJson(car)
         sp?.edit()?.putString("Products", json)?.apply()
     }
