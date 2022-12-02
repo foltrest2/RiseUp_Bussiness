@@ -79,7 +79,7 @@ class ConfigDiscoImagesActivity : AppCompatActivity() {
 
             finish()
             startActivity(Intent(this, LoginActivity::class.java))
-            val sp = getSharedPreferences("RiseUpBussiness", MODE_PRIVATE)
+            val sp = getSharedPreferences("RiseUpBusiness", MODE_PRIVATE)
             val json = sp.getString("Usuario", "NO_USER")
             Toast.makeText(this,"A borrar tipo: $json", Toast.LENGTH_LONG).show()
             sp.edit().clear().apply()
@@ -90,7 +90,7 @@ class ConfigDiscoImagesActivity : AppCompatActivity() {
 
 
     private fun loadUser(): DiscoModel? {
-        val sp = getSharedPreferences("RiseUpBusiness", MODE_PRIVATE)
+        val sp = getSharedPreferences("RiseUpBussiness", MODE_PRIVATE)
         val json = sp.getString("Usuario", "NO_USER")
         if (json == "NO_USER") {
             return null
