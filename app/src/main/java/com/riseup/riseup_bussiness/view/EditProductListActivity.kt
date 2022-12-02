@@ -12,7 +12,7 @@ import com.google.gson.reflect.TypeToken
 import com.riseup.riseup_bussiness.databinding.ActivityEditProductListBinding
 import com.riseup.riseup_bussiness.model.DiscoModel
 import com.riseup.riseup_bussiness.model.ProductModel
-import com.riseup.riseup_bussiness.util.ProductListAdapter
+import com.riseup.riseup_bussiness.util.EditProductListAdapter
 import com.riseup.riseup_bussiness.viewmodel.EditProductListViewModel
 
 class EditProductListActivity: AppCompatActivity() {
@@ -21,7 +21,7 @@ class EditProductListActivity: AppCompatActivity() {
     private var products: ArrayList<ProductModel> = arrayListOf()
     private val viewModel : EditProductListViewModel by viewModels()
 
-    private val adapter = ProductListAdapter({ thisProduct -> onClickListener(thisProduct) },
+    private val adapter = EditProductListAdapter({ thisProduct -> onClickListener(thisProduct) },
         { thisProduct -> changePriceListener(thisProduct) },
         { thisProduct -> changeNameListener(thisProduct) },
         { thisProduct -> changeImageListener(thisProduct) })
@@ -45,6 +45,10 @@ class EditProductListActivity: AppCompatActivity() {
         binding.returnToConfigBtn.setOnClickListener {
             finish()
             startActivity(Intent(this, ConfigurationActivity::class.java))
+        }
+
+        binding.addProductWhileEditing.setOnClickListener {
+            startActivity(Intent(this, AddProductActivity::class.java))
         }
 
     }

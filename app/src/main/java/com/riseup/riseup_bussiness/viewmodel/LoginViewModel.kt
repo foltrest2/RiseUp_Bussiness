@@ -19,55 +19,62 @@ import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
 
 
-class LoginViewModel: ViewModel(){
+class LoginViewModel : ViewModel() {
 
     private val _authState = MutableLiveData(
         AuthState(AuthResult.IDLE, "Starting...")
     )
-    val authState : LiveData<AuthState> get() = _authState
-    private lateinit var userReturn : DiscoModel
+    val authState: LiveData<AuthState> get() = _authState
+    private lateinit var userReturn: DiscoModel
 
     private val _inComingProducts = MutableLiveData<List<ProductModel>>()
-    val inComingProduct: MutableLiveData<List<ProductModel>> get() =_inComingProducts
+    val inComingProduct: MutableLiveData<List<ProductModel>> get() = _inComingProducts
 
     //Accion de registro
-    fun signIn(correo:String, pass:String){
-        viewModelScope.launch (Dispatchers.IO){
+    fun signIn(correo: String, pass: String) {
+        viewModelScope.launch(Dispatchers.IO) {
             try {
-                val result = Firebase.auth.signInWithEmailAndPassword(correo,pass).addOnCompleteListener { task->
-                    if (!task.isSuccessful) {
-                        try {
-                            throw task.exception!!
-                        }
-                        catch (authException: FirebaseAuthException ) {
+                val result = Firebase.auth.signInWithEmailAndPassword(correo, pass)
+                    .addOnCompleteListener { task ->
+                        if (!task.isSuccessful) {
+                            try {
+                                throw task.exception!!
+                            } catch (authException: FirebaseAuthException) {
 
-                            when(authException.errorCode){
+                                when (authException.errorCode) {
 
-                                "ERROR_WRONG_PASSWORD" ->
-                                    _authState.value = AuthState(AuthResult.FAIL, "wrongPassword")
-                                "ERROR_INVALID_EMAIL" ->
-                                    _authState.value = AuthState(AuthResult.FAIL, "invalidEmail")
-                                "ERROR_USER_NOT_FOUND" ->
-                                    _authState.value = AuthState(AuthResult.FAIL, "userNotFound")
+                                    "ERROR_WRONG_PASSWORD" ->
+                                        _authState.value =
+                                            AuthState(AuthResult.FAIL, "wrongPassword")
+                                    "ERROR_INVALID_EMAIL" ->
+                                        _authState.value =
+                                            AuthState(AuthResult.FAIL, "invalidEmail")
+                                    "ERROR_USER_NOT_FOUND" ->
+                                        _authState.value =
+                                            AuthState(AuthResult.FAIL, "userNotFound")
 
+                                }
                             }
-                        }
-                    }else{
+                        } else {
 
-                        val fbuser = Firebase.auth.currentUser
+                            val fbuser = Firebase.auth.currentUser
 
-                        if(fbuser!!.isEmailVerified){
-                            Log.e(">>>","el usuario esta verificado")
-                            //Pedimos el user en la db
-                                viewModelScope.launch ( Dispatchers.IO) {
+                            if (fbuser!!.isEmailVerified) {
+                                Log.e(">>>", "el usuario esta verificado")
+                                //Pedimos el user en la db
+                                viewModelScope.launch(Dispatchers.IO) {
                                     Firebase.firestore.collection("Discos").document(fbuser.uid)
                                         .get()
                                         .addOnSuccessListener {
                                             Log.e(">>>", "Se esta guardando el usuario")
                                             userReturn = it.toObject(DiscoModel::class.java)!!
-                                            if(userReturn.name == "" || userReturn.bannerCardID ==""
-                                                || userReturn.bannerRef == "" || userReturn.bannerID == "" || userReturn.productsRef == ""){
-                                                _authState.value = AuthState(AuthResult.SUCCESS, "VerifiedFirstTime")
+                                            if (userReturn.name == "" || userReturn.bannerCardID == ""
+                                                || userReturn.bannerRef == "" || userReturn.bannerID == "" || userReturn.productsRef == ""
+                                            ) {
+                                                _authState.value = AuthState(
+                                                    AuthResult.SUCCESS,
+                                                    "VerifiedFirstTime"
+                                                )
                                             }
                                         }.addOnFailureListener {
                                             Log.e(">>>", "No Se esta guardando el usuario")
@@ -76,37 +83,58 @@ class LoginViewModel: ViewModel(){
                                                 AuthState(AuthResult.FAIL, "networkError")
                                             return@addOnFailureListener
                                         }.await()
-                                    withContext(Dispatchers.Main){
-                                        Log.e(">>>",""+task.result.additionalUserInfo?.isNewUser)
+                                    withContext(Dispatchers.Main) {
+                                        Log.e(">>>", "" + task.result.additionalUserInfo?.isNewUser)
                                         if (
                                             fbuser.metadata!!.creationTimestamp == fbuser.metadata!!.lastSignInTimestamp
                                         ) {
-                                            Log.e(">>>","primera vez que se logea esl usuario")
-                                            _authState.value = AuthState(AuthResult.SUCCESS, "VerifiedFirstTime")
-                                        }
-                                        else {
-                                            Log.e(">>>","no es la primera vez que se logea el usuario")
-                                            _authState.value = AuthState(AuthResult.SUCCESS, "Verified") }
+                                            Log.e(">>>", "primera vez que se logea esl usuario")
+                                            _authState.value =
+                                                AuthState(AuthResult.SUCCESS, "VerifiedFirstTime")
+                                        } else {
+                                            Log.e(
+                                                ">>>",
+                                                "no es la primera vez que se logea el usuario"
+                                            )
+                                            viewModelScope.launch(Dispatchers.IO) {
+                                                val bannerURL = Firebase.storage.getReference(userReturn.bannerRef).child(userReturn.bannerID).downloadUrl.await()
+                                                val bannerCardURL = Firebase.storage.getReference(userReturn.bannerRef).child(userReturn.bannerCardID).downloadUrl.await()
 
+                                                withContext(Dispatchers.Main){
+                                                    userReturn.bannerURL = bannerURL.toString()
+                                                    userReturn.bannerCardURL = bannerCardURL.toString()
+                                                }
+
+                                                for(event in userReturn.eventsID){
+                                                    val posterURL = Firebase.storage.getReference(userReturn.eventsRef).child(event.posterID).downloadUrl.await()
+                                                    withContext(Dispatchers.Main){
+                                                        event.posterURL = posterURL.toString()
+                                                    }
+                                                }
+                                                withContext(Dispatchers.Main){
+                                                    _authState.value = AuthState(AuthResult.SUCCESS, "Verified") }
+                                            }
                                         }
+
+                                    }
 
                                 }
-                        }else{
-                            _authState.value = AuthState(AuthResult.SUCCESS, "NotVerified")
+                            } else {
+                                _authState.value = AuthState(AuthResult.SUCCESS, "NotVerified")
+                            }
                         }
-                    }
-                }.await()
+                    }.await()
 
-            }catch (ex:Exception){
+            } catch (ex: Exception) {
                 //Log.e(">>>", ex.errorCode)
                 // _authState.value = AuthState(AuthResult.FAIL, ex.localizedMessage)
             }
         }
     }
 
-    fun setSpProducts(products:ArrayList<ProductModel>){
+    fun setSpProducts(products: ArrayList<ProductModel>) {
         _inComingProducts.value = products
-        Log.e(">>>","IncomingProducts Seted: ${_inComingProducts.value}")
+        Log.e(">>>", "IncomingProducts Seted: ${_inComingProducts.value}")
     }
 
     fun loadProducts(disco: DiscoModel) {
@@ -116,18 +144,16 @@ class LoginViewModel: ViewModel(){
                     val thisProducts = products.toObjects(ProductModel::class.java)
                     _inComingProducts.postValue(thisProducts)
                     for (product in thisProducts) {
+                        val productImgURL = Firebase.storage.getReference(disco.productsRef)
+                            .child(product.image).downloadUrl.toString()
+                        product.imageURL = productImgURL
                         Log.e(">>>", "Acá el product $product")
-                        viewModelScope.launch(Dispatchers.IO) {
-                            val productImgURL = Firebase.storage.getReference(disco.productsRef!!)
-                                .child(product.image).downloadUrl.await().toString()
-                            product.imageURL = productImgURL
-                        }
                     }
                 }
         }
     }
 
-    fun saveUserFromViewModel() : DiscoModel {
+    fun saveUserFromViewModel(): DiscoModel {
 
         return userReturn
 

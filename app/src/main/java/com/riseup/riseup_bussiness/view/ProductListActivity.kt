@@ -19,10 +19,8 @@ class ProductListActivity : AppCompatActivity() {
     private var products: ArrayList<ProductModel> = arrayListOf()
    // private val viewModel: ProductListViewModel by viewModels()
     //STATE
-    private val adapter = ProductListAdapter({ thisProduct -> onClickListener(thisProduct) },
-       { thisProduct -> changePriceListener(thisProduct) },
-       { thisProduct -> changeNameListener(thisProduct) },
-       { thisProduct -> changeImageListener(thisProduct) })
+    private val adapter = ProductListAdapter{ thisProduct -> onClickListener(thisProduct) }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -69,12 +67,6 @@ class ProductListActivity : AppCompatActivity() {
           deleteProduct(thisProduct,products)
           saveProducts(products)
     }
-
-    private fun changePriceListener(product : ProductModel){}
-
-    private fun changeNameListener(product : ProductModel){}
-
-    private fun changeImageListener(product : ProductModel){}
 
     private fun deleteProduct(thisProduct: ProductModel,products:ArrayList<ProductModel>){
         products.remove(thisProduct)

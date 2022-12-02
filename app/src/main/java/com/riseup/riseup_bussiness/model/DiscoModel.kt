@@ -8,12 +8,13 @@ data class DiscoModel (
     var bannerID:String = "",
     var bannerRef:String = "",
     var bannerCardID:String = "",
+    var bannerCardURL:String? = null,
     var email:String = "",
     var eventsID:ArrayList<EventModel> = arrayListOf(),
     var eventsRef:String = "",
     var products:ArrayList<ProductModel> = arrayListOf(),
     var bannerURL:String? = null,
-    var productsRef:String? = null
+    var productsRef:String = ""
 
 ) : Serializable {
     override fun toString(): String {
