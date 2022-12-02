@@ -41,6 +41,7 @@ class ConfigDiscoImagesActivity : AppCompatActivity() {
         //Inicializacion de usuario
         user = loadUser()!!
         //Inicializacion del viewmodel
+        //
         viewmodel.setSpUser(user)
         viewmodel.inComingUser.observe(this){
             Log.e(">>>", "Actualizado en observer DiscoImage: ${it}")
@@ -89,7 +90,7 @@ class ConfigDiscoImagesActivity : AppCompatActivity() {
 
 
     private fun loadUser(): DiscoModel? {
-        val sp = getSharedPreferences("RiseUpBussiness", MODE_PRIVATE)
+        val sp = getSharedPreferences("RiseUpBusiness", MODE_PRIVATE)
         val json = sp.getString("Usuario", "NO_USER")
         if (json == "NO_USER") {
             return null
