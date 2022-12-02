@@ -50,6 +50,7 @@ class AddProductActivity : AppCompatActivity() {
         val temp = loadProducts()
        //Inicializacion del viewModel
        viewModel.setSpUser(user)
+       viewModel.setChange()
 
        //Listener de la modificacion
        viewModel.inComingUser.observe(this){
@@ -59,6 +60,16 @@ class AddProductActivity : AppCompatActivity() {
        viewModel.inComingProduct.observe(this){
            Log.e(">>>", "Actualizado products en observer: ${it}")
            saveProducts(it)
+       }
+       viewModel.change.observe(this){
+           Log.e(">>>", "CHANGE: $it")
+           if(it == 5){
+               viewModel.requestDisco(user) //Ya
+           }
+            if(it == 6){
+                finish()
+                startActivity(Intent(this,OrdersListActivity::class.java))
+            }
        }
 
         if(temp!=null){
@@ -111,20 +122,16 @@ class AddProductActivity : AppCompatActivity() {
        }
        binding.FinishInitialConfigBtn.setOnClickListener {
 
-           viewModel.updateDiscoName(user)
-           viewModel.updateDiscoRef(user)
-           viewModel.updateDiscoListImg(user)
-           viewModel.updateDiscoHomeImg(user)
-           viewModel.updateDiscoProducts(products,user)
-           viewModel.updateDiscoEventsStorage(user)
-           GlobalScope.launch {
-               viewModel.requestDisco(user)
-           }
-           finish()
-           startActivity(Intent(this,OrdersListActivity::class.java))
+           viewModel.updateDiscoName(user) //Ya
+           viewModel.updateDiscoRef(user) //Ya
+           viewModel.updateDiscoListImg(user) //Ya
+           viewModel.updateDiscoHomeImg(user) //Ya
+           viewModel.updateDiscoProducts(products,user) //Ya
+           //viewModel.updateDiscoEventsStorage(user)
 
 
        }
+
     }
     private fun addProduct(products: ArrayList<ProductModel>){
          if(products.isEmpty()){

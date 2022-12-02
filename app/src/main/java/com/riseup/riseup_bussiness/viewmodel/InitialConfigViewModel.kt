@@ -18,14 +18,20 @@ import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
 
 class InitialConfigViewModel:ViewModel() {
+
     private val _inComingUser = MutableLiveData<DiscoModel>()
     val inComingUser : LiveData<DiscoModel> get() = _inComingUser
     private val _inComingProducts = MutableLiveData<ArrayList<ProductModel>>()
-    val inComingProduct: MutableLiveData<ArrayList<ProductModel>> get() =_inComingProducts
+    val inComingProduct: LiveData<ArrayList<ProductModel>> get() =_inComingProducts
+    private var _change = MutableLiveData<Int>()
+    val change : LiveData<Int> get() = _change
 
     fun setSpUser(user: DiscoModel){
         _inComingUser.value = user
         Log.e(">>>","IncomingUser Seted: ${_inComingUser.value}")
+    }
+    fun setChange(){
+        _change.value = 0
     }
     fun setSpProducts(products:ArrayList<ProductModel>){
         _inComingProducts.value = products
@@ -41,7 +47,8 @@ class InitialConfigViewModel:ViewModel() {
                 user.eventsRef = "${user.name}/Events/"
                 user.productsRef = "${user.name}/Products/"
                 _inComingUser.value = user
-
+                val inc = _change.value
+                _change.value = inc!!.inc()
 
             }.addOnFailureListener{
 
@@ -57,7 +64,8 @@ class InitialConfigViewModel:ViewModel() {
             Firebase.firestore.collection("Discos").document(user.id).update("bannerRef","${user.name}/Banner/").addOnSuccessListener {
                 Firebase.firestore.collection("Discos").document(user.id).update("eventsRef","${user.name}/Events/").addOnSuccessListener {
                     Firebase.firestore.collection("Discos").document(user.id).update("productsRef","${user.name}/Products/").addOnSuccessListener{
-
+                        val inc = _change.value
+                        _change.value = inc!!.inc()
                     }
                 }
             }.await()
@@ -72,20 +80,24 @@ class InitialConfigViewModel:ViewModel() {
                 .putFile(user.bannerCardID!!.toUri()!!).addOnSuccessListener {
                     Firebase.firestore.collection("Discos").document(user.id)
                         .update("bannerCardID", filename).addOnSuccessListener {
+                            Log.e(">>>", "FILENAME QUE LLEGA en BANNERCARD: $filename")
                             user.bannerCardID = filename
-                            _inComingUser.postValue(user)
+                            _inComingUser.value = user
+                            val inc = _change.value
+                            _change.value = inc!!.inc()
 
                         }
                 }
         }
     }
-
+/**
     fun updateDiscoEventsStorage(user:DiscoModel){
         viewModelScope.launch(Dispatchers.IO) {
             Log.e(">>>", "user que llega al updateDiscoEventsStorage: ${user.name}")
             Firebase.storage.reference.child("${user.name}/Events/")
         }
     }
+    */
 
     fun updateDiscoHomeImg( user: DiscoModel) {
         viewModelScope.launch(Dispatchers.IO) {
@@ -95,8 +107,11 @@ class InitialConfigViewModel:ViewModel() {
                 .putFile(user.bannerID!!.toUri()!!).addOnSuccessListener {
                     Firebase.firestore.collection("Discos").document(user.id)
                         .update("bannerID", filename).addOnSuccessListener {
+                            Log.e(">>>", "FILENAME QUE LLEGA en BANNERID: $filename")
                             user.bannerID = filename
-                            _inComingUser.postValue(user)
+                            _inComingUser.value = user
+                            val inc = _change.value
+                            _change.value = inc!!.inc()
                         }
                 }
         }
@@ -116,18 +131,43 @@ class InitialConfigViewModel:ViewModel() {
                 batch.set(docRef, product)
             }
             batch.commit()
-
+            withContext(Dispatchers.Main){
+                val inc = _change.value
+                _change.value = inc!!.inc()
+            }
         }
 
 
     }
 
-    suspend fun requestDisco(user: DiscoModel) {
+    fun requestDisco(user: DiscoModel) {
+        viewModelScope.launch(Dispatchers.IO) {
+            val bannerURL = Firebase.storage.getReference(user.bannerRef).child(user.bannerID).downloadUrl.await()
+            val bannerCardURL = Firebase.storage.getReference(user.bannerRef).child(user.bannerCardID).downloadUrl.await()
+
+            withContext(Dispatchers.Main){
+                user.bannerURL = bannerURL.toString()
+                user.bannerCardURL = bannerCardURL.toString()
+            }
+
+            for(event in user.eventsID){
+                val posterURL = Firebase.storage.getReference(user.eventsRef).child(event.posterID).downloadUrl.await()
+                withContext(Dispatchers.Main){
+                    event.posterURL = posterURL.toString()
+                }
+            }
+            withContext(Dispatchers.Main){
+                _inComingUser.value = user
+                val inc = _change.value
+                _change.value = inc!!.inc()
+            }
+        }
+        /**
         viewModelScope.launch(Dispatchers.IO) {
             val thisUserDoneSnap = Firebase.firestore.collection("Discos").document(user.id).get().await()
             val thisUserDone = thisUserDoneSnap.toObject(DiscoModel::class.java)
-            _inComingUser.value = thisUserDone!!
-        }
+*/
+
 
     }
 
