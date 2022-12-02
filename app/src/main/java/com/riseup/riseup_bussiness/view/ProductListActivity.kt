@@ -19,8 +19,10 @@ class ProductListActivity : AppCompatActivity() {
     private var products: ArrayList<ProductModel> = arrayListOf()
    // private val viewModel: ProductListViewModel by viewModels()
     //STATE
-    private val adapter = ProductListAdapter { thisProduct -> onClickListener(thisProduct) }
-
+    private val adapter = ProductListAdapter({ thisProduct -> onClickListener(thisProduct) },
+       { thisProduct -> changePriceListener(thisProduct) },
+       { thisProduct -> changeNameListener(thisProduct) },
+       { thisProduct -> changeImageListener(thisProduct) })
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -66,15 +68,19 @@ class ProductListActivity : AppCompatActivity() {
         Toast.makeText(binding.returnToLoginICPLButton.context, "Producto eliminado", Toast.LENGTH_SHORT).show()
           deleteProduct(thisProduct,products)
           saveProducts(products)
-
     }
+
+    private fun changePriceListener(product : ProductModel){}
+
+    private fun changeNameListener(product : ProductModel){}
+
+    private fun changeImageListener(product : ProductModel){}
 
     private fun deleteProduct(thisProduct: ProductModel,products:ArrayList<ProductModel>){
         products.remove(thisProduct)
        adapter.deleteProduct(thisProduct)
-
-
     }
+
     private fun saveProducts(car: ArrayList<ProductModel>) {
         val sp = this.getSharedPreferences("RiseUpBusiness", AppCompatActivity.MODE_PRIVATE)
         val json = Gson().toJson(car)

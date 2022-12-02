@@ -10,7 +10,9 @@ import com.google.firebase.auth.FirebaseAuthException
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.ktx.storage
 import com.riseup.riseup_bussiness.model.DiscoModel
+import com.riseup.riseup_bussiness.model.ProductModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
@@ -24,6 +26,9 @@ class LoginViewModel: ViewModel(){
     )
     val authState : LiveData<AuthState> get() = _authState
     private lateinit var userReturn : DiscoModel
+
+    private val _inComingProducts = MutableLiveData<List<ProductModel>>()
+    val inComingProduct: MutableLiveData<List<ProductModel>> get() =_inComingProducts
 
     //Accion de registro
     fun signIn(correo:String, pass:String){
@@ -96,6 +101,29 @@ class LoginViewModel: ViewModel(){
                 //Log.e(">>>", ex.errorCode)
                 // _authState.value = AuthState(AuthResult.FAIL, ex.localizedMessage)
             }
+        }
+    }
+
+    fun setSpProducts(products:ArrayList<ProductModel>){
+        _inComingProducts.value = products
+        Log.e(">>>","IncomingProducts Seted: ${_inComingProducts.value}")
+    }
+
+    fun loadProducts(disco: DiscoModel) {
+        viewModelScope.launch(Dispatchers.IO) {
+            Firebase.firestore.collection("Discos").document(disco.id)
+                .collection("Products").get().addOnSuccessListener { products ->
+                    val thisProducts = products.toObjects(ProductModel::class.java)
+                    _inComingProducts.postValue(thisProducts)
+                    for (product in thisProducts) {
+                        Log.e(">>>", "Acá el product $product")
+                        viewModelScope.launch(Dispatchers.IO) {
+                            val productImgURL = Firebase.storage.getReference(disco.productsRef!!)
+                                .child(product.image).downloadUrl.await().toString()
+                            product.imageURL = productImgURL
+                        }
+                    }
+                }
         }
     }
 

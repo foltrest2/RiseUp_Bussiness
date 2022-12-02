@@ -16,12 +16,16 @@ class ProductListView(itemView: View) : RecyclerView.ViewHolder(itemView) {
     val binding = ProductsListRowBinding.bind(itemView)
 
 
-    fun render(product: ProductModel, onClickListener:(ProductModel) -> Unit){
+    fun render(product: ProductModel, onClickListener:(ProductModel) -> Unit, changePriceListener:(ProductModel) -> Unit,
+               changeNameListener:(ProductModel) -> Unit, changeImageListener:(ProductModel) -> Unit){
         binding.productTypeICPLTV.text = product.category
         val format: NumberFormat = NumberFormat.getCurrencyInstance(Locale("en", "US"))
         binding.productListPriceICTV.text = format.format(product.price)
         binding.productlistnameICTV.text = product.name
         binding.addProductPLICBtn.setOnClickListener { onClickListener(product) }
+        binding.productListPriceICTV.setOnClickListener { changePriceListener(product) }
+        binding.productlistnameICTV.setOnClickListener { changeNameListener(product) }
+        binding.productListICImg.setOnClickListener { changeImageListener(product) }
         val image: Uri = product.image!!.toUri()
         //binding.productListICImg.setImageURI(image)
         Glide.with(itemView).load(image).placeholder(binding.productListICImg.drawable).into(binding.productListICImg);

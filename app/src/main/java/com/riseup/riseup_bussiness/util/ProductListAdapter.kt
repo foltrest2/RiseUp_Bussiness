@@ -8,7 +8,10 @@ import com.riseup.riseup_bussiness.R
 import com.riseup.riseup_bussiness.model.ProductModel
 import com.riseup.riseup_bussiness.view.ProductListView
 
-class ProductListAdapter(private val onClickListener:(ProductModel) -> Unit): RecyclerView.Adapter<ProductListView>() {
+class ProductListAdapter(private val onClickListener:(ProductModel) -> Unit,
+                         private val changePriceListener:(ProductModel) -> Unit,
+                         private val changeNameListener:(ProductModel) -> Unit,
+                         private val changeImageListener:(ProductModel) -> Unit): RecyclerView.Adapter<ProductListView>() {
 
     private val productList = ArrayList<ProductModel>()
 
@@ -22,7 +25,7 @@ class ProductListAdapter(private val onClickListener:(ProductModel) -> Unit): Re
 
     override fun onBindViewHolder(holder: ProductListView, position: Int) {
         val product = productList[position]
-        holder.render(product, onClickListener)
+        holder.render(product, onClickListener, changePriceListener, changeNameListener, changeImageListener)
     }
 
     override fun getItemCount(): Int {
@@ -44,6 +47,5 @@ class ProductListAdapter(private val onClickListener:(ProductModel) -> Unit): Re
         productList.remove(product)
         notifyDataSetChanged()
     }
-
 
 }

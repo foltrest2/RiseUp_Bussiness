@@ -25,12 +25,12 @@ class InitialConfigViewModel:ViewModel() {
         _inComingUser.value = user
         Log.e(">>>","IncomingUser Seted: ${_inComingUser.value}")
     }
+
     fun setSpProducts(products:ArrayList<ProductModel>){
         _inComingProducts.value = products
         Log.e(">>>","IncomingProducts Seted: ${_inComingProducts.value}")
-
-
     }
+
     fun updateDiscoName(user: DiscoModel){
         viewModelScope.launch(Dispatchers.IO) {
             Log.e(">>>", "Llego al updateDiscoName: ${_inComingUser.value}")
