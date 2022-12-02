@@ -56,6 +56,9 @@ class AddProductActivity : AppCompatActivity() {
            Log.e(">>>", "Actualizado products en observer: ${it}")
            saveProducts(it)
        }
+       viewModel.inComingUser.observe(this){
+
+       }
 
         if(temp!=null){
             products=temp

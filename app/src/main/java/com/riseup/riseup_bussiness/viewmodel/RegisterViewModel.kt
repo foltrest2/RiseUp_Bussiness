@@ -60,6 +60,7 @@ class RegisterViewModel: ViewModel() {
                             "",
                             "",
                             "",
+                            "",
                             correo,
                             arrayListOf(),
                             "",

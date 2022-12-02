@@ -106,7 +106,7 @@ class InitialConfigViewModel:ViewModel() {
             var dbs = Firebase.storage
             var batch = db.batch()
             for(product in discoProducts) {
-                var prodName = "${product.name}.png"
+                var prodName = "${product.name}.png".replace(" ", "")
                 var docRef = db.collection("Discos").document(user.id).collection("Products").document(product.id)
                  dbs.reference.child("${user.name}/Products/${prodName}").putFile(product.image.toUri())
                 product.image = prodName

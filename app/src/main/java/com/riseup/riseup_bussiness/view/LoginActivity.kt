@@ -52,7 +52,8 @@ class LoginActivity : AppCompatActivity(){
 
                         }
                         "Verified"->{
-
+                            val sp = getSharedPreferences("RiseUpBusiness", MODE_PRIVATE)
+                            sp.edit().clear().apply()
                             val thisDiscoToSave = viewModel.saveUserFromViewModel()
                             saveDisco(thisDiscoToSave)
                             viewModel.loadProducts(thisDiscoToSave)
@@ -62,7 +63,8 @@ class LoginActivity : AppCompatActivity(){
                         }
 
                         "VerifiedFirstTime"->{
-
+                            val sp = getSharedPreferences("RiseUpBusiness", MODE_PRIVATE)
+                            sp.edit().clear().apply()
                             val thisDiscoToSave = viewModel.saveUserFromViewModel()
                             saveDisco(thisDiscoToSave)
                             viewModel.loadProducts(thisDiscoToSave)
