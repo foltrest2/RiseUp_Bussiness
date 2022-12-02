@@ -34,7 +34,7 @@ class InitialConfigViewModel:ViewModel() {
     fun updateDiscoName(user: DiscoModel){
         viewModelScope.launch(Dispatchers.IO) {
             Log.e(">>>", "Llego al updateDiscoName: ${_inComingUser.value}")
-            Firebase.firestore.collection("Discos2").document(user.id).update("name", user.name).addOnSuccessListener{
+            Firebase.firestore.collection("Discos").document(user.id).update("name", user.name).addOnSuccessListener{
                 user.bannerRef = "${user.name}/Banner/"
                 user.eventsRef = "${user.name}/Events/"
                 user.productsRef = "${user.name}/Products/"
@@ -52,9 +52,9 @@ class InitialConfigViewModel:ViewModel() {
 
         viewModelScope.launch(Dispatchers.IO) {
             Log.e(">>>", "Llego al updateDiscoRef: ${_inComingUser.value}")
-            Firebase.firestore.collection("Discos2").document(user.id).update("bannerRef","${user.name}/Banner/").addOnSuccessListener {
-                Firebase.firestore.collection("Discos2").document(user.id).update("eventsRef","${user.name}/Events/").addOnSuccessListener {
-                    Firebase.firestore.collection("Discos2").document(user.id).update("productsRef","${user.name}/Products/").addOnSuccessListener{
+            Firebase.firestore.collection("Discos").document(user.id).update("bannerRef","${user.name}/Banner/").addOnSuccessListener {
+                Firebase.firestore.collection("Discos").document(user.id).update("eventsRef","${user.name}/Events/").addOnSuccessListener {
+                    Firebase.firestore.collection("Discos").document(user.id).update("productsRef","${user.name}/Products/").addOnSuccessListener{
 
                     }
                 }
@@ -68,12 +68,20 @@ class InitialConfigViewModel:ViewModel() {
             var filename = "DiscoListImage.png"
             Firebase.storage.reference.child("${user.name}/Banner/${filename}")
                 .putFile(user.bannerCardID!!.toUri()!!).addOnSuccessListener {
-                    Firebase.firestore.collection("Discos2").document(user.id)
+                    Firebase.firestore.collection("Discos").document(user.id)
                         .update("bannerCardID", filename).addOnSuccessListener {
                             user.bannerCardID = filename
                             _inComingUser.postValue(user)
+
                         }
                 }
+        }
+    }
+
+    fun updateDiscoEventsStorage(user:DiscoModel){
+        viewModelScope.launch(Dispatchers.IO) {
+            Log.e(">>>", "user que llega al updateDiscoEventsStorage: ${user.name}")
+            Firebase.storage.reference.child("${user.name}/Events/")
         }
     }
 
@@ -83,7 +91,7 @@ class InitialConfigViewModel:ViewModel() {
             var filename = "DiscoHomeImage.png"
             Firebase.storage.reference.child("${user.name}/Banner/${filename}")
                 .putFile(user.bannerID!!.toUri()!!).addOnSuccessListener {
-                    Firebase.firestore.collection("Discos2").document(user.id)
+                    Firebase.firestore.collection("Discos").document(user.id)
                         .update("bannerID", filename).addOnSuccessListener {
                             user.bannerID = filename
                             _inComingUser.postValue(user)
@@ -99,7 +107,7 @@ class InitialConfigViewModel:ViewModel() {
             var batch = db.batch()
             for(product in discoProducts) {
                 var prodName = "${product.name}.png"
-                var docRef = db.collection("Discos2").document(user.id).collection("Products").document(product.id)
+                var docRef = db.collection("Discos").document(user.id).collection("Products").document(product.id)
                  dbs.reference.child("${user.name}/Products/${prodName}").putFile(product.image.toUri())
                 product.image = prodName
                 _inComingProducts.postValue(discoProducts)

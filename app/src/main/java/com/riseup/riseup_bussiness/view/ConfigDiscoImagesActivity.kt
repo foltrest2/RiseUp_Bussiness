@@ -15,6 +15,7 @@ import com.google.firebase.ktx.Firebase
 import com.google.gson.Gson
 import com.riseup.riseup_bussiness.databinding.ActivityConfigDiscoImagesBinding
 import com.riseup.riseup_bussiness.model.DiscoModel
+import com.riseup.riseup_bussiness.util.ErrorDialog
 import com.riseup.riseup_bussiness.viewmodel.ConfigDiscoImagesViewModel
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -61,10 +62,17 @@ class ConfigDiscoImagesActivity : AppCompatActivity() {
                if (bannerLImg != null && bannerHomeImg != null) {
                    viewmodel.updateDiscoListImg(bannerLImg, user)
                    viewmodel.updateDiscoHomeImg(bannerHomeImg,user)
+                   finish()
+                   startActivity(Intent(this, AddProductActivity::class.java))
+               }else{
+                   val dialogFragmentP = ErrorDialog()
+                   val bundle = Bundle()
+                   bundle.putString("TEXT","EmptyImages")
+                   dialogFragmentP.arguments = bundle
+                   dialogFragmentP.show(supportFragmentManager,"EmptyImagesDialog")
+
                }
 
-            finish()
-            startActivity(Intent(this, AddProductActivity::class.java))
         }
         binding.returnToLoginICButton.setOnClickListener {
 

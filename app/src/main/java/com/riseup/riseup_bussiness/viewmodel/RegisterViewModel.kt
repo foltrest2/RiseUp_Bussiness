@@ -67,7 +67,7 @@ class RegisterViewModel: ViewModel() {
                             "",
                             ""
                         )
-                        Firebase.firestore.collection("Discos2")
+                        Firebase.firestore.collection("Discos")
                             .document(disco.id).set(disco)
                         _authState.value = AuthState(AuthResult.SUCCESS, "Success")
 

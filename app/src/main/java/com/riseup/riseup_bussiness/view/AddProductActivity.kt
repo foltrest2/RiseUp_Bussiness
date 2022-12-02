@@ -112,8 +112,9 @@ class AddProductActivity : AppCompatActivity() {
            viewModel.updateDiscoListImg(user)
            viewModel.updateDiscoHomeImg(user)
            viewModel.updateDiscoProducts(products,user)
+           viewModel.updateDiscoEventsStorage(user)
            finish()
-           startActivity(Intent(this,ProductListActivity::class.java))
+           startActivity(Intent(this,OrdersListActivity::class.java))
 
        }
     }

@@ -11,6 +11,7 @@ import com.google.firebase.ktx.Firebase
 import com.google.gson.Gson
 import com.riseup.riseup_bussiness.databinding.ActivityDiscoInitialConfigBinding
 import com.riseup.riseup_bussiness.model.DiscoModel
+import com.riseup.riseup_bussiness.util.ErrorDialog
 import com.riseup.riseup_bussiness.viewmodel.InitialConfigurationViewModel
 
 
@@ -50,11 +51,16 @@ class DiscoInitialConfigActivity : AppCompatActivity() {
             if (binding.DiscoNameICET.text.isNotEmpty()) {
 
                  viewmodel.updateDiscoName(binding.DiscoNameICET.text.toString(), user)
+                finish()
+                startActivity(Intent(this, ConfigDiscoImagesActivity::class.java))
                      //viewmodel.updateDiscoRef(user)
+            }else{
+                val dialogFragmentP = ErrorDialog()
+                val bundle = Bundle()
+                bundle.putString("TEXT","EmptyFields")
+                dialogFragmentP.arguments = bundle
+                dialogFragmentP.show(supportFragmentManager,"EmptyFieldsDialog")
             }
-            finish()
-            startActivity(Intent(this, ConfigDiscoImagesActivity::class.java))
-
 
         }
     }
