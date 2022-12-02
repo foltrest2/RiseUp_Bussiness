@@ -13,7 +13,8 @@ data class DiscoModel (
     var eventsRef:String = "",
     var products:ArrayList<ProductModel> = arrayListOf(),
     var bannerURL:String? = null,
-    var productsRef:String? = null
+    var productsRef:String? = null,
+    var bannerCardURL:String? = null,
 
 ) : Serializable {
     override fun toString(): String {

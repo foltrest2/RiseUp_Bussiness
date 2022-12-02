@@ -7,6 +7,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 import com.riseup.riseup_bussiness.model.DiscoModel
@@ -14,6 +15,7 @@ import com.riseup.riseup_bussiness.model.ProductModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
+import kotlinx.coroutines.withContext
 
 class InitialConfigViewModel:ViewModel() {
     private val _inComingUser = MutableLiveData<DiscoModel>()
@@ -38,7 +40,7 @@ class InitialConfigViewModel:ViewModel() {
                 user.bannerRef = "${user.name}/Banner/"
                 user.eventsRef = "${user.name}/Events/"
                 user.productsRef = "${user.name}/Products/"
-                _inComingUser.postValue(user)
+                _inComingUser.value = user
 
 
             }.addOnFailureListener{
@@ -117,6 +119,15 @@ class InitialConfigViewModel:ViewModel() {
 
         }
 
+
+    }
+
+    suspend fun requestDisco(user: DiscoModel) {
+        viewModelScope.launch(Dispatchers.IO) {
+            val thisUserDoneSnap = Firebase.firestore.collection("Discos").document(user.id).get().await()
+            val thisUserDone = thisUserDoneSnap.toObject(DiscoModel::class.java)
+            _inComingUser.value = thisUserDone!!
+        }
 
     }
 

@@ -17,40 +17,67 @@ import java.util.*
 
 class ConfigUpdateAppearanceViewModel : ViewModel() {
 
-    lateinit var discoID : String
+    lateinit var disco : DiscoModel
     private val _incomingBanner = MutableLiveData<String>()
     val incomingBanner : LiveData<String> get() = _incomingBanner
+    private val _incomingBannerCard = MutableLiveData<String>()
+    val incomingBannerCard : LiveData<String> get() = _incomingBannerCard
 
 
-    fun updateImage(){
-        Firebase.firestore.collection("Discos").document(discoID).get().addOnSuccessListener {
-            val updatedDisco = it.toObject(DiscoModel::class.java)
-            val bannerID = updatedDisco?.bannerID
-            downloadBanner(bannerID)
-        }
+    fun loadBannersURL(){
+        downloadCardBanner(disco)
+        downloadMainBanner(disco)
     }
 
-   private fun downloadBanner(bannerID: String?) {
-        if(bannerID!!.isEmpty()){
+   private fun downloadMainBanner(disco : DiscoModel) {
+        if(disco.bannerID!!.isEmpty()){
             return
         } else {
             viewModelScope.launch(Dispatchers.IO){
-                val banner = Firebase.storage.getReference("Espacio 10-60/Banner").child(bannerID).downloadUrl.await()
+                val banner = Firebase.storage.getReference(disco.bannerRef).child(disco.bannerID).downloadUrl.await()
                 withContext(Dispatchers.Main){
                     _incomingBanner.value = banner.toString()
                 }
             }
         }
-
     }
 
-    fun upload(uriImage : Uri) {
+    private fun downloadCardBanner(disco : DiscoModel) {
+        if(disco.bannerCardID.isEmpty()){
+            return
+        } else {
+            viewModelScope.launch(Dispatchers.IO){
+                val banner = Firebase.storage.getReference(disco.bannerRef).child(disco.bannerCardID).downloadUrl.await()
+                withContext(Dispatchers.Main){
+                    _incomingBannerCard.value = banner.toString()
+                }
+            }
+        }
+    }
+
+    fun uploadMainBanner(uriImage : Uri) {
         //Upload
         val filename = UUID.randomUUID().toString()
         viewModelScope.launch(Dispatchers.IO){
+            Firebase.storage.getReference(disco.bannerRef).child(filename).putFile(uriImage).await()
+            Firebase.firestore.collection("Discos").document(disco.id).update("bannerID", filename).await()
+            val newBannerURL = Firebase.storage.getReference(disco.bannerRef).child(filename).downloadUrl.await()
+            withContext(Dispatchers.Main){
+                _incomingBanner.value = newBannerURL.toString()
+            }
+        }
+    }
 
-            Firebase.storage.getReference("/Espacio 10-60/Banner").child(filename).putFile(uriImage)
-            Firebase.firestore.collection("Discos").document(discoID).update("bannerID", filename)
+    fun uploadcardBanner(uriImage : Uri) {
+        //Upload
+        val filename = UUID.randomUUID().toString()
+        viewModelScope.launch(Dispatchers.IO) {
+            Firebase.storage.getReference(disco.bannerRef).child(filename).putFile(uriImage).await()
+            Firebase.firestore.collection("Discos").document(disco.id).update("bannerCardID", filename).await()
+            val newBannerCardURL = Firebase.storage.getReference(disco.bannerRef).child(filename).downloadUrl.await()
+            withContext(Dispatchers.Main){
+                _incomingBannerCard.value = newBannerCardURL.toString()
+            }
         }
     }
 

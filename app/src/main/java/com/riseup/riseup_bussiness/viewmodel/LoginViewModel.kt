@@ -10,6 +10,7 @@ import com.google.firebase.auth.FirebaseAuthException
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.ktx.storage
 import com.riseup.riseup_bussiness.model.DiscoModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -81,7 +82,27 @@ class LoginViewModel: ViewModel(){
                                         }
                                         else {
                                             Log.e(">>>","no es la primera vez que se logea el usuario")
-                                            _authState.value = AuthState(AuthResult.SUCCESS, "Verified") }
+                                            viewModelScope.launch(Dispatchers.IO) {
+                                                val bannerURL = Firebase.storage.getReference(userReturn.bannerRef).child(userReturn.bannerID).downloadUrl.await()
+                                                val bannerCardURL = Firebase.storage.getReference(userReturn.bannerRef).child(userReturn.bannerCardID).downloadUrl.await()
+
+                                                withContext(Dispatchers.Main){
+                                                    userReturn.bannerURL = bannerURL.toString()
+                                                    userReturn.bannerCardURL = bannerCardURL.toString()
+                                                }
+
+                                                for(event in userReturn.eventsID){
+                                                    val posterURL = Firebase.storage.getReference(userReturn.eventsRef).child(event.posterID).downloadUrl.await()
+                                                    withContext(Dispatchers.Main){
+                                                        event.posterURL = posterURL.toString()
+                                                    }
+                                                }
+                                                withContext(Dispatchers.Main){
+                                                    _authState.value = AuthState(AuthResult.SUCCESS, "Verified") }
+                                                }
+
+                                            }
+                                            //_authState.value = AuthState(AuthResult.SUCCESS, "Verified") }
 
                                         }
 

@@ -221,8 +221,8 @@
     <string name="OrderPopUpDetailTitle">Pedido</string>
     <string name="OrderDetailsTitleTxt">Detalles pedido</string>
     <string name="actualizar_apariencia">Actualizar apariencia</string>
-    <string name="seleccionBannerImg">Banner para la página principal</string>
-    <string name="seleccionEventosImg">Banners en la lista de eventos</string>
+    <string name="seleccionBannerImg">Banner principal de la discoteca</string>
+    <string name="seleccionEventosImg">Banner en tarjeta</string>
     <string name="seleccionaArchivo">Selecciona la imágen</string>
     <string name="eliminar">Eliminar</string>
     <string name="retornar">Retornar</string>
@@ -246,5 +246,8 @@
     <string name="ErrorDialogNotVerifiedEmailTV">Por favor verifica tu correo electrónico para activar la cuenta</string>
     <string name="ErrorDialogIncorrectFormat">Por favor ingresa el formato correcto en los campos</string>
     <string name="ErrorDialogIEmptyImages">Por favor selecciona las imagenes correspondientes</string>
+    <string name="DiscoPreview">¡Previsualiza tu discoteca!</string>
+    <string name="Cargando">Cargando...</string>
+    <string name="regresar_personalizacion">Regresar a personalización</string>
 
 </resources>

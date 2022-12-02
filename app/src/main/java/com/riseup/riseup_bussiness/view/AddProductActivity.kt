@@ -17,6 +17,9 @@ import com.riseup.riseup_bussiness.model.DiscoModel
 import com.riseup.riseup_bussiness.model.ProductModel
 import com.riseup.riseup_bussiness.util.ErrorDialog
 import com.riseup.riseup_bussiness.viewmodel.InitialConfigViewModel
+import kotlinx.coroutines.DelicateCoroutinesApi
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -27,6 +30,7 @@ class AddProductActivity : AppCompatActivity() {
     private lateinit var user : DiscoModel
     val viewModel: InitialConfigViewModel by viewModels()
    // var listener: OnNewProductListener? = null
+    @OptIn(DelicateCoroutinesApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityAddProductBinding.inflate(layoutInflater)
@@ -113,8 +117,12 @@ class AddProductActivity : AppCompatActivity() {
            viewModel.updateDiscoHomeImg(user)
            viewModel.updateDiscoProducts(products,user)
            viewModel.updateDiscoEventsStorage(user)
+           GlobalScope.launch {
+               viewModel.requestDisco(user)
+           }
            finish()
            startActivity(Intent(this,OrdersListActivity::class.java))
+
 
        }
     }
