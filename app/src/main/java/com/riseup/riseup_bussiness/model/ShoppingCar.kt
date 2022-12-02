@@ -8,8 +8,6 @@ data class ShoppingCar (
     var name:String = "",
     var price:Double = 0.0
 
-
-
 ) {
     override fun toString(): String {
         return "- Producto: $name\nCantidad: $lot \n"

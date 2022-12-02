@@ -46,6 +46,9 @@ class ConfigurationActivity : AppCompatActivity() {
         binding.contraintUserPagosGo.setOnClickListener {
 
         }
+        binding.constraintEditMenuLicores.setOnClickListener{
+            startActivity(Intent(this@ConfigurationActivity, EditProductListActivity::class.java))
+        }
     }
 
 }

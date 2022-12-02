@@ -131,6 +131,33 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintEditMenuLicores"
+                android:layout_width="match_parent"
+                android:layout_height="56dp">
+
+                <ImageView
+                    android:id="@+id/editProductsImg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/edit24px" />
+
+                <TextView
+                    android:id="@+id/editProductsTV"
+                    style="@style/PoppinsMed_16"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:text="@string/editar_men_de_licores"
+                    app:layout_constraintBottom_toBottomOf="@+id/editProductsImg"
+                    app:layout_constraintStart_toEndOf="@+id/editProductsImg"
+                    app:layout_constraintTop_toTopOf="@+id/editProductsImg" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/contraintUserPagosGo"
                 android:layout_width="match_parent"
                 android:layout_height="56dp">

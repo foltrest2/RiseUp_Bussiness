@@ -21,7 +21,22 @@
         android:theme="@style/Theme.RiseUp_Bussiness"
         tools:targetApi="31">
         <activity
+
             android:name=".view.DiscoPreviewActivity"
+            android:exported="false" />
+        <activity
+
+            android:name=".view.EditProductImageActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.EditProductNameActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.EditProductPriceActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.EditProductListActivity"
+
             android:exported="false" />
         <activity
             android:name=".view.ProductListActivity"

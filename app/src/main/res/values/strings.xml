@@ -249,5 +249,14 @@
     <string name="DiscoPreview">¡Previsualiza tu discoteca!</string>
     <string name="Cargando">Cargando...</string>
     <string name="regresar_personalizacion">Regresar a personalización</string>
+    <string name="editar_men_de_licores">Editar menú de licores</string>
+    <string name="escribe_aqu_el_precio">Escribe aquí el precio</string>
+    <string name="cambia_el_nombre">Cambia el nombre</string>
+    <string name="escribe_aqu_el_nombre">Escribe aquí el nombre</string>
+    <string name="cambia_el_precio">Cambia el precio</string>
+    <string name="selecciona_la_nueva_imagen">Selecciona la nueva imagen</string>
+    <string name="cambia_la_imagen">Cambia la imagen</string>
+    <string name="agrega_un_nuevo_producto">Agrega un nuevo producto</string>
+    <string name="para_editar_un_campo_t_calo">Para editar un campo, tócalo</string>
 
 </resources>

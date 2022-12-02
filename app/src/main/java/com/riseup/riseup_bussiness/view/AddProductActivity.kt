@@ -27,175 +27,195 @@ class AddProductActivity : AppCompatActivity() {
     private lateinit var binding: ActivityAddProductBinding
     private var products: ArrayList<ProductModel> = arrayListOf()
     private lateinit var productImg: Uri
-    private lateinit var user : DiscoModel
+    private lateinit var user: DiscoModel
     val viewModel: InitialConfigViewModel by viewModels()
-   // var listener: OnNewProductListener? = null
+
+    // var listener: OnNewProductListener? = null
     @OptIn(DelicateCoroutinesApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityAddProductBinding.inflate(layoutInflater)
         setContentView(binding.root)
-         //cargar usuario
-         user = loadUser()!!
+        //cargar usuario
+        user = loadUser()!!
         //this.listener = ProductListActivity()
         //Log.e(">>>", "listener seteado en addproductactivity: $listener}")
-       //Borrar cache
+        //Borrar cache
 
-       //val sp = getSharedPreferences("RiseUpBusiness", MODE_PRIVATE)
-       //sp.edit().clear().apply()
+        //val sp = getSharedPreferences("RiseUpBusiness", MODE_PRIVATE)
+        //sp.edit().clear().apply()
 
         //Inicializacion de la galeria
-        val galleryLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult(),::onGalleryResult)
+        val galleryLauncher = registerForActivityResult(
+            ActivityResultContracts.StartActivityForResult(),
+            ::onGalleryResult
+        )
         //Cargar productos
         val temp = loadProducts()
-       //Inicializacion del viewModel
-       viewModel.setSpUser(user)
-       viewModel.setChange()
+        //Inicializacion del viewModel
+        viewModel.setSpUser(user)
+        viewModel.setChange()
 
-       //Listener de la modificacion
-       viewModel.inComingUser.observe(this){
-           Log.e(">>>", "Actualizado useren observer: ${it}")
-           saveUserSp(it)
-       }
-       viewModel.inComingProduct.observe(this){
-           Log.e(">>>", "Actualizado products en observer: ${it}")
-           saveProducts(it)
-       }
-       viewModel.change.observe(this){
-           Log.e(">>>", "CHANGE: $it")
-           if(it == 5){
-               viewModel.requestDisco(user) //Ya
-           }
-            if(it == 6){
-                finish()
-                startActivity(Intent(this,OrdersListActivity::class.java))
-            }
-       }
-
-        if(temp!=null){
-            products=temp
-            viewModel.setSpProducts(products)
+        //Listener de la modificacion
+        viewModel.inComingUser.observe(this) {
+            Log.e(">>>", "Actualizado useren observer: ${it}")
+            saveUserSp(it)
         }
-        binding.AddProductConfigBtn.setOnClickListener {
+        viewModel.inComingProduct.observe(this) {
+            Log.e(">>>", "Actualizado products en observer: ${it}")
+            saveProducts(it)
+        }
 
-            if(binding.ProductNameICET.text.isEmpty() || binding.ProductTypeICET.text.isEmpty() || binding.ProductPriceICET.text.isEmpty()
-                || productImg == null){
-                val dialogFragmentP = ErrorDialog()
-                val bundle = Bundle()
-                bundle.putString("TEXT","EmptyFields")
-                dialogFragmentP.arguments = bundle
-                dialogFragmentP.show(supportFragmentManager,"EmptyFieldsDialog")
-            }else{
-                if(binding.ProductPriceICET.text.isDigitsOnly()){
-                    Toast.makeText(binding.ProductNameICET.context, "Producto agregado", Toast.LENGTH_SHORT).show()
-                    addProduct(products)
-                }else{
+        viewModel.change.observe(this) {
+            Log.e(">>>", "CHANGE: $it")
+            if (it == 5) {
+                viewModel.requestDisco(user) //Ya
+            }
+            if (it == 6) {
+                finish()
+                startActivity(Intent(this, OrdersListActivity::class.java))
+            }
+
+            if (temp != null) {
+                products = temp
+                viewModel.setSpProducts(products)
+            }
+            binding.AddProductConfigBtn.setOnClickListener {
+
+                if (binding.ProductNameICET.text.isEmpty() || binding.ProductTypeICET.text.isEmpty() || binding.ProductPriceICET.text.isEmpty()
+                    || productImg == null
+                ) {
                     val dialogFragmentP = ErrorDialog()
                     val bundle = Bundle()
-                    bundle.putString("TEXT","IncorrectFormat")
+                    bundle.putString("TEXT", "EmptyFields")
                     dialogFragmentP.arguments = bundle
-                    dialogFragmentP.show(supportFragmentManager,"IncorrectFormat")
+                    dialogFragmentP.show(supportFragmentManager, "EmptyFieldsDialog")
+                } else {
+                    if (binding.ProductPriceICET.text.isDigitsOnly()) {
+                        Toast.makeText(
+                            binding.ProductNameICET.context,
+                            "Producto agregado",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                        addProduct(products)
+                    } else {
+                        val dialogFragmentP = ErrorDialog()
+                        val bundle = Bundle()
+                        bundle.putString("TEXT", "IncorrectFormat")
+                        dialogFragmentP.arguments = bundle
+                        dialogFragmentP.show(supportFragmentManager, "IncorrectFormat")
 
+                    }
                 }
-            }
-            //Toast.makeText(binding.ProductNameICET.context, "Producto agregado", Toast.LENGTH_SHORT).show()
-           //addProduct(products)
-            //listener?.let{
+                //Toast.makeText(binding.ProductNameICET.context, "Producto agregado", Toast.LENGTH_SHORT).show()
+                //addProduct(products)
+                //listener?.let{
                 //Log.e(">>>", "se agrega este producto: $products}")
-       // }
-            saveProducts(products)
-        }
-        binding.ShowProductPrevViewTV.setOnClickListener {
+                // }
+                saveProducts(products)
+            }
+            binding.ShowProductPrevViewTV.setOnClickListener {
 
-             finish()
-            startActivity(Intent(this,ProductListActivity::class.java))
+                finish()
+                startActivity(Intent(this, ProductListActivity::class.java))
 
-        }
-        binding.ChooseProductImageBtn.setOnClickListener {
-            val intent = Intent(Intent.ACTION_GET_CONTENT)
-            intent.type= "image/*"
-            galleryLauncher.launch(intent)
-        }
-       binding.returnToLoginICPButton.setOnClickListener {
-           finish()
-           startActivity(Intent(this,ConfigDiscoImagesActivity::class.java))
-       }
-       binding.FinishInitialConfigBtn.setOnClickListener {
+            }
+            binding.ChooseProductImageBtn.setOnClickListener {
+                val intent = Intent(Intent.ACTION_GET_CONTENT)
+                intent.type = "image/*"
+                galleryLauncher.launch(intent)
+            }
+            binding.returnToLoginICPButton.setOnClickListener {
+                finish()
+                startActivity(Intent(this, ConfigDiscoImagesActivity::class.java))
+            }
+            binding.FinishInitialConfigBtn.setOnClickListener {
 
-           viewModel.updateDiscoName(user) //Ya
-           viewModel.updateDiscoRef(user) //Ya
-           viewModel.updateDiscoListImg(user) //Ya
-           viewModel.updateDiscoHomeImg(user) //Ya
-           viewModel.updateDiscoProducts(products,user) //Ya
-           //viewModel.updateDiscoEventsStorage(user)
+                viewModel.updateDiscoName(user) //Ya
+                viewModel.updateDiscoRef(user) //Ya
+                viewModel.updateDiscoListImg(user) //Ya
+                viewModel.updateDiscoHomeImg(user) //Ya
+                viewModel.updateDiscoProducts(products, user) //Ya
+                //viewModel.updateDiscoEventsStorage(user)
 
 
-       }
-
-    }
-    private fun addProduct(products: ArrayList<ProductModel>){
-         if(products.isEmpty()){
-             products.add(ProductModel(UUID.randomUUID().toString(),binding.ProductTypeICET.text.toString(),
-                 binding.ProductPriceICET.text.toString().toIntOrNull()?:0,
-                 0
-                 ,binding.ProductNameICET.text.toString(),
-                 0,
-                 productImg.toString(),
-                 ""))
-
-         }else{
-             val temporal: ArrayList<ProductModel> = arrayListOf()
-             val imgpath = productImg.toString()
-
-             temporal.add(ProductModel(UUID.randomUUID().toString(),binding.ProductTypeICET.text.toString(),
-                 binding.ProductPriceICET.text.toString().toIntOrNull()?:0,
-                 0
-                 ,binding.ProductNameICET.text.toString(),
-                 0,
-                 imgpath,
-                 ""))
-             products.addAll(temporal)
-
-         }
-    }
-    private fun saveProducts(car: ArrayList<ProductModel>) {
-        val sp = this.getSharedPreferences("RiseUpBusiness", AppCompatActivity.MODE_PRIVATE)
-        val json = Gson().toJson(car)
-        sp?.edit()?.putString("Products", json)?.apply()
-    }
-    private fun loadProducts(): ArrayList<ProductModel>? {
-        val sp = this.getSharedPreferences("RiseUpBusiness", AppCompatActivity.MODE_PRIVATE)
-        val json = sp?.getString("Products", "NO_USER")
-        return if (json == "NO_USER") {
-            null
-        } else {
-            val deserialized = object : TypeToken<ArrayList<ProductModel>>() {}.type
-            Gson().fromJson(json, deserialized)
-        }
-    }
-    private fun onGalleryResult(result: ActivityResult) {
-        if(result.resultCode == RESULT_OK){
-            val uriImage = result.data?.data
-            productImg = uriImage!!
+            }
 
         }
     }
-    private fun loadUser(): DiscoModel? {
-        val sp = getSharedPreferences("RiseUpBusiness", MODE_PRIVATE)
-        val json = sp.getString("Usuario", "NO_USER")
-        if (json == "NO_USER") {
-            return null
-        } else {
-            return Gson().fromJson(json, DiscoModel::class.java)
-        }
-    }
+        private fun addProduct(products: ArrayList<ProductModel>) {
+            if (products.isEmpty()) {
+                products.add(
+                    ProductModel(
+                        UUID.randomUUID().toString(), binding.ProductTypeICET.text.toString(),
+                        binding.ProductPriceICET.text.toString().toIntOrNull() ?: 0,
+                        0, binding.ProductNameICET.text.toString(),
+                        0,
+                        productImg.toString(),
+                        ""
+                    )
+                )
 
-    private fun saveUserSp(user: DiscoModel) {
-        val sp = getSharedPreferences("RiseUpBusiness", MODE_PRIVATE)
-        val json = Gson().toJson(user)
-        sp.edit().putString("Usuario", json).apply()
-    }
-    /*
+            } else {
+                val temporal: ArrayList<ProductModel> = arrayListOf()
+                val imgpath = productImg.toString()
+
+                temporal.add(
+                    ProductModel(
+                        UUID.randomUUID().toString(), binding.ProductTypeICET.text.toString(),
+                        binding.ProductPriceICET.text.toString().toIntOrNull() ?: 0,
+                        0, binding.ProductNameICET.text.toString(),
+                        0,
+                        imgpath,
+                        ""
+                    )
+                )
+                products.addAll(temporal)
+
+            }
+        }
+
+        private fun saveProducts(car: ArrayList<ProductModel>) {
+            val sp = this.getSharedPreferences("RiseUpBusiness", AppCompatActivity.MODE_PRIVATE)
+            val json = Gson().toJson(car)
+            sp?.edit()?.putString("Products", json)?.apply()
+        }
+
+        private fun loadProducts(): ArrayList<ProductModel>? {
+            val sp = this.getSharedPreferences("RiseUpBusiness", AppCompatActivity.MODE_PRIVATE)
+            val json = sp?.getString("Products", "NO_USER")
+            return if (json == "NO_USER") {
+                null
+            } else {
+                val deserialized = object : TypeToken<ArrayList<ProductModel>>() {}.type
+                Gson().fromJson(json, deserialized)
+            }
+        }
+
+        private fun onGalleryResult(result: ActivityResult) {
+            if (result.resultCode == RESULT_OK) {
+                val uriImage = result.data?.data
+                productImg = uriImage!!
+
+            }
+        }
+
+        private fun loadUser(): DiscoModel? {
+            val sp = getSharedPreferences("RiseUpBusiness", MODE_PRIVATE)
+            val json = sp.getString("Usuario", "NO_USER")
+            if (json == "NO_USER") {
+                return null
+            } else {
+                return Gson().fromJson(json, DiscoModel::class.java)
+            }
+        }
+
+        private fun saveUserSp(user: DiscoModel) {
+            val sp = getSharedPreferences("RiseUpBusiness", MODE_PRIVATE)
+            val json = Gson().toJson(user)
+            sp.edit().putString("Usuario", json).apply()
+        }
+        /*
     interface OnNewProductListener{
 
         fun onNewProduct(product:ProductModel)

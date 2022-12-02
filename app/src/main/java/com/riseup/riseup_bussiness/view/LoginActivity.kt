@@ -5,19 +5,25 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.viewModels
+import androidx.lifecycle.LifecycleOwner
 import com.google.gson.Gson
 import com.riseup.riseup_bussiness.databinding.ActivityLoginBinding
 import com.riseup.riseup_bussiness.model.DiscoModel
+import com.riseup.riseup_bussiness.model.ProductModel
 import com.riseup.riseup_bussiness.util.ErrorDialog
 import com.riseup.riseup_bussiness.util.SuccessfulRegisterDialog
 import com.riseup.riseup_bussiness.viewmodel.AuthResult
 import com.riseup.riseup_bussiness.viewmodel.LoginViewModel
+import kotlinx.coroutines.DelicateCoroutinesApi
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 class LoginActivity : AppCompatActivity(){
 
     private lateinit var binding: ActivityLoginBinding
-    val viewmodel: LoginViewModel by viewModels()
+    val viewModel: LoginViewModel by viewModels()
 
+    @OptIn(DelicateCoroutinesApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
@@ -30,7 +36,7 @@ class LoginActivity : AppCompatActivity(){
             }
         }
 
-        viewmodel.authState.observe(this){
+        viewModel.authState.observe(this){
             when(it.result){
                 AuthResult.IDLE ->{
                 }
@@ -46,18 +52,22 @@ class LoginActivity : AppCompatActivity(){
 
                         }
                         "Verified"->{
-
-                            val thisDiscoToSave = viewmodel.saveUserFromViewModel()
+                            val sp = getSharedPreferences("RiseUpBusiness", MODE_PRIVATE)
+                            sp.edit().clear().apply()
+                            val thisDiscoToSave = viewModel.saveUserFromViewModel()
                             saveDisco(thisDiscoToSave)
+                            viewModel.loadProducts(thisDiscoToSave)
                             Log.e(">>>", "SAVED: $thisDiscoToSave")
                             startActivity(Intent(this@LoginActivity,OrdersListActivity::class.java))
                             finish()
                         }
 
                         "VerifiedFirstTime"->{
-
-                            val thisDiscoToSave = viewmodel.saveUserFromViewModel()
+                            val sp = getSharedPreferences("RiseUpBusiness", MODE_PRIVATE)
+                            sp.edit().clear().apply()
+                            val thisDiscoToSave = viewModel.saveUserFromViewModel()
                             saveDisco(thisDiscoToSave)
+                            viewModel.loadProducts(thisDiscoToSave)
                             Log.e(">>>", "SAVED: $thisDiscoToSave")
                             startActivity(Intent(this@LoginActivity,DiscoInitialConfigActivity::class.java))
                             finish()
@@ -109,6 +119,11 @@ class LoginActivity : AppCompatActivity(){
             startActivity(Intent(this@LoginActivity, RegisterActivity::class.java))
         }
 
+        viewModel.inComingProduct.observe(this){
+            Log.e(">>>", "Actualizado products en observer: ${it}")
+            saveProducts(it)
+        }
+
     }
     fun logIn(){
         if(binding.emailLoginTF.text.isEmpty() || binding.loginPasswordTF.text.isEmpty() ){
@@ -119,13 +134,12 @@ class LoginActivity : AppCompatActivity(){
             dialogFragmentE.arguments = bundle
             dialogFragmentE.show(supportFragmentManager,"EmptyFieldsDialog")
         }else{
-            viewmodel.signIn(binding.emailLoginTF.text.toString(),binding.loginPasswordTF.text.toString())
-
+            viewModel.signIn(binding.emailLoginTF.text.toString(),binding.loginPasswordTF.text.toString())
         }
 
     }
 
-    fun showDialog(){
+    private fun showDialog(){
         SuccessfulRegisterDialog().show(supportFragmentManager,"successfullyRegister")
     }
 
@@ -133,5 +147,11 @@ class LoginActivity : AppCompatActivity(){
         val sp = getSharedPreferences("RiseUpBusiness", MODE_PRIVATE)
         val json = Gson().toJson(disco)
         sp.edit().putString("Usuario",json).apply()
+    }
+
+    private fun saveProducts(car: List<ProductModel>) {
+        val sp = this.getSharedPreferences("RiseUpBusiness", AppCompatActivity.MODE_PRIVATE)
+        val json = Gson().toJson(car)
+        sp?.edit()?.putString("Products", json)?.apply()
     }
 }

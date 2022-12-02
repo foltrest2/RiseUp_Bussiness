@@ -35,10 +35,7 @@ class OrdersListActivity : AppCompatActivity() {
         activeOrdersFragment = ActiveOrdersFragment.newInstance()
         completedOrdersFragment = CompletedOrdersFragment.newInstance()
 
-
         viewModel.suscribeRealTimeOrders(disco)
-
-
 
         showFragment(activeOrdersFragment)
         binding.finalizadasDivider.setBackgroundResource(R.color.grayFigma)

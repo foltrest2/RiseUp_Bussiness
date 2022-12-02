@@ -6,23 +6,27 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.riseup.riseup_bussiness.R
 import com.riseup.riseup_bussiness.model.ProductModel
+import com.riseup.riseup_bussiness.view.EditProductListView
 import com.riseup.riseup_bussiness.view.ProductListView
 
-class ProductListAdapter(private val onClickListener:(ProductModel) -> Unit): RecyclerView.Adapter<ProductListView>() {
+class EditProductListAdapter(private val onClickListener:(ProductModel) -> Unit,
+                             private val changePriceListener:(ProductModel) -> Unit,
+                             private val changeNameListener:(ProductModel) -> Unit,
+                             private val changeImageListener:(ProductModel) -> Unit): RecyclerView.Adapter<EditProductListView>() {
 
     private val productList = ArrayList<ProductModel>()
 
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductListView {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EditProductListView {
         //inflate: XML->View
         val inflater = LayoutInflater.from(parent.context)
-        val view = inflater.inflate(R.layout.products_list_row, parent, false)
-        return ProductListView(view)
+        val view = inflater.inflate(R.layout.edit_products_list_row, parent, false)
+        return EditProductListView(view)
     }
 
-    override fun onBindViewHolder(holder: ProductListView, position: Int) {
+    override fun onBindViewHolder(holder: EditProductListView, position: Int) {
         val product = productList[position]
-        holder.render(product, onClickListener)
+        holder.render(product, onClickListener, changePriceListener, changeNameListener, changeImageListener)
     }
 
     override fun getItemCount(): Int {

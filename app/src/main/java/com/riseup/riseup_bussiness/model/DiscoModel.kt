@@ -18,6 +18,6 @@ data class DiscoModel (
 
 ) : Serializable {
     override fun toString(): String {
-        return "DiscoModel(id='$id', name='$name', bannerID='$bannerID', bannerRef='$bannerRef', bannerCardID='$bannerCardID', email='$email', eventsID=$eventsID, eventsRef='$eventsRef', products=$products, bannerURL=$bannerURL)"
+        return "DiscoModel(id='$id', name='$name', bannerID='$bannerID', bannerRef='$bannerRef', bannerCardID='$bannerCardID', bannerCardURL='$bannerCardURL', email='$email', eventsID=$eventsID, eventsRef='$eventsRef', products=$products, bannerURL=$bannerURL, productsRef=$productsRef)"
     }
 }

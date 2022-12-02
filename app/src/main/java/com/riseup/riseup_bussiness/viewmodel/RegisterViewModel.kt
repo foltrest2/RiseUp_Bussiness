@@ -65,6 +65,7 @@ class RegisterViewModel: ViewModel() {
                             "",
                             arrayListOf(),
                             "",
+                            "",
                             ""
                         )
                         Firebase.firestore.collection("Discos")

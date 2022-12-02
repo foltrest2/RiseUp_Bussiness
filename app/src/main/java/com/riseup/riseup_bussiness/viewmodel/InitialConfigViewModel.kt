@@ -30,15 +30,15 @@ class InitialConfigViewModel:ViewModel() {
         _inComingUser.value = user
         Log.e(">>>","IncomingUser Seted: ${_inComingUser.value}")
     }
+
     fun setChange(){
         _change.value = 0
     }
     fun setSpProducts(products:ArrayList<ProductModel>){
         _inComingProducts.value = products
         Log.e(">>>","IncomingProducts Seted: ${_inComingProducts.value}")
-
-
     }
+
     fun updateDiscoName(user: DiscoModel){
         viewModelScope.launch(Dispatchers.IO) {
             Log.e(">>>", "Llego al updateDiscoName: ${_inComingUser.value}")
@@ -90,14 +90,6 @@ class InitialConfigViewModel:ViewModel() {
                 }
         }
     }
-/**
-    fun updateDiscoEventsStorage(user:DiscoModel){
-        viewModelScope.launch(Dispatchers.IO) {
-            Log.e(">>>", "user que llega al updateDiscoEventsStorage: ${user.name}")
-            Firebase.storage.reference.child("${user.name}/Events/")
-        }
-    }
-    */
 
     fun updateDiscoHomeImg( user: DiscoModel) {
         viewModelScope.launch(Dispatchers.IO) {
@@ -123,7 +115,7 @@ class InitialConfigViewModel:ViewModel() {
             var dbs = Firebase.storage
             var batch = db.batch()
             for(product in discoProducts) {
-                var prodName = "${product.name}.png"
+                var prodName = "${product.name}.png".replace(" ", "")
                 var docRef = db.collection("Discos").document(user.id).collection("Products").document(product.id)
                  dbs.reference.child("${user.name}/Products/${prodName}").putFile(product.image.toUri())
                 product.image = prodName
@@ -162,11 +154,6 @@ class InitialConfigViewModel:ViewModel() {
                 _change.value = inc!!.inc()
             }
         }
-        /**
-        viewModelScope.launch(Dispatchers.IO) {
-            val thisUserDoneSnap = Firebase.firestore.collection("Discos").document(user.id).get().await()
-            val thisUserDone = thisUserDoneSnap.toObject(DiscoModel::class.java)
-*/
 
 
     }
