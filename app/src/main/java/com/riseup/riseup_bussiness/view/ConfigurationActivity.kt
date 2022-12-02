@@ -28,6 +28,9 @@ class ConfigurationActivity : AppCompatActivity() {
         binding.contraintAparienciaGo.setOnClickListener{
             startActivity(Intent(this@ConfigurationActivity, ConfigUpdateAppearanceActivity::class.java))
         }
+        binding.constraintOrdenesGo.setOnClickListener {
+            startActivity(Intent(this@ConfigurationActivity, OrdersListActivity::class.java))
+        }
         binding.contraintIdiomaGo.setOnClickListener{
             startActivity(Intent(this@ConfigurationActivity, ConfigLanguageActivity::class.java))
         }
@@ -41,7 +44,7 @@ class ConfigurationActivity : AppCompatActivity() {
             CacheCleanedDialog().show(supportFragmentManager, "dialogcache")
         }
         binding.contraintUserPagosGo.setOnClickListener {
-            startActivity(Intent(this@ConfigurationActivity, OrdersListActivity::class.java))
+
         }
     }
 

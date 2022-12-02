@@ -10,16 +10,15 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.google.gson.Gson
 import com.riseup.riseup_bussiness.databinding.ActivityDiscoInitialConfigBinding
-import com.riseup.riseup_bussiness.model.Disco
+import com.riseup.riseup_bussiness.model.DiscoModel
+import com.riseup.riseup_bussiness.util.ErrorDialog
 import com.riseup.riseup_bussiness.viewmodel.InitialConfigurationViewModel
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 
 
 class DiscoInitialConfigActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityDiscoInitialConfigBinding
-    private lateinit var user : Disco
+    private lateinit var user : DiscoModel
     val viewmodel: InitialConfigurationViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,26 +51,31 @@ class DiscoInitialConfigActivity : AppCompatActivity() {
             if (binding.DiscoNameICET.text.isNotEmpty()) {
 
                  viewmodel.updateDiscoName(binding.DiscoNameICET.text.toString(), user)
+                finish()
+                startActivity(Intent(this, ConfigDiscoImagesActivity::class.java))
                      //viewmodel.updateDiscoRef(user)
+            }else{
+                val dialogFragmentP = ErrorDialog()
+                val bundle = Bundle()
+                bundle.putString("TEXT","EmptyFields")
+                dialogFragmentP.arguments = bundle
+                dialogFragmentP.show(supportFragmentManager,"EmptyFieldsDialog")
             }
-            finish()
-            startActivity(Intent(this, ConfigDiscoImagesActivity::class.java))
-
 
         }
     }
 
-    private fun loadUser(): Disco? {
+    private fun loadUser(): DiscoModel? {
         val sp = getSharedPreferences("RiseUpBusiness", MODE_PRIVATE)
         val json = sp.getString("Usuario", "NO_USER")
         if (json == "NO_USER") {
             return null
         } else {
-            return Gson().fromJson(json, Disco::class.java)
+            return Gson().fromJson(json, DiscoModel::class.java)
         }
     }
 
-    private fun saveUserSp(user: Disco) {
+    private fun saveUserSp(user: DiscoModel) {
 
         Log.e(">>>", "Guardando en DiscoInitialConfig: ${user}")
         val sp = getSharedPreferences("RiseUpBusiness", MODE_PRIVATE)

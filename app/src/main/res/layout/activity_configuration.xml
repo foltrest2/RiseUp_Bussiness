@@ -104,6 +104,33 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintOrdenesGo"
+                android:layout_width="match_parent"
+                android:layout_height="56dp">
+
+                <ImageView
+                    android:id="@+id/ordenesImg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/listalt24px" />
+
+                <TextView
+                    android:id="@+id/ordenesTVProfile"
+                    style="@style/PoppinsMed_16"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:text="@string/ordenes"
+                    app:layout_constraintBottom_toBottomOf="@+id/ordenesImg"
+                    app:layout_constraintStart_toEndOf="@+id/ordenesImg"
+                    app:layout_constraintTop_toTopOf="@+id/ordenesImg" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/contraintUserPagosGo"
                 android:layout_width="match_parent"
                 android:layout_height="56dp">

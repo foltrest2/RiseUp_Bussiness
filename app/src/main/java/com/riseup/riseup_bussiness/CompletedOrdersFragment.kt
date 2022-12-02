@@ -1,7 +1,6 @@
 package com.riseup.riseup_bussiness
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -13,6 +12,7 @@ import com.riseup.riseup_bussiness.databinding.FragmentCompletedOrdersBinding
 import com.riseup.riseup_bussiness.model.OrdersModel
 import com.riseup.riseup_bussiness.util.CompletedOrdersBlockAdapter
 import com.riseup.riseup_bussiness.viewmodel.OrdersListViewModel
+import com.riseup.riseup_users.repo.SharedPreferences
 
 
 class CompletedOrdersFragment : Fragment() {
@@ -26,12 +26,17 @@ class CompletedOrdersFragment : Fragment() {
     private val adapter = CompletedOrdersBlockAdapter({thisorder -> onItemSelectedRemove(thisorder)}, {thisorder -> onItemSelectedReturn(thisorder)})
 
 
+
+    private lateinit var sp : SharedPreferences
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentCompletedOrdersBinding.inflate(inflater,container,false)
         val view = binding.root
+
+       sp = SharedPreferences(requireContext())
 
         //Recrear el estado
         var ordersRecycler = binding.recyclerViewCompletedOrders
@@ -45,7 +50,6 @@ class CompletedOrdersFragment : Fragment() {
                 for(orders in it){
                     if (orders.state == 1){
                         adapter.addOrder(orders)
-                        //Log.e(">>>", "Aqui me la esta agregando complete")
                     }
                 }
             }
@@ -59,13 +63,11 @@ class CompletedOrdersFragment : Fragment() {
     }
 
     fun onItemSelectedRemove(order: OrdersModel){
-        Toast.makeText(context, "Delete: ${order.code}", Toast.LENGTH_SHORT).show()
         adapter.removeOrder(order)
         viewModel.onOrderStateChange(order,2)
     }
 
     fun onItemSelectedReturn(order: OrdersModel){
-        Toast.makeText(context, "Retorna: ${order.code}", Toast.LENGTH_LONG).show()
         adapter.removeOrder(order)
         viewModel.onOrderStateChange(order,0)
     }

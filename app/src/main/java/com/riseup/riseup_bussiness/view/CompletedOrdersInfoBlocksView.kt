@@ -9,20 +9,21 @@ class CompletedOrdersInfoBlocksView(itemView: View) : RecyclerView.ViewHolder(it
 
     val binding = CompletedOrdersBlockRowBinding.bind(itemView)
 
-/**
-    var orderCompletedCode : TextView = itemView.findViewById(R.id.completedOrderCodeTV)
-    var deleteOrder : TextView = itemView.findViewById(R.id.deleteOrderTV)
-    var returnOrder : TextView = itemView.findViewById(R.id.returnOrderTV)
-    var constraintOrderDelete : ConstraintLayout = itemView.findViewById(R.id.deleteOrderConstraint)
-    var constraintOrderReturn : ConstraintLayout = itemView.findViewById(R.id.returnOrderConstraint)
-    var deleteOrderArrow : ImageView = itemView.findViewById(R.id.arrowDeleteOrderImg)
-    var returnOrderArrow : ImageView = itemView.findViewById(R.id.arrowReturnOrderImg)
-    */
 
     fun render(order : OrdersModel, onClickListener:(OrdersModel) -> Unit, onClickListenerReturn: (OrdersModel) -> Unit){
         binding.completedOrderCodeTV.text = order.code
+        binding.ListCardProductsCompleted.text = order.shoppingCar.toString().replace("[","").replace("]","").replace(",","")
         binding.deleteOrderConstraint.setOnClickListener { onClickListener(order) }
         binding.returnOrderConstraint.setOnClickListener { onClickListenerReturn(order) }
+        binding.completedOrderCodeTV.setOnClickListener {
+            if(binding.ListCardProductsCompleted.visibility == View.VISIBLE){
+                binding.OrdersCompleteDividerTitleInfo.visibility = View.GONE
+                binding.ListCardProductsCompleted.visibility = View.GONE
+            } else {
+                binding.ListCardProductsCompleted.visibility = View.VISIBLE
+                binding.OrdersCompleteDividerTitleInfo.visibility = View.VISIBLE
+            }
+        }
     }
 
 }

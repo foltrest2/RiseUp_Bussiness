@@ -5,10 +5,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.viewModels
-import com.google.firestore.v1.StructuredQuery
 import com.google.gson.Gson
 import com.riseup.riseup_bussiness.databinding.ActivityLoginBinding
-import com.riseup.riseup_bussiness.model.Disco
+import com.riseup.riseup_bussiness.model.DiscoModel
 import com.riseup.riseup_bussiness.util.ErrorDialog
 import com.riseup.riseup_bussiness.util.SuccessfulRegisterDialog
 import com.riseup.riseup_bussiness.viewmodel.AuthResult
@@ -130,7 +129,7 @@ class LoginActivity : AppCompatActivity(){
         SuccessfulRegisterDialog().show(supportFragmentManager,"successfullyRegister")
     }
 
-    private fun saveDisco(disco: Disco){
+    private fun saveDisco(disco: DiscoModel){
         val sp = getSharedPreferences("RiseUpBusiness", MODE_PRIVATE)
         val json = Gson().toJson(disco)
         sp.edit().putString("Usuario",json).apply()

@@ -16,12 +16,15 @@ class ConfigInformationActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.atrasArrowInfoAppBtn.setOnClickListener {
+            finish()
             startActivity(Intent(this@ConfigInformationActivity, ConfigurationActivity::class.java))
         }
         binding.politicaPrivConstraint.setOnClickListener {
+            finish()
             startActivity(Intent(this@ConfigInformationActivity, ConfigPoliticInformationActivity::class.java))
         }
         binding.condUsoConstraint.setOnClickListener {
+            finish()
             startActivity(Intent(this@ConfigInformationActivity, ConfigUsageConditionsActivity::class.java))
         }
         binding.bibCodAbirConstraint.setOnClickListener {

@@ -10,9 +10,8 @@ import com.google.firebase.auth.FirebaseAuthException
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import com.riseup.riseup_bussiness.model.Disco
+import com.riseup.riseup_bussiness.model.DiscoModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
@@ -24,7 +23,7 @@ class LoginViewModel: ViewModel(){
         AuthState(AuthResult.IDLE, "Starting...")
     )
     val authState : LiveData<AuthState> get() = _authState
-    private lateinit var userReturn : Disco
+    private lateinit var userReturn : DiscoModel
 
     //Accion de registro
     fun signIn(correo:String, pass:String){
@@ -56,12 +55,12 @@ class LoginViewModel: ViewModel(){
                             Log.e(">>>","el usuario esta verificado")
                             //Pedimos el user en la db
                                 viewModelScope.launch ( Dispatchers.IO) {
-                                    Firebase.firestore.collection("Discos2").document(fbuser.uid)
+                                    Firebase.firestore.collection("Discos").document(fbuser.uid)
                                         .get()
                                         .addOnSuccessListener {
                                             Log.e(">>>", "Se esta guardando el usuario")
-                                            userReturn = it.toObject(Disco::class.java)!!
-                                            if(userReturn.name == "" || userReturn.bannerCardID == "" || userReturn.bannerCardID ==""
+                                            userReturn = it.toObject(DiscoModel::class.java)!!
+                                            if(userReturn.name == "" || userReturn.bannerCardID ==""
                                                 || userReturn.bannerRef == "" || userReturn.bannerID == "" || userReturn.productsRef == ""){
                                                 _authState.value = AuthState(AuthResult.SUCCESS, "VerifiedFirstTime")
                                             }
@@ -79,11 +78,11 @@ class LoginViewModel: ViewModel(){
                                         ) {
                                             Log.e(">>>","primera vez que se logea esl usuario")
                                             _authState.value = AuthState(AuthResult.SUCCESS, "VerifiedFirstTime")
-                                        } /*
+                                        }
                                         else {
                                             Log.e(">>>","no es la primera vez que se logea el usuario")
                                             _authState.value = AuthState(AuthResult.SUCCESS, "Verified") }
-                                        */
+
                                         }
 
                                 }
@@ -100,7 +99,7 @@ class LoginViewModel: ViewModel(){
         }
     }
 
-    fun saveUserFromViewModel() : Disco {
+    fun saveUserFromViewModel() : DiscoModel {
 
         return userReturn
 

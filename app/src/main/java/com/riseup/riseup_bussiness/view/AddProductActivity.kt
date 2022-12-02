@@ -5,14 +5,17 @@ import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
+import androidx.core.text.isDigitsOnly
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.riseup.riseup_bussiness.databinding.ActivityAddProductBinding
-import com.riseup.riseup_bussiness.model.Disco
+import com.riseup.riseup_bussiness.model.DiscoModel
 import com.riseup.riseup_bussiness.model.ProductModel
+import com.riseup.riseup_bussiness.util.ErrorDialog
 import com.riseup.riseup_bussiness.viewmodel.InitialConfigViewModel
 import java.util.*
 import kotlin.collections.ArrayList
@@ -21,7 +24,7 @@ class AddProductActivity : AppCompatActivity() {
     private lateinit var binding: ActivityAddProductBinding
     private var products: ArrayList<ProductModel> = arrayListOf()
     private lateinit var productImg: Uri
-    private lateinit var user : Disco
+    private lateinit var user : DiscoModel
     val viewModel: InitialConfigViewModel by viewModels()
    // var listener: OnNewProductListener? = null
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -59,7 +62,29 @@ class AddProductActivity : AppCompatActivity() {
             viewModel.setSpProducts(products)
         }
         binding.AddProductConfigBtn.setOnClickListener {
-           addProduct(products)
+
+            if(binding.ProductNameICET.text.isEmpty() || binding.ProductTypeICET.text.isEmpty() || binding.ProductPriceICET.text.isEmpty()
+                || productImg == null){
+                val dialogFragmentP = ErrorDialog()
+                val bundle = Bundle()
+                bundle.putString("TEXT","EmptyFields")
+                dialogFragmentP.arguments = bundle
+                dialogFragmentP.show(supportFragmentManager,"EmptyFieldsDialog")
+            }else{
+                if(binding.ProductPriceICET.text.isDigitsOnly()){
+                    Toast.makeText(binding.ProductNameICET.context, "Producto agregado", Toast.LENGTH_SHORT).show()
+                    addProduct(products)
+                }else{
+                    val dialogFragmentP = ErrorDialog()
+                    val bundle = Bundle()
+                    bundle.putString("TEXT","IncorrectFormat")
+                    dialogFragmentP.arguments = bundle
+                    dialogFragmentP.show(supportFragmentManager,"IncorrectFormat")
+
+                }
+            }
+            //Toast.makeText(binding.ProductNameICET.context, "Producto agregado", Toast.LENGTH_SHORT).show()
+           //addProduct(products)
             //listener?.let{
                 //Log.e(">>>", "se agrega este producto: $products}")
        // }
@@ -76,6 +101,10 @@ class AddProductActivity : AppCompatActivity() {
             intent.type= "image/*"
             galleryLauncher.launch(intent)
         }
+       binding.returnToLoginICPButton.setOnClickListener {
+           finish()
+           startActivity(Intent(this,ConfigDiscoImagesActivity::class.java))
+       }
        binding.FinishInitialConfigBtn.setOnClickListener {
 
            viewModel.updateDiscoName(user)
@@ -83,6 +112,9 @@ class AddProductActivity : AppCompatActivity() {
            viewModel.updateDiscoListImg(user)
            viewModel.updateDiscoHomeImg(user)
            viewModel.updateDiscoProducts(products,user)
+           viewModel.updateDiscoEventsStorage(user)
+           finish()
+           startActivity(Intent(this,OrdersListActivity::class.java))
 
        }
     }
@@ -133,17 +165,17 @@ class AddProductActivity : AppCompatActivity() {
 
         }
     }
-    private fun loadUser(): Disco? {
+    private fun loadUser(): DiscoModel? {
         val sp = getSharedPreferences("RiseUpBusiness", MODE_PRIVATE)
         val json = sp.getString("Usuario", "NO_USER")
         if (json == "NO_USER") {
             return null
         } else {
-            return Gson().fromJson(json, Disco::class.java)
+            return Gson().fromJson(json, DiscoModel::class.java)
         }
     }
 
-    private fun saveUserSp(user: Disco) {
+    private fun saveUserSp(user: DiscoModel) {
         val sp = getSharedPreferences("RiseUpBusiness", MODE_PRIVATE)
         val json = Gson().toJson(user)
         sp.edit().putString("Usuario", json).apply()

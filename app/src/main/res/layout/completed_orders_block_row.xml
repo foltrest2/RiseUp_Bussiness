@@ -4,22 +4,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/CompletedOrderBlockConstraintLayout"
     android:layout_width="match_parent"
-    android:layout_height="130dp"
+    android:layout_height="wrap_content"
     android:layout_marginLeft="20dp"
     android:layout_marginRight="20dp"
     android:layout_marginBottom="15dp"
-    android:background="@drawable/ordersbox">
+    android:background="@drawable/ordersbox"
+    android:paddingBottom="30dp">
 
     <TextView
         android:id="@+id/completedOrderCodeTV"
         style="@style/PoppinsSemiBold_36"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="61dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="24dp"
-        android:layout_marginBottom="24dp"
         android:text="TextView"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/OrdersCompleteDividerTitleInfo"
         app:layout_constraintEnd_toStartOf="@+id/lineaGuiaOrderCompletedRow"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -27,11 +27,12 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/deleteOrderConstraint"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="24dp"
         android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/completedOrderCodeTV">
+        app:layout_constraintStart_toEndOf="@+id/completedOrderCodeTV"
+        app:layout_constraintTop_toTopOf="@+id/completedOrderCodeTV">
 
         <TextView
             android:id="@+id/deleteOrderTV"
@@ -68,8 +69,9 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/returnOrderConstraint"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="24dp"
         android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/completedOrderCodeTV"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/completedOrderCodeTV"
         app:layout_constraintTop_toTopOf="@+id/guideline2">
@@ -105,5 +107,30 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintGuide_begin="65dp"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <View
+        android:id="@+id/OrdersCompleteDividerTitleInfo"
+        style="@style/Divider.HorizontalLight"
+        android:layout_width="0dp"
+        android:layout_height="0.5dp"
+        android:layout_marginTop="8dp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.185"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/completedOrderCodeTV" />
+
+    <TextView
+        android:id="@+id/ListCardProductsCompleted"
+        style="@style/PoppinsMed_14"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="8dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/OrdersCompleteDividerTitleInfo" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

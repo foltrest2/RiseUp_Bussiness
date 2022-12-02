@@ -5,20 +5,24 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import com.google.gson.Gson
 import com.riseup.riseup_bussiness.databinding.ActivityConfigDiscoImagesBinding
-import com.riseup.riseup_bussiness.model.Disco
+import com.riseup.riseup_bussiness.model.DiscoModel
+import com.riseup.riseup_bussiness.util.ErrorDialog
 import com.riseup.riseup_bussiness.viewmodel.ConfigDiscoImagesViewModel
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
 class ConfigDiscoImagesActivity : AppCompatActivity() {
     private lateinit var binding: ActivityConfigDiscoImagesBinding
-    private lateinit var user : Disco
+    private lateinit var user : DiscoModel
     private lateinit var bannerLImg: Uri
     private lateinit var bannerHomeImg: Uri
     val viewmodel:ConfigDiscoImagesViewModel by viewModels()
@@ -58,25 +62,43 @@ class ConfigDiscoImagesActivity : AppCompatActivity() {
                if (bannerLImg != null && bannerHomeImg != null) {
                    viewmodel.updateDiscoListImg(bannerLImg, user)
                    viewmodel.updateDiscoHomeImg(bannerHomeImg,user)
+                   finish()
+                   startActivity(Intent(this, AddProductActivity::class.java))
+               }else{
+                   val dialogFragmentP = ErrorDialog()
+                   val bundle = Bundle()
+                   bundle.putString("TEXT","EmptyImages")
+                   dialogFragmentP.arguments = bundle
+                   dialogFragmentP.show(supportFragmentManager,"EmptyImagesDialog")
+
                }
 
+        }
+        binding.returnToLoginICButton.setOnClickListener {
+
             finish()
-            startActivity(Intent(this, AddProductActivity::class.java))
+            startActivity(Intent(this, LoginActivity::class.java))
+            val sp = getSharedPreferences("RiseUpBussiness", MODE_PRIVATE)
+            val json = sp.getString("Usuario", "NO_USER")
+            Toast.makeText(this,"A borrar tipo: $json", Toast.LENGTH_LONG).show()
+            sp.edit().clear().apply()
+            Firebase.auth.signOut()
         }
 
     }
 
-    private fun loadUser(): Disco? {
+
+    private fun loadUser(): DiscoModel? {
         val sp = getSharedPreferences("RiseUpBusiness", MODE_PRIVATE)
         val json = sp.getString("Usuario", "NO_USER")
         if (json == "NO_USER") {
             return null
         } else {
-            return Gson().fromJson(json, Disco::class.java)
+            return Gson().fromJson(json, DiscoModel::class.java)
         }
     }
 
-    private fun saveUserSp(user: Disco) {
+    private fun saveUserSp(user: DiscoModel) {
         val sp = getSharedPreferences("RiseUpBusiness", MODE_PRIVATE)
         val json = Gson().toJson(user)
         sp.edit().putString("Usuario", json).apply()

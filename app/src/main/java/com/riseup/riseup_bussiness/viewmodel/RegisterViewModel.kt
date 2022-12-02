@@ -1,25 +1,20 @@
 package com.riseup.riseup_bussiness.viewmodel
 
-import android.icu.text.SimpleDateFormat
-import android.icu.util.TimeZone
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.google.firebase.auth.FirebaseAuthException
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
 import com.google.firebase.auth.FirebaseAuthUserCollisionException
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import com.google.firebase.storage.ktx.storage
-import com.riseup.riseup_bussiness.model.Disco
+import com.riseup.riseup_bussiness.model.DiscoModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
-import kotlinx.coroutines.withContext
 import java.util.*
 
 class RegisterViewModel: ViewModel() {
@@ -59,18 +54,20 @@ class RegisterViewModel: ViewModel() {
                         Firebase.auth.currentUser!!.sendEmailVerification()
                         Log.e(">>>", Firebase.auth.currentUser!!.uid)
                         //Registrar el objeto en Firestore
-                        val disco = Disco(
+                        val disco = DiscoModel(
                             Firebase.auth.currentUser!!.uid,
                             "",
+                            "",
+                            "",
+                            "",
                             correo,
-                            "",
-                            "",
+                            arrayListOf(),
                             "",
                             arrayListOf(),
                             "",
                             ""
                         )
-                        Firebase.firestore.collection("Discos2")
+                        Firebase.firestore.collection("Discos")
                             .document(disco.id).set(disco)
                         _authState.value = AuthState(AuthResult.SUCCESS, "Success")
 

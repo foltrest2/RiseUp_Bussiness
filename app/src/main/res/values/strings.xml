@@ -244,5 +244,7 @@
     <string name="ErrorDialogWeakPassTV">¡La contraseña ingresada es muy débil(menos de 6 caracteres)!</string>
     <string name="ErrorDialogEmptyFieldsTV">Por favor completa todos los campos</string>
     <string name="ErrorDialogNotVerifiedEmailTV">Por favor verifica tu correo electrónico para activar la cuenta</string>
+    <string name="ErrorDialogIncorrectFormat">Por favor ingresa el formato correcto en los campos</string>
+    <string name="ErrorDialogIEmptyImages">Por favor selecciona las imagenes correspondientes</string>
 
 </resources>
