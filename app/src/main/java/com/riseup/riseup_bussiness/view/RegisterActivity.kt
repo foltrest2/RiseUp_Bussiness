@@ -31,10 +31,11 @@ class RegisterActivity : AppCompatActivity() {
 
                 }
                 AuthResult.SUCCESS->{
-
-                    //  startActivity(Intent(this@RegisterActivity, LoginActivity::class.java).putExtra("Dialog","showDialog"))
+                    val sp = getSharedPreferences("RiseUpBussiness", MODE_PRIVATE)
+                    sp.edit().clear().apply()
+                      startActivity(Intent(this@RegisterActivity, LoginActivity::class.java).putExtra("Dialog","showDialog"))
                     Log.e(">>>","Hice la petición al dialogo")
-                    SuccessfulRegisterDialog().show(supportFragmentManager,"successfullyRegister")
+                   // SuccessfulRegisterDialog().show(supportFragmentManager,"successfullyRegister")
 
                 }
                 AuthResult.FAIL->{

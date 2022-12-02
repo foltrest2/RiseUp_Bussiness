@@ -125,7 +125,7 @@ class LoginActivity : AppCompatActivity(){
 
     }
 
-    fun showDialog(){
+    private fun showDialog(){
         SuccessfulRegisterDialog().show(supportFragmentManager,"successfullyRegister")
     }
 
