@@ -41,6 +41,7 @@ class ConfigDiscoImagesActivity : AppCompatActivity() {
         //Inicializacion de usuario
         user = loadUser()!!
         //Inicializacion del viewmodel
+        //
         viewmodel.setSpUser(user)
         viewmodel.inComingUser.observe(this){
             Log.e(">>>", "Actualizado en observer DiscoImage: ${it}")
