@@ -11,8 +11,8 @@ class SharedPreferences(context: Context) {
     val context: Context = context
 
 
-    fun loadUser(): ShoppingCar? {
-        val sp = context.getSharedPreferences("RiseUpUser", AppCompatActivity.MODE_PRIVATE)
+    fun loadDisco(): ShoppingCar? {
+        val sp = context.getSharedPreferences("RiseUpBusiness", AppCompatActivity.MODE_PRIVATE)
         val json = sp.getString("Usuario", "NO_USER")
         if (json == "NO_USER") {
             return null

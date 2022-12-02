@@ -5,10 +5,13 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
+import com.google.gson.Gson
 import com.riseup.riseup_bussiness.ActiveOrdersFragment
 import com.riseup.riseup_bussiness.CompletedOrdersFragment
 import com.riseup.riseup_bussiness.R
 import com.riseup.riseup_bussiness.databinding.ActivityOrdersListBinding
+import com.riseup.riseup_bussiness.model.DiscoModel
+import com.riseup.riseup_bussiness.util.ActiveOrdersBlockAdapter
 import com.riseup.riseup_bussiness.viewmodel.OrdersListViewModel
 
 class OrdersListActivity : AppCompatActivity() {
@@ -16,6 +19,7 @@ class OrdersListActivity : AppCompatActivity() {
 
     private lateinit var activeOrdersFragment: ActiveOrdersFragment
     private lateinit var completedOrdersFragment: CompletedOrdersFragment
+    private lateinit var disco : DiscoModel
 
     private val binding: ActivityOrdersListBinding by lazy {
         ActivityOrdersListBinding.inflate(layoutInflater)
@@ -26,12 +30,12 @@ class OrdersListActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+        disco = loadDisco()!!
 
         activeOrdersFragment = ActiveOrdersFragment.newInstance()
         completedOrdersFragment = CompletedOrdersFragment.newInstance()
 
-        viewModel.subscribeRealTimeOrders()
-
+        viewModel.suscribeRealTimeOrders(disco)
 
         showFragment(activeOrdersFragment)
         binding.finalizadasDivider.setBackgroundResource(R.color.grayFigma)
@@ -59,5 +63,14 @@ class OrdersListActivity : AppCompatActivity() {
         val transaction = supportFragmentManager.beginTransaction()
         transaction.replace(R.id.ordenesContainer, fragment)
         transaction.commit()
+    }
+    private fun loadDisco(): DiscoModel? {
+        val sp = getSharedPreferences("RiseUpBusiness", MODE_PRIVATE)
+        val json = sp.getString("Usuario", "NO_USER")
+        if (json == "NO_USER") {
+            return null
+        } else {
+            return Gson().fromJson(json, DiscoModel::class.java)
+        }
     }
 }

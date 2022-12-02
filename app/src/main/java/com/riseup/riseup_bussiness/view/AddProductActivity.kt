@@ -37,7 +37,7 @@ class AddProductActivity : AppCompatActivity() {
         //Log.e(">>>", "listener seteado en addproductactivity: $listener}")
        //Borrar cache
 
-       //val sp = getSharedPreferences("RiseUpBussiness", MODE_PRIVATE)
+       //val sp = getSharedPreferences("RiseUpBusiness", MODE_PRIVATE)
        //sp.edit().clear().apply()
 
         //Inicializacion de la galeria
@@ -144,12 +144,12 @@ class AddProductActivity : AppCompatActivity() {
          }
     }
     private fun saveProducts(car: ArrayList<ProductModel>) {
-        val sp = this.getSharedPreferences("RiseUpBussiness", AppCompatActivity.MODE_PRIVATE)
+        val sp = this.getSharedPreferences("RiseUpBusiness", AppCompatActivity.MODE_PRIVATE)
         val json = Gson().toJson(car)
         sp?.edit()?.putString("Products", json)?.apply()
     }
     private fun loadProducts(): ArrayList<ProductModel>? {
-        val sp = this.getSharedPreferences("RiseUpBussiness", AppCompatActivity.MODE_PRIVATE)
+        val sp = this.getSharedPreferences("RiseUpBusiness", AppCompatActivity.MODE_PRIVATE)
         val json = sp?.getString("Products", "NO_USER")
         return if (json == "NO_USER") {
             null
