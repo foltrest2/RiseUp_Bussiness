@@ -5,14 +5,17 @@ import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
+import androidx.core.text.isDigitsOnly
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.riseup.riseup_bussiness.databinding.ActivityAddProductBinding
 import com.riseup.riseup_bussiness.model.DiscoModel
 import com.riseup.riseup_bussiness.model.ProductModel
+import com.riseup.riseup_bussiness.util.ErrorDialog
 import com.riseup.riseup_bussiness.viewmodel.InitialConfigViewModel
 import java.util.*
 import kotlin.collections.ArrayList
@@ -59,7 +62,29 @@ class AddProductActivity : AppCompatActivity() {
             viewModel.setSpProducts(products)
         }
         binding.AddProductConfigBtn.setOnClickListener {
-           addProduct(products)
+
+            if(binding.ProductNameICET.text.isEmpty() || binding.ProductTypeICET.text.isEmpty() || binding.ProductPriceICET.text.isEmpty()
+                || productImg == null){
+                val dialogFragmentP = ErrorDialog()
+                val bundle = Bundle()
+                bundle.putString("TEXT","EmptyFields")
+                dialogFragmentP.arguments = bundle
+                dialogFragmentP.show(supportFragmentManager,"EmptyFieldsDialog")
+            }else{
+                if(binding.ProductPriceICET.text.isDigitsOnly()){
+                    Toast.makeText(binding.ProductNameICET.context, "Producto agregado", Toast.LENGTH_SHORT).show()
+                    addProduct(products)
+                }else{
+                    val dialogFragmentP = ErrorDialog()
+                    val bundle = Bundle()
+                    bundle.putString("TEXT","IncorrectFormat")
+                    dialogFragmentP.arguments = bundle
+                    dialogFragmentP.show(supportFragmentManager,"IncorrectFormat")
+
+                }
+            }
+            //Toast.makeText(binding.ProductNameICET.context, "Producto agregado", Toast.LENGTH_SHORT).show()
+           //addProduct(products)
             //listener?.let{
                 //Log.e(">>>", "se agrega este producto: $products}")
        // }
@@ -76,6 +101,10 @@ class AddProductActivity : AppCompatActivity() {
             intent.type= "image/*"
             galleryLauncher.launch(intent)
         }
+       binding.returnToLoginICPButton.setOnClickListener {
+           finish()
+           startActivity(Intent(this,ConfigDiscoImagesActivity::class.java))
+       }
        binding.FinishInitialConfigBtn.setOnClickListener {
 
            viewModel.updateDiscoName(user)
@@ -83,6 +112,8 @@ class AddProductActivity : AppCompatActivity() {
            viewModel.updateDiscoListImg(user)
            viewModel.updateDiscoHomeImg(user)
            viewModel.updateDiscoProducts(products,user)
+           finish()
+           startActivity(Intent(this,ProductListActivity::class.java))
 
        }
     }

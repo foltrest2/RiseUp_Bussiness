@@ -42,6 +42,7 @@ class ErrorDialog:DialogFragment() {
             "PasswordNotMatch"-> binding.passNotMatchdescTV.text = getString(R.string.ErrorDialogPassNotMatchTV)
             "EmptyFields"-> binding.passNotMatchdescTV.text = getString(R.string.ErrorDialogEmptyFieldsTV)
             "NotVerified"-> binding.passNotMatchdescTV.text = getString(R.string.ErrorDialogNotVerifiedEmailTV)
+            "IncorrectFormat"-> binding.passNotMatchdescTV.text = getString(R.string.ErrorDialogIncorrectFormat)
 
         }
 

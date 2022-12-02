@@ -5,10 +5,13 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import com.google.gson.Gson
 import com.riseup.riseup_bussiness.databinding.ActivityConfigDiscoImagesBinding
 import com.riseup.riseup_bussiness.model.DiscoModel
@@ -63,8 +66,19 @@ class ConfigDiscoImagesActivity : AppCompatActivity() {
             finish()
             startActivity(Intent(this, AddProductActivity::class.java))
         }
+        binding.returnToLoginICButton.setOnClickListener {
+
+            finish()
+            startActivity(Intent(this, LoginActivity::class.java))
+            val sp = getSharedPreferences("RiseUpBussiness", MODE_PRIVATE)
+            val json = sp.getString("Usuario", "NO_USER")
+            Toast.makeText(this,"A borrar tipo: $json", Toast.LENGTH_LONG).show()
+            sp.edit().clear().apply()
+            Firebase.auth.signOut()
+        }
 
     }
+
 
     private fun loadUser(): DiscoModel? {
         val sp = getSharedPreferences("RiseUpBusiness", MODE_PRIVATE)

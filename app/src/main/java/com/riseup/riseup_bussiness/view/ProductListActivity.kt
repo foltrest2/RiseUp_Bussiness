@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
@@ -62,6 +63,7 @@ class ProductListActivity : AppCompatActivity() {
     }
 
     private fun onClickListener(thisProduct: ProductModel) {
+        Toast.makeText(binding.returnToLoginICPLButton.context, "Producto eliminado", Toast.LENGTH_SHORT).show()
           deleteProduct(thisProduct,products)
           saveProducts(products)
 
